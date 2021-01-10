@@ -21,10 +21,9 @@ export const About = () => (
           put our minds together to build a new website from the ground up.
         </Text>
         <Text fontSize="lg">
-          The new website is currently under construction,
+          The new website is <em>currently under construction</em>,
           but we encourage you to check back early February for more information.
-        </Text>
-        <Divider />
+        </Text>        
         <Text fontSize="lg">
           We also plan to run the lottery entirely from this website. More details will be available
           closer to February 1, 2021.

@@ -10,10 +10,10 @@ export const Hero = ({ title }) => (
       fontSize="10vw">{title}</Heading>
     <Fade in={true}>
       <Text py={2} fontSize="xl" textAlign="center">
-        new website | new lottery | still OSCA
+        new website | still OSCA
       </Text>
       <Text fontSize="md" pb={8} color="gray.500" textAlign="center">
-        ...coming soon
+        ...coming soon...
       </Text>
     </Fade>
     <Button colorScheme="teal" mt={8} variant="outline">

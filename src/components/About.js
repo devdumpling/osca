@@ -1,48 +1,35 @@
 import {
-  Link as ChakraLink,
-  List,
-  ListIcon,
-  ListItem,
+  Heading,
+  Flex,
   Text,
-  Fade,
+  Divider,
+  VStack
 } from '@chakra-ui/react'
-import { CheckCircleIcon, LinkIcon } from '@chakra-ui/icons'
+
 import { Container } from './Container'
 
 export const About = () => (
-  <Fade in={true}>
-    <Container textAlign="left">
-      <Text py={2} fontSize="xl" textAlign="center">
-        new website | new lottery | still OSCA
-      </Text>
-      <Text fontSize="md" pb={8} color="gray.500" textAlign="center">
-        ...coming soon
-      </Text>
-      <List spacing={3} pl={16} my={0} mt={0}>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink
-            isExternal
-            href="https://www.oberlin.edu/alumni-association/groups/oscalums"
-            flexGrow={1}
-            mr={2}
-          >
-            oscalums <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink isExternal href="https://www.facebook.com/Oberlin-Student-Cooperative-Association-218110806562/" flexGrow={1} mr={2}>
-            check fb for updates <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-        <ListItem>
-          <ListIcon as={CheckCircleIcon} color="green.500" />
-          <ChakraLink isExternal href="http://osca.csr.oberlin.edu/" flexGrow={2} mr={2}>
-            old website <LinkIcon />
-          </ChakraLink>
-        </ListItem>
-      </List>
-    </Container>
-  </Fade >
+  <Container mb="8rem" textAlign="left">
+    <Flex wrap="wrap">
+      <VStack spacing={8} mx={4}>
+        <Heading mb={2}>
+          What is osca.coop?          
+        </Heading>
+        <Text fontSize="lg">
+          With a new year and a new rent contract, OSCA has had to make some major changes.
+          In order to adapt to the times, the current OSCA officers, staff, and some members of the OSCA alumni community
+          put our minds together to build a new website from the ground up.
+        </Text>
+        <Text fontSize="lg">
+          The new website is currently under construction,
+          but we encourage you to check back early February for more information.
+        </Text>
+        <Divider />
+        <Text fontSize="lg">
+          We also plan to run the lottery entirely from this website. More details will be available
+          closer to February 1, 2021.
+        </Text>
+      </VStack>
+    </Flex>
+  </Container>
 )

@@ -1,37 +1,33 @@
 import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
+import { signIn, signOut, useSession } from 'next-auth/client'
 import { Flex, Button, Avatar } from '@chakra-ui/react'
 
-const isBrowser = () => typeof window !== 'undefined'
-
 const LoginButton = () => {
-  const { loginWithRedirect } = useAuth0()
-
   return (
-    <Button colorScheme="transparent" onClick={() => loginWithRedirect()}>
+    <Button colorScheme="transparent" onClick={() => signIn('auth0', { prompt: 'login' })}>
       Log In
     </Button>
   )
 }
 
 const LogoutButton = () => {
-  const { logout } = useAuth0()
-
   return (
-    <Button colorScheme='transparent' onClick={() => logout({ returnTo: isBrowser() ? window.location.origin : '' })}>
+    <Button colorScheme='transparent' onClick={() => signOut('auth0')}>
       Log Out
     </Button>
   )
 }
 
 const Account = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0()
+  const [ session, loading ] = useSession()
 
-  if (isLoading) {
+  if (loading) {
     return <div>Loading ...</div>
   }
 
-  if (isAuthenticated) {
+  if (session) {
+    const { user } = session
+
     return (
       <Flex align="center">
         <Avatar size="sm" name={user.name} src={user.picture} mx={2} />

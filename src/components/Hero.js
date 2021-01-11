@@ -1,7 +1,7 @@
-import { Fade, Button, Flex, Text, Heading } from '@chakra-ui/react'
-import { withAuth0 } from "@auth0/auth0-react";
+import { Fade, Button, Flex, Text, Heading, Link } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
-export const Hero = withAuth0(({ title, auth0 }) => (
+export const Hero = ({ title }) => (
   <Flex direction="column" justifyContent="center" alignItems="center" height="100vh">
     <Heading
       bgGradient="linear(to-l, teal.500, green.500)"
@@ -18,13 +18,13 @@ export const Hero = withAuth0(({ title, auth0 }) => (
       </Text>
     </Fade>
     <Button colorScheme="teal" mt={8} variant="outline">
-      Spring 2020 Lottery
+      <Link as={NextLink} href="/lottery">Spring 2020 Lottery</Link>
     </Button>
     <Button colorScheme="teal" mt={8} variant="outline">
       Get email updates
     </Button>
   </Flex>
-))
+)
 
 Hero.defaultProps = {
   title: 'OSCA',

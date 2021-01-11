@@ -6,11 +6,13 @@ Work in Progress
 
 #### Auth0
 
-Add the following environment variables for Auth0 to the Vercel project. `NEXT_PUBLIC_` ensures that they are accessible to the client.
+Setup Application in Auth0 as a Regular Web App (not Single Page App). Add the following environment variables for Auth0 to the Vercel project. These are only accessible to functions (not the the public facing client).
 
 ```
-NEXT_PUBLIC_AUTH0_DOMAIN=
-NEXT_PUBLIC_AUTH0_CLIENT_ID=
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_DOMAIN=
+NEXTAUTH_URL=https://osca.coop # for live production site, when we're ready
 ```
 
 #### Google oAuth

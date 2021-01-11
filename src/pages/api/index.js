@@ -15,7 +15,7 @@ export default async (req, res) => {
     res.json(session)
   } else {
     // Not Signed in
-    res.status(401)
+    res.status(401).json({ error: 'Not authorized' })
   }
   res.end()
 }

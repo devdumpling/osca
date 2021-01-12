@@ -45,9 +45,12 @@ function Wall ({ condition, children = [], caught = '' }) {
   }
 }
 
-// todo: nextjs should have a prefetching mechanism, so that the
+// todo:
+// 1. nextjs should have a prefetching mechanism, so that the
 // fetch is performed when hovering over a link to this page
 // and doesn't have to be re-fetched every render.
+// 2. handle users who aren't qualified to enter the lottery
+// probably using another endpoint that checks for qualification.
 const Lottery = () => {
   let [session, loading] = useSession()
   let [entry, setEntry] = useState()

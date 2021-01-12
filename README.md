@@ -12,6 +12,7 @@ Setup Application in Auth0 as a Regular Web App (not Single Page App). Add the f
 AUTH0_CLIENT_ID=
 AUTH0_CLIENT_SECRET=
 AUTH0_DOMAIN=
+GCLOUD_CREDENTIALS= # Buffer.from(JSON.stringify(credentials)).toString('base64')
 NEXTAUTH_URL=https://osca.coop # for live production site, when we're ready
 ```
 

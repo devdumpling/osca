@@ -4,7 +4,10 @@ import { hash, userQualifies, currentLotteryId } from '../../../utils'
 
 const { GCLOUD_CREDENTIALS } = process.env
 const credentials = JSON.parse(Buffer.from(GCLOUD_CREDENTIALS || '', 'base64').toString())
-const firestore = new Firestore({ credentials })
+const firestore = new Firestore({
+  projectId: credentials.project_id,
+  credentials
+})
 const entries = firestore.collection('lottery-entries')
 
 export default async (req, res) => {

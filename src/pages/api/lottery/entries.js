@@ -4,7 +4,10 @@ import { userQualifies } from '../../../utils'
 
 const { GCLOUD_CREDENTIALS } = process.env
 const credentials = JSON.parse(Buffer.from(GCLOUD_CREDENTIALS || '', 'base64').toString())
-const firestore = new Firestore({ credentials })
+const firestore = new Firestore({
+  projectId: credentials.project_id,
+  credentials
+})
 const entries = firestore.collection('lottery-entries')
 
 export default async (req, res) => {
@@ -31,7 +34,7 @@ export default async (req, res) => {
     const entrants = snapshot.docs
       .map(doc => ({ ...doc.data(), entryId: doc.id }))
       .filter(userQualifies)
-    res.status(200).json({ entrants })
+    res.status(200).json(entrants)
   } else {
     res.status(401).json({ error: 'Not authorized' })
   }

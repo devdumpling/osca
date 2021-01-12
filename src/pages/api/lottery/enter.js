@@ -1,53 +1,34 @@
 import { getSession } from 'next-auth/client'
-import faunadb, { query as q } from 'faunadb'
+import { Firestore } from '@google-cloud/firestore'
 import { hash, userQualifies, currentLotteryId } from '../../../utils'
 
-const { FAUNADB_SECRET: secret } = process.env
-
-// Cache fauna client
-let client
-
-if (secret) {
-  client = new faunadb.Client({ secret })
-}
+const { GCLOUD_CREDENTIALS } = process.env
+const credentials = JSON.parse(Buffer.from(GCLOUD_CREDENTIALS || '', 'base64').toString())
+const firestore = new Firestore({ credentials })
+const entries = firestore.collection('lottery-entries')
 
 export default async (req, res) => {
   let session
   try {
     // Get user session
     session = await getSession({ req })
-  } catch (error) { 
+  } catch (error) {
     return res.status(500).json({ error: `Could not get user session: ${error}` }) 
   }
 
   if (session) {
-    if (!client) {
-      return res.status(500).json({ error: new Error('Failed to connect to database :(') })
-    }
     const user = session.user
     const email = user.email
     const lotteryId = (req.query.lotteryId || currentLotteryId).toLowerCase()
 
     if (userQualifies(user)) {
-      let data = {
-        email,
-        lotteryId
-      }
-      const entryId = hash(data)
-      data = { ...data, entryId }
-
-      let result
       try {
-        result = await client.query(
-          q.Create(q.Collection('lottery-entries'), { data })
-        )
-        res.status(200).json({ entry: result.data })
+        const data = { email, lotteryId }
+        const id = hash(data).toString()
+        await entries.doc(id).set(data)
+        res.status(200).json({ [id]: data })
       } catch (error) {
-        if (error.message === 'instance not unique') {
-          res.status(200).json({ entry: data })
-        } else {
-          res.status(500).json({ error: `Could not create entry: ${error}` })
-        }
+        res.status(500).json({ error: `Could not create entry: ${error}` })
       }
     } else {
       res.status(401).json({ error: 'Unqualified to enter lottery' })

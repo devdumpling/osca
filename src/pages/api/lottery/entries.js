@@ -1,54 +1,36 @@
 import { getSession } from 'next-auth/client'
-import faunadb, { query as q } from 'faunadb'
+import { Firestore } from '@google-cloud/firestore'
 import { userQualifies } from '../../../utils'
 
-const { FAUNADB_SECRET: secret } = process.env
-
-// Cache fauna client
-let client
-
-if (secret) {
-  client = new faunadb.Client({ secret })
-}
+const { GCLOUD_CREDENTIALS } = process.env
+const credentials = JSON.parse(Buffer.from(GCLOUD_CREDENTIALS || '', 'base64').toString())
+const firestore = new Firestore({ credentials })
+const entries = firestore.collection('lottery-entries')
 
 export default async (req, res) => {
-  // try {
-  // Get user session
-  const session = await getSession({ req })
+  let session
+  try {
+    // Get user session
+    session = await getSession({ req })
+  } catch (error) {
+    return res.status(500).json({ error: `Could not get user session: ${error}` }) 
+  }
 
   if (session) {
-    if (!client) {
-      return res.status(500).json({ error: new Error('Failed to connect to database :(') })
-    }
-
     const lotteryId = req.query.lotteryId ? req.query.lotteryId.toLowerCase() : undefined
     const email = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
 
-    let lotteryQuery
-    if (email && lotteryId) {
-      lotteryQuery = q.Intersection(
-        q.Match(q.Index('entryByEmail'), email),
-        q.Match(q.Index('entryByLotteryId'), lotteryId)
-      )
-    } else {
-      if (email) {
-        lotteryQuery = q.Match(q.Index('entryByEmail'), email)
-      } else if (lotteryId) {
-        lotteryQuery = q.Match(q.Index('entryByLotteryId'), lotteryId)
-      } else {
-        lotteryQuery = q.Documents(q.Collection('lottery-entries'))
-      }
+    let query = entries
+    if (email) {
+      query = query.where('email', '==', email)
     }
-    const { data } = await client.query(
-      q.Map(
-        q.Paginate(lotteryQuery),
-        q.Lambda(x => q.Get(x))
-      )
-    )
-    const entrants = data
-      .map(x => x.data)
+    if (lotteryId) {
+      query = query.where('lotteryId', '==', lotteryId)
+    }
+    const snapshot = await query.get()
+    const entrants = snapshot.docs
+      .map(doc => ({ ...doc.data(), entryId: doc.id }))
       .filter(userQualifies)
-
     res.status(200).json({ entrants })
   } else {
     res.status(401).json({ error: 'Not authorized' })

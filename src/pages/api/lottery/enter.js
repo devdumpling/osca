@@ -28,9 +28,9 @@ export default async (req, res) => {
     if (userQualifies(user)) {
       try {
         const data = { email, lotteryId, entryMetadata }
-        const id = hash(email + lotteryId).toString()
-        await entries.doc(id).set(data)
-        res.status(200).json({ [id]: data })
+        const entryId = hash(email + lotteryId).toString()
+        await entries.doc(entryId).set(data)
+        res.status(200).json({ ...data, entryId })
       } catch (error) {
         res.status(500).json({ error: `Could not create entry: ${error}` })
       }

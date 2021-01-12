@@ -23,11 +23,12 @@ export default async (req, res) => {
     const user = session.user
     const email = user.email
     const lotteryId = (req.query.lotteryId || currentLotteryId).toLowerCase()
+    const entryMetadata = JSON.parse(req.body || req.query.entryMetadata || '{}')
 
     if (userQualifies(user)) {
       try {
-        const data = { email, lotteryId }
-        const id = hash(data).toString()
+        const data = { email, lotteryId, entryMetadata }
+        const id = hash(email + lotteryId).toString()
         await entries.doc(id).set(data)
         res.status(200).json({ [id]: data })
       } catch (error) {

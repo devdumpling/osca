@@ -24,9 +24,6 @@ export default async (req, res) => {
     const lotteryId = req.query.lotteryId ? req.query.lotteryId.toLowerCase() : undefined
     const email = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
 
-    console.log(`lotteryId = ${lotteryId}`)
-    console.log(`email = ${email}`)
-
     let lotteryQuery
     if (email && lotteryId) {
       lotteryQuery = q.Intersection(
@@ -56,7 +53,4 @@ export default async (req, res) => {
   } else {
     res.status(401).json({ error: 'Not authorized' })
   }
-  // } catch (error) {
-  //   res.status(500).json({ error })
-  // }
 }

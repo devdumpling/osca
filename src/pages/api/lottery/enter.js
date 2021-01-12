@@ -17,7 +17,7 @@ export default async (req, res) => {
     // Get user session
     session = await getSession({ req })
   } catch (error) { 
-    return res.status(500).json({ error }) 
+    return res.status(500).json({ error: `Could not get user session: ${error}` }) 
   }
 
   if (session) {
@@ -46,7 +46,7 @@ export default async (req, res) => {
         if (error.message === 'instance not unique') {
           res.status(200).json({ entry: data })
         } else {
-          res.status(500).json({ error })
+          res.status(500).json({ error: `Could not create entry: ${error}` })
         }
       }
     } else {

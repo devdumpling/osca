@@ -51,6 +51,8 @@ function Wall ({ condition, children = [], caught = '' }) {
 // and doesn't have to be re-fetched every render.
 // 2. handle users who aren't qualified to enter the lottery
 // probably using another endpoint that checks for qualification.
+// 3. maybe switch to the firestore clientside library, so that
+// we can work with db updates realtime.
 const Lottery = () => {
   let [session, loading] = useSession()
   let [entry, setEntry] = useState()

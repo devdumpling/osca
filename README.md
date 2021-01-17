@@ -19,3 +19,13 @@ NEXTAUTH_URL=https://osca.coop # for live production site, when we're ready
 #### Google oAuth
 
 Create and configure a oAuth client in Google Cloud Platform, and setup in Auth0 settings.
+
+#### Tina CMS
+
+```
+GITHUB_CLIENT_SECRET=
+SIGNING_KEY= # for nextjs preview: `openssl rand -base64 32`
+NEXT_PUBLIC_GITHUB_CLIENT_ID=7b03502bc69d51e931c0
+NEXT_PUBLIC_REPO_FULL_NAME=lukeburns/osca
+NEXT_PUBLIC_BASE_BRANCH=main
+```

@@ -43,19 +43,17 @@ export default Index
  */
 export async function getStaticProps ({ preview, previewData }) {
   if (preview) {
-    console.log('preview', {
-      ...previewData,
-      fileRelativePath: 'content/index.json',
-      parse: parseJson,
-      head_branch: process.env.NEXT_PUBLIC_BASE_BRANCH
-    })
     // todo: deal with uninformative page breaking error if JSON file is missing
-    return getGithubPreviewProps({
-      ...previewData,
-      fileRelativePath: 'src/content/index.json',
-      parse: parseJson,
-      head_branch: process.env.NEXT_PUBLIC_BASE_BRANCH
-    })
+    try {
+      return await getGithubPreviewProps({
+        ...previewData,
+        fileRelativePath: 'src/content/index.json',
+        parse: parseJson,
+        head_branch: process.env.NEXT_PUBLIC_BASE_BRANCH
+      })
+    } catch (error) {
+      return { props: { error } }
+    }
   }
   return {
     props: {

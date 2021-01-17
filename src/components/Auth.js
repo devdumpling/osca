@@ -12,7 +12,7 @@ const LoginButton = () => {
 
 const LogoutButton = () => {
   return (
-    <Button colorScheme='transparent' onClick={() => signOut('auth0')}>
+    <Button colorScheme='transparent' onClick={() => signOut({ callbackUrl: '/' })}>
       Log Out
     </Button>
   )

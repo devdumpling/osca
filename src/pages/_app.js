@@ -52,15 +52,6 @@ export default class Site extends App {
        * 5. Wrap the page Component with the Tina and Github providers
        */
       <TinaProvider cms={this.cms}>
-        <TinacmsGithubProvider
-          onLogin={onLogin}
-          onLogout={onLogout}
-          error={pageProps.error}
-        >
-          {/**
-           * 6. Add a button for entering Preview/Edit Mode
-           */}
-          <EditLink cms={this.cms} />
           <Provider session={pageProps.session}>
             <ChakraProvider resetCSS theme={theme}>
               <ColorModeProvider
@@ -68,11 +59,17 @@ export default class Site extends App {
                   useSystemColorMode: true
                 }}
               >
-                <Component {...pageProps} />
+                <TinacmsGithubProvider
+                  onLogin={onLogin}
+                  onLogout={onLogout}
+                  error={pageProps.error}
+                >
+                  <EditLink cms={this.cms} />
+                  <Component {...pageProps} />
+                </TinacmsGithubProvider>
               </ColorModeProvider>
             </ChakraProvider>
           </Provider>
-        </TinacmsGithubProvider>
       </TinaProvider>
     )
   }
@@ -82,7 +79,6 @@ const onLogin = async () => {
   const token = localStorage.getItem('tinacms-github-token') || null
   const headers = new Headers()
 
-  console.log('token', token)
   if (token) {
     headers.append('Authorization', 'Bearer ' + token)
   }
@@ -91,15 +87,13 @@ const onLogin = async () => {
   const data = await resp.json()
 
   if (resp.status == 200) {
-    // window.location.href = window.location.pathname
-    console.log('onLogin: 200 window.location.href = window.location.pathname')
+    window.location.href = window.location.pathname
   } else throw new Error(data.message)
 }
 
 const onLogout = () => {
   return fetch('/api/reset-preview').then(() => {
-    console.log('onLogout: reset preview')
-    // window.location.reload()
+    window.location.reload()
   })
 }
 

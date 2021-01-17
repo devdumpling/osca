@@ -25,7 +25,7 @@ export default class Site extends App {
     /**
      * 1. Create the TinaCMS instance
      */
-    this.cms = new TinaCMS({
+    const cms = new TinaCMS({
       enabled: !!props.pageProps.preview,
       apis: {
         /**
@@ -43,6 +43,14 @@ export default class Site extends App {
       sidebar: props.pageProps.preview,
       toolbar: props.pageProps.preview
     })
+    this.cms = cms
+
+    import("react-tinacms-editor").then(
+      ({ MarkdownFieldPlugin, HtmlFieldPlugin }) => {
+        cms.plugins.add(MarkdownFieldPlugin)
+        cms.plugins.add(HtmlFieldPlugin)
+      }
+    )
   }
 
   render () {

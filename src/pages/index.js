@@ -13,7 +13,7 @@ import Header from '../components/Header'
 
 const Index = ({ file={} }) => {
   const formOptions = {
-    label: 'Home Page',
+    label: 'About',
     fields: [{ name: 'title', component: 'text' }, { name: 'body', component: 'markdown' }],
   }
   const [data, form] = useGithubJsonForm(file, formOptions)
@@ -27,7 +27,7 @@ const Index = ({ file={} }) => {
       <Container>
         <Hero />
         <Main>
-          <About data={data} />
+          <About form={form} data={data} />
         </Main>
         <Footer />
         <CTA />

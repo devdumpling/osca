@@ -1,8 +1,7 @@
 import {
   Heading,
   Flex,
-  Text,
-  Divider,
+  Text,  
   VStack
 } from '@chakra-ui/react'
 import ReactMarkdown from 'react-markdown'

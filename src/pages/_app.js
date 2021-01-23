@@ -7,7 +7,7 @@ import {
   TinacmsGithubProvider,
   GithubMediaStore
 } from 'react-tinacms-github'
-
+import EditLink from '../components/EditLink'
 import theme from '../theme'
 
 export default class Site extends App {
@@ -71,9 +71,9 @@ export default class Site extends App {
                   onLogin={onLogin}
                   onLogout={onLogout}
                   error={pageProps.error}
-                >
-                  <EditLink cms={this.cms} />
+                >                  
                   <Component {...pageProps} />
+                  <EditLink cms={this.cms} />
                 </TinacmsGithubProvider>
               </ColorModeProvider>
             </ChakraProvider>
@@ -103,15 +103,4 @@ const onLogout = () => {
   return fetch('/api/reset-preview').then(() => {
     window.location.reload()
   })
-}
-
-export const EditLink = ({ cms }) => {
-  if (typeof window !== 'undefined') {
-    window.cms = cms
-  }
-  return (
-    <button onClick={() => cms.toggle()}>
-      {cms.enabled ? 'Exit Edit Mode' : 'Edit This Site'}
-    </button>
-  )
 }

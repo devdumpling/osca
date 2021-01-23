@@ -2,7 +2,6 @@ import Meta from '../components/Meta'
 import { getGithubPreviewProps, parseJson } from 'next-tinacms-github'
 import { usePlugin } from 'tinacms'
 import { useGithubJsonForm } from 'react-tinacms-github'
-
 import { Hero } from '../components/Hero'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
@@ -12,12 +11,14 @@ import About from '../components/About'
 import Header from '../components/Header'
 
 const Index = ({ file = {} }) => {
+  // Form Options for TinaCMS
   const formOptions = {
     label: 'About',
     fields: [{ name: 'title', component: 'text' }, { name: 'body', component: 'markdown' }],
   }
   const [data, form] = useGithubJsonForm(file, formOptions)
   usePlugin(form)
+
   return (
     <>
       <Meta />

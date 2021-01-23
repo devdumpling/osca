@@ -13,7 +13,7 @@ export const About = () => (
     <Flex wrap="wrap">
       <VStack spacing={8} mx={4}>
         <Heading mb={2}>
-          What is osca.coop?          
+          What is dev.osca.coop?          
         </Heading>
         <Text fontSize="lg">
           With a new year and a new rent contract, OSCA has had to make some major changes.

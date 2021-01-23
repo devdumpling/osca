@@ -1,6 +1,7 @@
 import React, { useState } from "react"
-import { Box, Flex, Text, Link as ChakraLink } from "@chakra-ui/react"
+import { Heading, Box, Flex, Text, Link } from "@chakra-ui/react"
 import { Account } from "./Auth"
+import NextLink from 'next/link'
 
 import { DarkModeSwitch } from './DarkModeSwitch'
 
@@ -26,9 +27,9 @@ const Header = props => {
       {...props}
     >
       <Flex align="center" mr={5}>
-        {/* <Heading as="h1" size="lg"> */}
-          <ChakraLink src="/">OSCA</ChakraLink>
-        {/* </Heading> */}
+        <Heading as="h1" size="lg">
+          <Link as={NextLink} href="/">OSCA</Link>
+        </Heading>
       </Flex>
 
       <Box display={{ sm: "block", md: "none" }} onClick={handleToggle}>
@@ -49,9 +50,9 @@ const Header = props => {
         alignItems="center"
         flexGrow={1}
       >
-        <MenuItems>Docs</MenuItems>
-        <MenuItems>Examples</MenuItems>
-        <MenuItems>Blog</MenuItems>
+        <MenuItems><Link as={NextLink} href="/lottery">Spring 2021 Lottery</Link></MenuItems>
+        <MenuItems><Link as={NextLink} href="/alumni">Alumni</Link></MenuItems>
+        <MenuItems><Link as={NextLink} href="/blog">Blog</Link></MenuItems>
       </Box>
 
       <Box

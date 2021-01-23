@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Meta from '../components/Meta'
 import { getGithubPreviewProps, parseJson } from 'next-tinacms-github'
 import { usePlugin } from 'tinacms'
 import { useGithubJsonForm } from 'react-tinacms-github'
@@ -11,7 +11,7 @@ import { Footer } from '../components/Footer'
 import About from '../components/About'
 import Header from '../components/Header'
 
-const Index = ({ file={} }) => {
+const Index = ({ file = {} }) => {
   const formOptions = {
     label: 'About',
     fields: [{ name: 'title', component: 'text' }, { name: 'body', component: 'markdown' }],
@@ -20,9 +20,7 @@ const Index = ({ file={} }) => {
   usePlugin(form)
   return (
     <>
-      <Head>
-        <title>OSCA | Oberlin Student Cooperative Association</title>
-      </Head>
+      <Meta />
       <Header />
       <Container>
         <Hero />
@@ -41,7 +39,7 @@ export default Index
 /**
  * Fetch data with getStaticProps based on 'preview' mode
  */
-export async function getStaticProps ({ preview, previewData }) {
+export async function getStaticProps({ preview, previewData }) {
   if (preview) {
     // todo: deal with uninformative page breaking error if JSON file is missing
     try {

@@ -17,48 +17,51 @@ const formatId = id => {
 
 const enterLottery = (set = x => x) => {
   hit(`/api/lottery/enter?id=${currentLotteryId}`).then(set).catch(console.error)
-  // todo: 
+  // todo:
   // - [ ] metadata (T#, grad year) + metadata validation
   // - [ ] error handling: missed deadline, unqualifed, etc (see endpoint for errors)
 }
 
 function CountDown ({ now, future }) {
-  let remaining = future - now
-  return <span>{remaining/1000} seconds</span>
+  const remaining = future - now
+  return <span>{remaining / 1000} seconds</span>
 }
 
 class EntrySubmission extends React.Component {
-  constructor ({ lottery={} }) {
+  constructor ({ lottery = {} }) {
     super()
     const { latency } = lottery
     this.state = { time: Date.now() + latency }
     this.latency = latency
   }
+
   componentDidMount () {
-    this.interval = setInterval((function () {
+    this.interval = setInterval(function () {
       this.setState({ time: Date.now() + this.latency })
-    }).bind(this), 200)
+    }.bind(this), 200)
   }
+
   componentWillUnmount () {
     clearInterval(this.interval)
   }
+
   render () {
-    let { lottery={}, setEntry } = this.props
-    let { active, start, end, now, latency, lotteryId } = lottery
+    const { lottery = {}, setEntry } = this.props
+    const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
       <div>
         {
           this.state.time >= start && end >= this.state.time
             ? <div>
-                <p>The {formatId(lotteryId)} lottery is now open for submissions!</p><br />
-                <Button onClick={() => enterLottery(setEntry)}>Enter Lottery</Button> (<CountDown now={this.state.time} future={end} /> remaining)
-              </div>
+              <p>The {formatId(lotteryId)} lottery is now open for submissions!</p><br />
+              <Button onClick={() => enterLottery(setEntry)}>Enter Lottery</Button> (<CountDown now={this.state.time} future={end} /> remaining)
+            </div>
             : (
-              this.state.time > end
-              ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
-              : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
-            )
+                this.state.time > end
+                  ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
+                  : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
+              )
         }
       </div>
     )
@@ -66,13 +69,15 @@ class EntrySubmission extends React.Component {
 }
 
 function Entry ({ entry }) {
-  let { email, lotteryId, entryId, userData={}, entryMetadata={}, timestamp } = entry
-  return <div>
+  const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
+  return (
+<div>
     <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
     <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
     <br />
     <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
   </div>
+)
 }
 
 function Wall ({ condition, children = [], caught = '' }) {
@@ -91,13 +96,13 @@ function Wall ({ condition, children = [], caught = '' }) {
 // probably using another endpoint that checks for qualification.
 // 3. maybe switch to the firestore clientside library, so that
 // we can work with db updates realtime.
-const Lottery = () => {
+const Lottery = (props) => {
   let [session, loading] = useSession()
-  let [entry, setEntry] = useState()
-  let [lottery, setLottery] = useState()
+  const [entry, setEntry] = useState()
+  const [lottery, setLottery] = useState()
 
   if (session && session.user) {
-    let { email } = session.user
+    const { email } = session.user
 
     if (!entry || !lottery) {
       loading = true
@@ -136,12 +141,12 @@ const Lottery = () => {
         <Main>
           <Wall condition={!loading} caught={<div>Loading...</div>}>
             <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
-              { !(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} /> }
+              {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
             </Wall>
           </Wall>
         </Main>
         <Footer />
-        <CTA />
+        <CTA {...props} />
       </Container>
     </>
   )

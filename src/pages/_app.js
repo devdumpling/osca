@@ -7,7 +7,6 @@ import {
   TinacmsGithubProvider,
   GithubMediaStore
 } from 'react-tinacms-github'
-import EditLink from '../components/EditLink'
 import theme from '../theme'
 
 export default class Site extends App {
@@ -63,8 +62,7 @@ export default class Site extends App {
                 onLogout={onLogout}
                 error={pageProps.error}
               >
-                <Component {...pageProps} />
-                <EditLink cms={this.cms} />
+                <Component {...pageProps} cms={this.cms} />
               </TinacmsGithubProvider>
             </ColorModeProvider>
           </ChakraProvider>

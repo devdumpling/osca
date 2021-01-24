@@ -12,7 +12,7 @@ const permissionsRef = firestore.collection('user-permissions')
 
 async function authorize (session, req) {
   const entryEmail = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
-  
+
   if (session && session.user) {
     const userRef = await permissionsRef.doc(session.user.email).get()
 

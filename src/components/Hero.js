@@ -1,4 +1,4 @@
-import { Fade, Button, Flex, Text, Heading } from '@chakra-ui/react'
+import { Link as ChakraLink, Fade, Button, Flex, Text, Heading } from '@chakra-ui/react'
 
 export const Hero = ({ title }) => (
   <Flex direction="column" justifyContent="center" alignItems="center" height="100vh">
@@ -16,9 +16,11 @@ export const Hero = ({ title }) => (
         ...coming soon...
       </Text>
     </Fade>
-    <Button colorScheme="teal" mt={8} variant="outline">
-      Get email updates
+    <ChakraLink isExternal href="https://forms.gle/mRBYbR458RVHmSsh9">
+      <Button colorScheme="teal" mt={8} variant="outline">
+        Get email updates
     </Button>
+    </ChakraLink>
   </Flex>
 )
 

@@ -35,7 +35,7 @@ export default function Meta() {
       <meta
         name="description"
         content={`OSCA | Oberlin Student Cooperative Association`}
-      />      
+      />
     </Head>
   )
 }

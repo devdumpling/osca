@@ -9,32 +9,70 @@ import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
 import Header from '../components/Header'
 
-import { currentLotteryId } from '../utils'
+const currentLotteryId = 'spring2021'
 
 const formatId = id => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : ''
 }
 
 const enterLottery = (set = x => x) => {
-  hit('/api/lottery/enter').then(set)
-  // todo: /api/lottery/enter?entryMetadata={"T-number":"T01223879"}
+  hit(`/api/lottery/enter?id=${currentLotteryId}`).then(set).catch(console.error)
+  // todo: 
+  // - [ ] metadata (T#, grad year) + metadata validation
+  // - [ ] error handling: missed deadline, unqualifed, etc (see endpoint for errors)
 }
 
-function LotteryHandler ({ email, lotteryId, entryId, entryMetadata={}, set }) {
-  return (
-    <div>
-      {
-        !email
-          ? <Button onClick={() => enterLottery(set)}>Enter Lottery</Button>
-          : <div>
-            <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
-            <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
-            <br />
-            <pre>{JSON.stringify({ entryMetadata }, null, 2)}</pre>
-          </div>
-      }
-    </div>
-  )
+function CountDown ({ now, future }) {
+  let remaining = future - now
+  return <span>{remaining/1000} seconds</span>
+}
+
+class EntrySubmission extends React.Component {
+  constructor ({ lottery={} }) {
+    super()
+    const { latency } = lottery
+    this.state = { time: Date.now() + latency }
+    this.latency = latency
+  }
+  componentDidMount () {
+    this.interval = setInterval((function () {
+      this.setState({ time: Date.now() + this.latency })
+    }).bind(this), 200)
+  }
+  componentWillUnmount () {
+    clearInterval(this.interval)
+  }
+  render () {
+    let { lottery={}, setEntry } = this.props
+    let { active, start, end, now, latency, lotteryId } = lottery
+    this.latency = latency
+    return (
+      <div>
+        {
+          this.state.time >= start && end >= this.state.time
+            ? <div>
+                <p>The {formatId(lotteryId)} lottery is now open for submissions!</p><br />
+                <Button onClick={() => enterLottery(setEntry)}>Enter Lottery</Button> (<CountDown now={this.state.time} future={end} /> remaining)
+              </div>
+            : (
+              this.state.time > end
+              ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
+              : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
+            )
+        }
+      </div>
+    )
+  }
+}
+
+function Entry ({ entry }) {
+  let { email, lotteryId, entryId, entryMetadata={} } = entry
+  return <div>
+    <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
+    <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
+    <br />
+    <pre>{JSON.stringify({ entryMetadata }, null, 2)}</pre>
+  </div>
 }
 
 function Wall ({ condition, children = [], caught = '' }) {
@@ -56,18 +94,31 @@ function Wall ({ condition, children = [], caught = '' }) {
 const Lottery = () => {
   let [session, loading] = useSession()
   let [entry, setEntry] = useState()
+  let [lottery, setLottery] = useState()
 
   if (session && session.user) {
     let { email } = session.user
 
-    if (!entry) {
+    if (!entry || !lottery) {
       loading = true
-      const uri = `/api/lottery/entries?lotteryId=${currentLotteryId}&email=${email}`
-      hit(uri).then(data => {
+      hit(`/api/lottery/entries?id=${currentLotteryId}&email=${email}`).then(data => {
         if (data.length == 1) {
           setEntry(data[0])
         } else {
           setEntry({}) // empty object if no entry in db
+        }
+      }).catch(err => console.log(err))
+
+      let now = Date.now()
+      hit(`/api/lottery/lotteries?id=${currentLotteryId}`).then(data => {
+        console.log('lottery', lottery)
+        if (data.length == 1) {
+          const lottery = data[0]
+          const latency = lottery.now - now // cynical latency
+          now = Date.now() + latency
+          setLottery({ ...lottery, latency, now })
+        } else {
+          setLottery({}) // empty object if no entry in db
         }
       }).catch(err => console.log(err))
     } else {
@@ -85,7 +136,7 @@ const Lottery = () => {
         <Main>
           <Wall condition={!loading} caught={<div>Loading...</div>}>
             <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
-              <LotteryHandler {...entry} set={setEntry} />
+              { !(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} /> }
             </Wall>
           </Wall>
         </Main>
@@ -101,3 +152,10 @@ export default Lottery
 async function hit (...args) {
   return fetch(...args).then(x => x.json())
 }
+
+// single shot latency
+// async function latency () {
+//   const now = Date.now()
+//   const time = await fetch('/api/time')
+//   return time - now
+// }

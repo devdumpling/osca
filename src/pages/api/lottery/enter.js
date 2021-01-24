@@ -10,9 +10,19 @@ const firestore = new Firestore({
 })
 const entriesRef = firestore.collection('lottery-entries')
 const lotteriesRef = firestore.collection('lotteries')
+const usersRef = firestore.collection('users')
 
-function authorized (session) {
+function authorize (session) {
   return session
+}
+
+function qualified (userRef) {
+  if (userRef.exists) {
+    const userData = userRef.data()
+    return userRef.exists && userData.tnumber && userData.year
+  } else {
+    return false
+  }
 }
 
 export default async (req, res) => {
@@ -28,9 +38,17 @@ export default async (req, res) => {
     })
   }
 
-  if (authorized(session)) {
+  if (authorize(session)) {
     const user = session.user
     const email = user.email
+
+    const userRef = await usersRef.doc(email).get()
+    if (!qualified(userRef)) {
+      return res.status(422).json({
+        error: 'User profile must include T-Number and Graduate Year'
+      })
+    }
+    const userData = userRef.data()
 
     const lotteryId = req.query.id || req.query.lotteryId
     if (!lotteryId) {
@@ -68,7 +86,7 @@ export default async (req, res) => {
     }
 
     const entryMetadata = JSON.parse(req.body || req.query.entryMetadata || '{}')
-    const data = { email, lotteryId, entryMetadata, timestamp }
+    const data = { email, lotteryId, entryMetadata, userData, timestamp }
     const entryId = hash(email + lotteryId).toString()
     try {
       await entriesRef.doc(entryId).set(data)

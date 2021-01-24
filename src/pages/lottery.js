@@ -66,12 +66,12 @@ class EntrySubmission extends React.Component {
 }
 
 function Entry ({ entry }) {
-  let { email, lotteryId, entryId, entryMetadata={} } = entry
+  let { email, lotteryId, entryId, userData={}, entryMetadata={}, timestamp } = entry
   return <div>
     <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
     <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
     <br />
-    <pre>{JSON.stringify({ entryMetadata }, null, 2)}</pre>
+    <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
   </div>
 }
 
@@ -101,7 +101,8 @@ const Lottery = () => {
 
     if (!entry || !lottery) {
       loading = true
-      hit(`/api/lottery/entries?id=${currentLotteryId}&email=${email}`).then(data => {
+      hit(`/api/lottery/entries?lotteryId=${currentLotteryId}&email=${email}`).then(data => {
+        console.log(data)
         if (data.length == 1) {
           setEntry(data[0])
         } else {
@@ -110,8 +111,7 @@ const Lottery = () => {
       }).catch(err => console.log(err))
 
       let now = Date.now()
-      hit(`/api/lottery/lotteries?id=${currentLotteryId}`).then(data => {
-        console.log('lottery', lottery)
+      hit(`/api/lottery/lotteries?lotteryId=${currentLotteryId}`).then(data => {
         if (data.length == 1) {
           const lottery = data[0]
           const latency = lottery.now - now // cynical latency

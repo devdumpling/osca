@@ -10,7 +10,7 @@ const firestore = new Firestore({
 const entriesRef = firestore.collection('lottery-entries')
 const permissionsRef = firestore.collection('user-permissions')
 
-async function authorized (session, req) {
+async function authorize (session, req) {
   const entryEmail = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
   
   if (session && session.user) {
@@ -39,7 +39,7 @@ export default async (req, res) => {
     })
   }
 
-  if (await authorized(session, req)) {
+  if (await authorize(session, req)) {
     let query = entriesRef
     const id = req.query.id || req.query.entryId
     if (id) {

@@ -8,17 +8,24 @@ const firestore = new Firestore({
   credentials
 })
 const entriesRef = firestore.collection('lottery-entries')
+const permissionsRef = firestore.collection('user-permissions')
 
-const authlist = [
-  'luke@starter.org',
-  'devon.wells.a@gmail.com'
-]
+async function authorized (session, req) {
+  const entryEmail = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
+  
+  if (session && session.user) {
+    const userRef = await permissionsRef.doc(session.user.email).get()
 
-function authorized (session, req) {
-  const email = req.query.email ? req.query.email.toLowerCase().replace(/ /g, '+') : undefined
-  return session &&
-         session.user &&
-         (authlist.indexOf(session.user.email) >= 0 || session.user.email === email)
+    let entriesPermission = false
+    if (userRef.exists) {
+      const user = userRef.data()
+      entriesPermission = user.entries // user has been assigned permissions `entries: true` in `user-permissions` collection
+    }
+
+    return entriesPermission || session.user.email === entryEmail // signed in user is trying to access their entry
+  } else {
+    return false
+  }
 }
 
 export default async (req, res) => {
@@ -32,7 +39,7 @@ export default async (req, res) => {
     })
   }
 
-  if (authorized(session, req)) {
+  if (await authorized(session, req)) {
     let query = entriesRef
     const id = req.query.id || req.query.entryId
     if (id) {

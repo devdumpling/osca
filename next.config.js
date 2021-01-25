@@ -7,7 +7,7 @@ const subdomains = {
 
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
-const withBranchEnv = require('../next-branch-env')({
+const withBranchEnv = require('next-branch-env')({
   verbose: true,
   branch: 'dev',
   expose: 'BRANCH',

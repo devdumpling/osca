@@ -4331,6 +4331,13 @@ next-auth@canary:
     require_optional "^1.0.1"
     typeorm "^0.2.30"
 
+next-branch-env@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/next-branch-env/-/next-branch-env-0.1.2.tgz#d0959045d10e41255bc2a587c3b392ef8e14bf1b"
+  integrity sha512-HFiw5IAw3gIvor3eLcD8Re1ilRXe5sJeT+OGthHmmW6gw0coMpXVwI0h5LQqM5OgLjRJlQqArC52xp//zj2Wqg==
+  dependencies:
+    next-env "^1.1.1"
+
 next-env@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/next-env/-/next-env-1.1.1.tgz#4ec4c1f745f36a24fe95d500d1118a3e934d6d6e"

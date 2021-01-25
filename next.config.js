@@ -7,7 +7,9 @@ const subdomains = {
 
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
-const withBranchEnv = require('next-branch-env')()
+const withBranchEnv = require('next-branch-env')({
+  branch: process.env.VERCEL_GITHUB_COMMIT_REF
+})
 const branch = process.env.NEXT_PUBLIC_BRANCH
 console.log(`branch=${branch}`)
 
@@ -32,7 +34,7 @@ console.log(`nextauthurl=${process.env.NEXTAUTH_URL}`)
 
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
-  process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.VERCEL_GITHUB_COMMIT_REF || 'development'
+  process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.NEXT_PUBLIC_BRANCH || 'development'
 }
 console.log(`basebranch=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 

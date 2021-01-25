@@ -7,11 +7,13 @@ const subdomains = {
 
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
-const withBranchEnv = require('next-branch-env')({
+const withBranchEnv = require('../next-branch-env')({
   verbose: true,
+  branch: 'dev',
+  expose: 'BRANCH',
+  publicPrefix: 'NEXTAUTH_'
 })
-const branch = process.env.NEXT_PUBLIC_BRANCH
-console.log(`NEXT_PUBLIC_BRANCH=${branch}`)
+const branch = process.env.BRANCH
 
 // 2. Two options for dealing setting a branch-dependent NEXTAUTH_URL variable for Vercel deployments:
 //    (1) Define NEXTAUTH_URL_{BRANCH} for each branch explicitly in Vercel
@@ -19,7 +21,7 @@ console.log(`NEXT_PUBLIC_BRANCH=${branch}`)
 // If option (2), then below we set NEXTAUTH_URL={protocol}://{branch}.{host}
 if (!process.env.NEXTAUTH_URL) {
   // Be sure to set NEXT_PUBLIC_HOST to root host (e.g. 'osca.coop' but not 'dev.osca.coop')
-  const PROTOCOL = process.env.PROTOCOL || (branch ? 'https' : 'http') // assumes (1) no branch means localhost and (2) that there's no ssl in local dev environment, so probably better just to set PROTOCOL accordingly
+  const PROTOCOL = process.env.PROTOCOL || 'https' // set to http if on localhost!
   const VERCEL_HOST = process.env.VERCEL_URL ? (new URL(`https://${process.env.VERCEL_URL}`)).host : undefined
   const HOST = process.env.NEXT_PUBLIC_HOST || VERCEL_HOST || `localhost:${process.env.PORT || '3000'}`
 
@@ -30,31 +32,17 @@ if (!process.env.NEXTAUTH_URL) {
     process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}/api/auth/`
   }
 }
-console.log(`NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
 
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
-  process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.NEXT_PUBLIC_BRANCH || 'development'
+  process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.BRANCH || 'development'
 }
-console.log(`NEXT_PUBLIC_BASE_BRANCH=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 
-module.exports = (phase, defaultConfig) => {
-  return {
-    ...defaultConfig,
-    webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-      // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//))
-      // console.log('webpack', config)
-      if (isServer) {
-        console.log('server!', isServer)
-      }
-      return config
-    },
-    env: {
-      NEXTAUTH_URL: process.env.NEXTAUTH_URL, // does this help it propagate to the nextauth lib?
-      customVar: 'red'
-    }
+module.exports = withBranchEnv({
+  env: {
+    customVar: 'red'
   }
-}
+})
 
 function subdomain (branch) {
   return subdomains[branch] || branch

@@ -39,9 +39,13 @@ if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
 }
 
 module.exports = withBranchEnv({
+  build: {
+    env: {
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL, // does this make it avail?
+    }
+  },
   env: {
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    customVar: 'red'
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL, // not all env vars are set automatically or available everywhere
   }
 })
 

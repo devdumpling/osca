@@ -13,8 +13,7 @@ auth0.authorizationUrl = auth0.authorizationUrl += '&prompt=login'
 
 export default async (req, res) => {
   console.log({
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    customVar: process.env.customVar
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL
   })
   return NextAuth(req, res, { 
     providers: [ auth0 ]

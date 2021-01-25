@@ -13,9 +13,6 @@ export default class Site extends App {
   constructor (props) {
     super(props)
 
-    console.log('NEXTAUTH_URL', process.env.NEXTAUTH_URL)
-    console.log('NEXT_PUBLIC_NEXTAUTH_URL', process.env.NEXT_PUBLIC_NEXTAUTH_URL)
-
     const github = new GithubClient({
       proxy: '/api/proxy-github',
       authCallbackRoute: '/api/create-github-access-token',

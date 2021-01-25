@@ -1,9 +1,6 @@
 import NextAuth from 'next-auth'
 import Providers from 'next-auth/providers'
 
-console.log('NEXTAUTH_URL', process.env.NEXTAUTH_URL)
-console.log('NEXT_PUBLIC_NEXTAUTH_URL', process.env.NEXT_PUBLIC_NEXTAUTH_URL)
-
 const auth0 = Providers.Auth0({
   clientId: process.env.AUTH0_CLIENT_ID,
   clientSecret: process.env.AUTH0_CLIENT_SECRET,

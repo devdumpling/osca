@@ -25,15 +25,12 @@ if (!process.env.NEXTAUTH_URL) {
 
   // Set Auth URL based on branch
   if (branch === 'main' || !branch) {
-    process.env.NEXTAUTH_URL = `${PROTOCOL}://${HOST}`
+    process.env.NEXTAUTH_URL = `${PROTOCOL}://${HOST}/api/auth/`
   } else {
-    process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}`
+    process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}/api/auth/`
   }
 }
 console.log(`NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
-
-process.env.NEXT_PUBLIC_NEXTAUTH_URL = process.env.NEXTAUTH_URL
-console.log(`NEXT_PUBLIC_NEXTAUTH_URL=${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`)
 
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {

@@ -1,8 +1,10 @@
+console.log(`0 NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
+
 import { getSession } from 'next-auth/client'
 import { Firestore } from '@google-cloud/firestore'
 import { credentials } from '../../utils'
 
-console.log(process.env.NEXTAUTH_URL)
+console.log(`1 NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
 
 const firestore = new Firestore({
   projectId: credentials.project_id,
@@ -11,6 +13,7 @@ const firestore = new Firestore({
 const permissionsRef = firestore.collection('user-permissions')
 
 export default async (req, res) => {
+  console.log(`2 NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
   let session
   try {
     // Get user session

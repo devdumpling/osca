@@ -8,7 +8,7 @@ const subdomains = {
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
 const withBranchEnv = require('next-branch-env')({
-  verbose: true
+  verbose: true,
 })
 const branch = process.env.NEXT_PUBLIC_BRANCH
 console.log(`NEXT_PUBLIC_BRANCH=${branch}`)
@@ -38,7 +38,11 @@ if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
 }
 console.log(`NEXT_PUBLIC_BASE_BRANCH=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 
-module.exports = withBranchEnv()
+module.exports = withBranchEnv({
+  env: {
+    NEXTAUTH_URL: 'https://dev.osca.starter.org/api/auth/'
+  }
+})
 
 function subdomain (branch) {
   return subdomains[branch] || branch

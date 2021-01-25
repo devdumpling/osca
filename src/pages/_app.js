@@ -1,3 +1,4 @@
+import '../env-test'
 import App from 'next/app'
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 import { Provider } from 'next-auth/client'
@@ -42,6 +43,7 @@ export default class Site extends App {
 
   render () {
     const { Component, pageProps } = this.props
+
     return (
       /**
        * 5. Wrap the page Component with the Tina and Github providers

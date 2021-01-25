@@ -14,6 +14,8 @@ If you need branch-specific environment variables for Vercel deployments, you ca
 
 If you need a branch-specific _public_ environment variable, then just prepend with `NEXT_PUBLIC_` like usual (this is [Vercel's convention](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser) for handling public and private environment variables). For example, `NEXT_PUBLIC_CLIENT_ID_DEVELOPMENT` will be available from the browser as `NEXT_PUBLIC_CLIENT_ID` in `development` deployments.
 
+Note: make sure the 'Automatically expose System Environment Variables' option is checked in your Vercel project configuration, under Environment Variables.
+
 #### Auth0
 
 Setup Application in Auth0 as a Regular Web App (not Single Page App). Add the following environment variables for Auth0 to the Vercel project. These are only accessible to functions (not the the public facing client).

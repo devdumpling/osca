@@ -5,7 +5,12 @@ const subdomains = {
   development: 'dev'
 }
 
-const withNextEnv = nextEnv({ serverPrefix: '' }) // match prefix convention as vercel for compatibility
+// match prefix convention as vercel for compatibility
+const withNextEnv = nextEnv({
+  serverPrefix: '',
+  staticPrefix: 'NEXT_PUBLIC_',
+  publicPrefix: 'NEXT_PUBLIC_RUNTIME_'
+})
 
 // This configuration does THREE separate things:
 

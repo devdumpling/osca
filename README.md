@@ -4,6 +4,14 @@ Work in Progress
 
 ## Configuration
 
+```
+NEXT_PUBLIC_HOST=osca.coop # the root host which has branch deployments as subdomains. if local, set to e.g. localhost:3000.
+```
+
+If you need branch-specific environment variables for Vercel deployments, you can set overrides by appending `_{BRANCH}` in your Vercel environment configuration. For example, if you set `CLIENT_SECRET_DEVELOPMENT` in the Vercel dashboard, all deployments from the `development` branch can access it from `CLIENT_SECRET` from the server. Any existing `CLIENT_SECRET` variable is overwritten.
+
+If you need a branch-specific _public_ environment variable, then just prepend with `NEXT_PUBLIC_` like usual (this is [Vercel's convention](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser) for handling public and private environment variables). For example, `NEXT_PUBLIC_CLIENT_ID_DEVELOPMENT` will be available from the browser as `NEXT_PUBLIC_CLIENT_ID` in `development` deployments.
+
 #### Auth0
 
 Setup Application in Auth0 as a Regular Web App (not Single Page App). Add the following environment variables for Auth0 to the Vercel project. These are only accessible to functions (not the the public facing client).
@@ -58,9 +66,11 @@ GCLOUD_CREDENTIALS=
 #### Tina CMS
 
 ```
-GITHUB_CLIENT_SECRET=
 SIGNING_KEY= # for nextjs preview: `openssl rand -base64 32`
-NEXT_PUBLIC_GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET{_ENV}=
+NEXT_PUBLIC_GITHUB_CLIENT_ID{_ENV}=
 NEXT_PUBLIC_REPO_FULL_NAME=lukeburns/osca
 NEXT_PUBLIC_BASE_BRANCH=main
 ```
+
+where `_ENV = '' || '_DEVELOPMENT' || '_STAGING' || '_LOCAL`. Unforunately, Github requires a separate oAuth client for each redirect url, which requires environment variables for each

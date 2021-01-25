@@ -15,6 +15,7 @@
     "framer-motion": "^3.2.1",
     "next": "latest",
     "next-auth": "canary",
+    "next-env": "^1.1.1",
     "next-tinacms-github": "^0.35.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",

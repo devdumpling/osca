@@ -17,13 +17,10 @@ export default class Site extends App {
       proxy: '/api/proxy-github',
       authCallbackRoute: '/api/create-github-access-token',
       clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
-      baseRepoFullName: process.env.NEXT_PUBLIC_REPO_FULL_NAME, // e.g: tinacms/tinacms.org,
-      baseBranch: process.env.NEXT_PUBLIC_BASE_BRANCH // e.g. 'master' or 'main' on newer repos
+      baseRepoFullName: process.env.NEXT_PUBLIC_REPO_FULL_NAME,
+      baseBranch: process.env.NEXT_PUBLIC_BASE_BRANCH
     })
 
-    /**
-     * 1. Create the TinaCMS instance
-     */
     const cms = new TinaCMS({
       enabled: !!props.pageProps.preview,
       apis: {

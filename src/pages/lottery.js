@@ -71,7 +71,7 @@ class EntrySubmission extends React.Component {
 function Entry ({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-<div>
+  <div>
     <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
     <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
     <br />

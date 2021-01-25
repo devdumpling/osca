@@ -1,5 +1,10 @@
 const nextEnv = require('next-env')
 
+// Configure subdomains for branches, if different
+const subdomains = {
+  development: 'dev'
+}
+
 const withNextEnv = nextEnv({ serverPrefix: '' }) // match prefix convention as vercel for compatibility
 
 // This configuration does THREE separate things:
@@ -37,7 +42,7 @@ if (!process.env.NEXTAUTH_URL) {
   if (branch === 'main' || branch === 'local') {
     process.env.NEXTAUTH_URL = `${PROTOCOL}://${HOST}`
   } else {
-    process.env.NEXTAUTH_URL = `${PROTOCOL}://${branch}.${HOST}`
+    process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}`
   }
 }
 
@@ -47,3 +52,7 @@ if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
 }
 
 module.exports = withNextEnv()
+
+function subdomain (branch) {
+  return subdomains[branch] || branch
+}

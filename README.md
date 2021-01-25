@@ -4,8 +4,10 @@ Work in Progress
 
 ## Configuration
 
+Set the root host for the Preview and Production Vercel environments. If in a local development environment (e.g. the Development Vercal environment), this should be set to e.g. localhost:3000. Currently, we assume that all branches are deployed as subdomains.
+
 ```
-NEXT_PUBLIC_HOST=osca.coop # the root host which has branch deployments as subdomains. if local, set to e.g. localhost:3000.
+NEXT_PUBLIC_HOST=osca.coop 
 ```
 
 If you need branch-specific environment variables for Vercel deployments, you can set overrides by appending `_{BRANCH}` in your Vercel environment configuration. For example, if you set `CLIENT_SECRET_DEVELOPMENT` in the Vercel dashboard, all deployments from the `development` branch can access it from `CLIENT_SECRET` from the server. Any existing `CLIENT_SECRET` variable is overwritten.

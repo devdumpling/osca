@@ -2,6 +2,8 @@ import { getSession } from 'next-auth/client'
 import { Firestore } from '@google-cloud/firestore'
 import { credentials } from '../../utils'
 
+console.log(process.env.NEXTAUTH_URL)
+
 const firestore = new Firestore({
   projectId: credentials.project_id,
   credentials

@@ -40,6 +40,7 @@ if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
 
 module.exports = withBranchEnv({
   env: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     customVar: 'red'
   }
 })

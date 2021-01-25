@@ -58,7 +58,7 @@ Create a Firebase project (or add Firebase to existing GCP project). Enable Fire
 It is stored as a JSON array, which can be obtained from the data in `credentials.json`.
 
 ```
-GCLOUD_CREDENTIALS=["project_id","private_key_id","private_key*","client_email","client_id","client_x509_cert_url"]
+GCLOUD_CREDENTIALS=["project_id","private_key*","client_email"]
 ```
 
 * `private_key` should _not_ be wrapped by `-----BEGIN PRIVATE KEY-----\n` and `\n-----END PRIVATE KEY-----\n`

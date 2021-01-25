@@ -1,5 +1,9 @@
-import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import dynamic from 'next/dynamic'
+// import NextAuth from 'next-auth'
+// import Providers from 'next-auth/providers'
+
+const NextAuth = dynamic(import('next-auth'))
+const Providers = dynamic(import('next-auth/providers'))
 
 const auth0 = Providers.Auth0({
   clientId: process.env.AUTH0_CLIENT_ID,

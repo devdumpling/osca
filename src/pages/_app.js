@@ -1,4 +1,3 @@
-import '../env-test'
 import App from 'next/app'
 import { ChakraProvider, ColorModeProvider } from '@chakra-ui/react'
 import { Provider } from 'next-auth/client'

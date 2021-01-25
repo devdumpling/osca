@@ -38,11 +38,23 @@ if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
 }
 console.log(`NEXT_PUBLIC_BASE_BRANCH=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 
-module.exports = withBranchEnv({
-  env: {
-    NEXTAUTH_URL: 'https://dev.osca.starter.org/api/auth/'
+module.exports = (phase, defaultConfig) => {
+  return {
+    ...defaultConfig,
+    webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+      // config.plugins.push(new webpack.IgnorePlugin(/\/__tests__\//))
+      // console.log('webpack', config)
+      if (isServer) {
+        console.log('server!', isServer)
+      }
+      return config
+    },
+    env: {
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL, // does this help it propagate to the nextauth lib?
+      customVar: 'red'
+    }
   }
-})
+}
 
 function subdomain (branch) {
   return subdomains[branch] || branch

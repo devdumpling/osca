@@ -28,13 +28,13 @@ if (!process.env.NEXTAUTH_URL) {
     process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}`
   }
 }
-console.log(`nextauthurl=${process.env.NEXTAUTH_URL}`)
+console.log(`nextauth_url=${process.env.NEXTAUTH_URL}`)
 
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
   process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.NEXT_PUBLIC_BRANCH || 'development'
 }
-console.log(`basebranch=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
+console.log(`base_branch=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 
 module.exports = withBranchEnv()
 

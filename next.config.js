@@ -17,9 +17,9 @@ console.log(`branch=${branch}`)
 // If option (2), then below we set NEXTAUTH_URL={protocol}://{branch}.{host}
 if (!process.env.NEXTAUTH_URL) {
   // Be sure to set NEXT_PUBLIC_HOST to root host (e.g. 'osca.coop' but not 'dev.osca.coop')
-  const VERCEL_HOST = process.env.VERCEL_URL ? (new URL(process.env.VERCEL_URL)).host : undefined
-  const HOST = process.env.NEXT_PUBLIC_HOST || VERCEL_HOST || `localhost:${process.env.PORT || '3000'}`
   const PROTOCOL = process.env.PROTOCOL || (branch ? 'https' : 'http') // assumes (1) no branch means localhost and (2) that there's no ssl in local dev environment, so probably better just to set PROTOCOL accordingly
+  const VERCEL_HOST = process.env.VERCEL_URL ? (new URL(`https://${process.env.VERCEL_URL}`)).host : undefined
+  const HOST = process.env.NEXT_PUBLIC_HOST || VERCEL_HOST || `localhost:${process.env.PORT || '3000'}`
 
   // Set Auth URL based on branch
   if (branch === 'main' || !branch) {

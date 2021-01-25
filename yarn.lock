@@ -4331,10 +4331,10 @@ next-auth@canary:
     require_optional "^1.0.1"
     typeorm "^0.2.30"
 
-next-branch-env@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/next-branch-env/-/next-branch-env-0.1.2.tgz#d0959045d10e41255bc2a587c3b392ef8e14bf1b"
-  integrity sha512-HFiw5IAw3gIvor3eLcD8Re1ilRXe5sJeT+OGthHmmW6gw0coMpXVwI0h5LQqM5OgLjRJlQqArC52xp//zj2Wqg==
+next-branch-env@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/next-branch-env/-/next-branch-env-0.1.3.tgz#c0fbd393760f50cd82c1c84afd592cd0f3051760"
+  integrity sha512-D4aecCCW0vKr8S7KQjcEBK+2wGL7KrATErsh9btqTdb1cGgL9qTHgX6ZdWsmLFMwHBkKNKkpxeR4c5VDktbRqw==
   dependencies:
     next-env "^1.1.1"
 

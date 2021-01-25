@@ -7,6 +7,8 @@ const subdomains = {
 
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
+console.log(process.env.VERCEL_GITHUB_COMMIT_REF)
+console.log(process.env)
 const withBranchEnv = require('next-branch-env')({
   branch: process.env.VERCEL_GITHUB_COMMIT_REF
 })

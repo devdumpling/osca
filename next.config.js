@@ -14,11 +14,11 @@ const withNextEnv = nextEnv({ serverPrefix: '' }) // match prefix convention as 
 const branch = process.env.VERCEL_GITHUB_COMMIT_REF || 'local'
 if (branch) {
   console.log(`${branch}: Processing '${branch}' branch overrides...`)
-  if (branch == 'local') {
+  if (branch === 'local') {
     console.log(`${branch}: Not on Vercel deployment, so you must be local. Branch is considered 'local' for overrides, but you probably won't need this unless it helps you stay organized.`)
   }
   const BRANCH = branch.toUpperCase()
-  Object.entries(process.env).map(([key, val]) => {
+  Object.entries(process.env).forEach(([key, val]) => {
     let _key
     if (key.indexOf(`_${BRANCH}`) > -1 && key.indexOf(`_${BRANCH}`) === key.length - `_${BRANCH}`.length) {
       _key = key.slice(0, key.indexOf(`_${BRANCH}`))

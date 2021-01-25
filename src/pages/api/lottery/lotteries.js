@@ -1,7 +1,6 @@
 import { Firestore } from '@google-cloud/firestore'
+import { credentials } from '../../../utils'
 
-const { GCLOUD_CREDENTIALS } = process.env
-const credentials = JSON.parse(Buffer.from(GCLOUD_CREDENTIALS || '', 'base64').toString())
 const firestore = new Firestore({
   projectId: credentials.project_id,
   credentials

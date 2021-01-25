@@ -53,19 +53,15 @@ Add Google oAuth client id and secret to connection in the Auth0 dashboard.
 
 #### Google Firebase (Firestore)
 
-Create a Firebase project (or add Firebase to existing GCP project). Enable Firestore. Go to Settings -> Service Accounts and click Generate new private key. This will save a JSON file, let's call it `credentials.json` for convenience.
+Create a Firebase project (or add Firebase to existing GCP project). Enable Firestore. Go to Settings -> Service Accounts and click Generate new private key. This will save a JSON file, let's call it `credentials.json` for convenience. 
 
-In NodeJS, run the following:
-
-```js
-Buffer.from(JSON.stringify(require('./credentials.json')).toString('base64')
-```
-
-And add the (rather long) string to the Vecel environment configuration:
+It is stored as a JSON array, which can be obtained from the data in `credentials.json`.
 
 ```
-GCLOUD_CREDENTIALS=
+GCLOUD_CREDENTIALS=["project_id","private_key_id","private_key*","client_email","client_id","client_x509_cert_url"]
 ```
+
+* `private_key` should _not_ be wrapped by `-----BEGIN PRIVATE KEY-----\n` and `\n-----END PRIVATE KEY-----\n`
 
 #### Tina CMS
 

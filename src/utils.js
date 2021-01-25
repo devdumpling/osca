@@ -1,5 +1,21 @@
+const { GCLOUD_CREDENTIALS } = process.env
+const gcc = JSON.parse(GCLOUD_CREDENTIALS || '[]')
+const credentials = {
+  type: 'service_account',
+  auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+  token_uri: 'https://oauth2.googleapis.com/token',
+  auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+  project_id: gcc[0],
+  private_key_id: gcc[1],
+  private_key: `-----BEGIN PRIVATE KEY-----\n${gcc[2]}\n-----END PRIVATE KEY-----\n`,
+  client_email: gcc[3],
+  client_id: gcc[4],
+  client_x509_cert_url: gcc[5]
+}
+
 export {
-  hash
+  hash,
+  credentials
 }
 
 // 53-bit hash used for unique entryId for a given email and lotteryId (e.g. Spring 2020)

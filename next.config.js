@@ -32,6 +32,9 @@ if (!process.env.NEXTAUTH_URL) {
 }
 console.log(`NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
 
+process.env.NEXT_PUBLIC_NEXTAUTH_URL = process.env.NEXTAUTH_URL
+console.log(`NEXT_PUBLIC_NEXTAUTH_URL=${process.env.NEXT_PUBLIC_NEXTAUTH_URL}`)
+
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
   process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.NEXT_PUBLIC_BRANCH || 'development'

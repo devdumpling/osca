@@ -7,9 +7,11 @@ const subdomains = {
 
 // 1. Set branch-specific environment variable overrides
 // Example: if on the development branch, NEXT_PUBLIC_URL_DEVELOPMENT overrides NEXT_PUBLIC_URL
-const withBranchEnv = require('next-branch-env')()
+const withBranchEnv = require('next-branch-env')({
+  verbose: true
+})
 const branch = process.env.NEXT_PUBLIC_BRANCH
-console.log(`branch=${branch}`)
+console.log(`NEXT_PUBLIC_BRANCH=${branch}`)
 
 // 2. Two options for dealing setting a branch-dependent NEXTAUTH_URL variable for Vercel deployments:
 //    (1) Define NEXTAUTH_URL_{BRANCH} for each branch explicitly in Vercel
@@ -28,13 +30,13 @@ if (!process.env.NEXTAUTH_URL) {
     process.env.NEXTAUTH_URL = `${PROTOCOL}://${subdomain(branch)}.${HOST}`
   }
 }
-console.log(`nextauth_url=${process.env.NEXTAUTH_URL}`)
+console.log(`NEXTAUTH_URL=${process.env.NEXTAUTH_URL}`)
 
 // 3. Set base branch for CMS to current deployment branch, if not set. Otherwise, falls back to 'development'.
 if (!process.env.NEXT_PUBLIC_BASE_BRANCH) {
   process.env.NEXT_PUBLIC_BASE_BRANCH = process.env.NEXT_PUBLIC_BRANCH || 'development'
 }
-console.log(`base_branch=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
+console.log(`NEXT_PUBLIC_BASE_BRANCH=${process.env.NEXT_PUBLIC_BASE_BRANCH}`)
 
 module.exports = withBranchEnv()
 

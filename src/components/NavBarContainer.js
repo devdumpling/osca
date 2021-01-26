@@ -14,6 +14,7 @@ export default function NavBarContainer({ children, ...props }) {
       wrap="wrap"
       w="100%"
       p={4}
+      boxShadow="base"
       zIndex="2"
       bg={bgColor[colorMode]}
       color={color[colorMode]}

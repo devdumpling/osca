@@ -4,15 +4,15 @@ import { Flex, Button, Avatar } from '@chakra-ui/react'
 
 const LoginButton = () => {
   return (
-    <Button colorScheme="transparent" onClick={() => signIn('auth0', { prompt: 'login' })}>
+    <Button colorScheme="teal" variant="outline" onClick={() => signIn('auth0', { prompt: 'login' })}>
       Log In
     </Button>
   )
 }
 
-const LogoutButton = () => {
+const LogoutButton = ({loading}) => {
   return (
-    <Button colorScheme='transparent' onClick={() => signOut({ callbackUrl: '/' })}>
+    <Button colorScheme="teal" variant="outline" onClick={() => signOut({ callbackUrl: '/' })}>
       Log Out
     </Button>
   )
@@ -22,7 +22,7 @@ const Account = () => {
   const [ session, loading ] = useSession()
 
   if (loading) {
-    return <div>Loading ...</div>
+    return <Button colorScheme="teal" variant="outline" isLoading={loading}></Button>
   }
 
   if (session) {

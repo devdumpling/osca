@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
-import Head from 'next/head'
+import Meta from '../components/Meta'
 import { Button } from '@chakra-ui/react'
-
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
+import LotteryForm from '../components/LotteryForm'
 import Header from '../components/Header'
-
 import { currentLotteryId } from '../utils'
 
 const formatId = id => {
@@ -20,14 +19,14 @@ const enterLottery = (set = x => x) => {
   // todo: /api/lottery/enter?entryMetadata={"T-number":"T01223879"}
 }
 
-function LotteryHandler ({ email, lotteryId, entryId, entryMetadata={}, set }) {
+function LotteryHandler({ email, lotteryId, entryId, entryMetadata = {}, set }) {
   return (
     <div>
       {
         !email
           ? <Button onClick={() => enterLottery(set)}>Enter Lottery</Button>
           : <div>
-            <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
+            <h3>Thanks for entering, <strong>{email}</strong>!</h3>
             <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
             <br />
             <pre>{JSON.stringify({ entryMetadata }, null, 2)}</pre>
@@ -37,7 +36,7 @@ function LotteryHandler ({ email, lotteryId, entryId, entryMetadata={}, set }) {
   )
 }
 
-function Wall ({ condition, children = [], caught = '' }) {
+function Wall({ condition, children = [], caught = '' }) {
   if (condition) {
     return children
   } else {
@@ -77,13 +76,12 @@ const Lottery = () => {
 
   return (
     <>
-      <Head>
-        <title>OSCA Lottery</title>
-      </Head>
+      <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Main>
-          <Wall condition={!loading} caught={<div>Loading...</div>}>
+        <Main>          
+          <LotteryForm />
+          <Wall condition={!loading} caught={<div>Loading...</div>}>            
             <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
               <LotteryHandler {...entry} set={setEntry} />
             </Wall>
@@ -98,6 +96,6 @@ const Lottery = () => {
 
 export default Lottery
 
-async function hit (...args) {
+async function hit(...args) {
   return fetch(...args).then(x => x.json())
 }

@@ -21,7 +21,7 @@ const Index = ({ file = {} }) => {
 
   return (
     <>
-      <Meta />
+      <Meta title="OSCA | Oberlin Student Cooperative Association" />
       <Header />
       <Container>
         <Hero />

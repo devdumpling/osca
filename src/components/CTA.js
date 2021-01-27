@@ -11,7 +11,7 @@ export const CTA = () => (
     maxWidth="48rem"
     py={2}
   >
-    <ChakraLink isExternal href="https://paypal.com" flexGrow={1} mx={2}>
+    <ChakraLink isExternal href="https://paypal.com" flexGrow={1} mx={2}>      
       <Button width="100%" variant="outline" variantcolor="green">
         Donate
       </Button>

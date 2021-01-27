@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
-export default function Meta() {
+export default function Meta({title}) {
   return (
     <Head>
-      <title>OSCA | Oberlin Student Cooperative Association</title>
+      <title>{title}</title>
       <link
         rel="apple-touch-icon"
         sizes="180x180"

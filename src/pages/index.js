@@ -10,7 +10,7 @@ import { Footer } from '../components/Footer'
 import About from '../components/About'
 import Header from '../components/Header'
 
-const Index = ({ file = {} }) => {
+const Index = ({ file = {}, cms, session }) => {
   // Form Options for TinaCMS
   const formOptions = {
     label: 'About',
@@ -29,7 +29,7 @@ const Index = ({ file = {} }) => {
           <About form={form} data={data} />
         </Main>
         <Footer />
-        <CTA />
+        <CTA cms={cms} session={session} />
       </Container>
     </>
   )

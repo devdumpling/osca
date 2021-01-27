@@ -7,7 +7,6 @@ import {
   TinacmsGithubProvider,
   GithubMediaStore
 } from 'react-tinacms-github'
-import EditLink from '../components/EditLink'
 import theme from '../theme'
 
 export default class Site extends App {
@@ -18,34 +17,22 @@ export default class Site extends App {
       proxy: '/api/proxy-github',
       authCallbackRoute: '/api/create-github-access-token',
       clientId: process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID,
-      baseRepoFullName: process.env.NEXT_PUBLIC_REPO_FULL_NAME, // e.g: tinacms/tinacms.org,
-      baseBranch: process.env.NEXT_PUBLIC_BASE_BRANCH // e.g. 'master' or 'main' on newer repos
+      baseRepoFullName: process.env.NEXT_PUBLIC_REPO_FULL_NAME,
+      baseBranch: process.env.NEXT_PUBLIC_BASE_BRANCH
     })
 
-    /**
-     * 1. Create the TinaCMS instance
-     */
     const cms = new TinaCMS({
       enabled: !!props.pageProps.preview,
       apis: {
-        /**
-         * 2. Register the GithubClient
-         */
         github
       },
-      /**
-       * 3. Register the Media Store
-       */
       media: new GithubMediaStore(github),
-      /**
-       * 4. Use the Sidebar and Toolbar
-       */
-      sidebar: props.pageProps.preview,
+      sidebar: false,
       toolbar: props.pageProps.preview
     })
     this.cms = cms
 
-    import("react-tinacms-editor").then(
+    import('react-tinacms-editor').then(
       ({ MarkdownFieldPlugin, HtmlFieldPlugin }) => {
         cms.plugins.add(MarkdownFieldPlugin)
         cms.plugins.add(HtmlFieldPlugin)
@@ -55,29 +42,29 @@ export default class Site extends App {
 
   render () {
     const { Component, pageProps } = this.props
+
     return (
       /**
        * 5. Wrap the page Component with the Tina and Github providers
        */
       <TinaProvider cms={this.cms}>
-          <Provider session={pageProps.session}>
-            <ChakraProvider resetCSS theme={theme}>
-              <ColorModeProvider
-                options={{
-                  useSystemColorMode: true
-                }}
+        <Provider session={pageProps.session}>
+          <ChakraProvider resetCSS theme={theme}>
+            <ColorModeProvider
+              options={{
+                useSystemColorMode: true
+              }}
+            >
+              <TinacmsGithubProvider
+                onLogin={onLogin}
+                onLogout={onLogout}
+                error={pageProps.error}
               >
-                <TinacmsGithubProvider
-                  onLogin={onLogin}
-                  onLogout={onLogout}
-                  error={pageProps.error}
-                >                  
-                  <Component {...pageProps} />
-                  <EditLink cms={this.cms} />
-                </TinacmsGithubProvider>
-              </ColorModeProvider>
-            </ChakraProvider>
-          </Provider>
+                <Component {...pageProps} cms={this.cms} />
+              </TinacmsGithubProvider>
+            </ColorModeProvider>
+          </ChakraProvider>
+        </Provider>
       </TinaProvider>
     )
   }
@@ -94,7 +81,7 @@ const onLogin = async () => {
   const resp = await fetch('/api/preview', { headers: headers })
   const data = await resp.json()
 
-  if (resp.status == 200) {
+  if (resp.status === 200) {
     window.location.href = window.location.pathname
   } else throw new Error(data.message)
 }

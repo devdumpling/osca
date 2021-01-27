@@ -137,7 +137,7 @@ const Lottery = (props) => {
       <Header />
       <Container>
         <Main>          
-          {/* <LotteryForm /> */}
+          <LotteryForm />
           <Wall condition={!loading} caught={<div>Loading...</div>}>            
             <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
               {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}

@@ -5,7 +5,7 @@ import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
 import Header from '../components/Header'
 
-const Landing = () => {
+const Landing = (props) => {
   return (
     <>
       <Meta />
@@ -13,7 +13,7 @@ const Landing = () => {
       <Container>
         <Hero />
         <Footer />
-        <CTA />
+        <CTA {...props} />
       </Container>
     </>
   )

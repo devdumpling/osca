@@ -20,6 +20,7 @@
     "next-tinacms-github": "^0.35.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-icons": "^4.1.0",
     "react-markdown": "^5.0.3",
     "react-tinacms-editor": "^0.35.0",
     "react-tinacms-github": "^0.35.0",

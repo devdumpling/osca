@@ -13,15 +13,9 @@ export const Hero = ({ title }) => (
       <Text py={2} fontSize="xl" textAlign="center">
         new website | still OSCA
       </Text>
-      <Text fontSize="md" pb={8} color="gray.500" textAlign="center">
-        ...coming soon...
-      </Text>
     </Fade>
     <Button colorScheme="teal" mt={8} variant="outline">
-      <Link as={NextLink} href="/lottery">Spring 2020 Lottery</Link>
-    </Button>
-    <Button colorScheme="teal" mt={8} variant="outline">
-      Get email updates
+      <Link as={NextLink} href="/lottery">Spring 2021 Lottery</Link>
     </Button>
   </Flex>
 )

@@ -26,7 +26,6 @@ const About = ({ data={}, form={} }) => (
         </VStack>
       </Flex>
     </InlineForm>
-    {/* Should remove `global` if we can. Was having trouble. */}
     <style jsx global>{`
       .chakra-stack p {
         margin-bottom: 1rem !important;

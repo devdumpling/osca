@@ -8,11 +8,12 @@ import {
   GithubMediaStore
 } from 'react-tinacms-github'
 import theme from '../theme'
+import { motion } from 'framer-motion'
 
 export default class Site extends App {
-  constructor (props) {
+  constructor(props) {
     super(props)
-
+        
     const github = new GithubClient({
       proxy: '/api/proxy-github',
       authCallbackRoute: '/api/create-github-access-token',
@@ -40,8 +41,8 @@ export default class Site extends App {
     )
   }
 
-  render () {
-    const { Component, pageProps } = this.props
+  render() {
+    const { Component, pageProps, router } = this.props
 
     return (
       /**
@@ -60,7 +61,16 @@ export default class Site extends App {
                 onLogout={onLogout}
                 error={pageProps.error}
               >
-                <Component {...pageProps} cms={this.cms} />
+                <motion.div key={router.route} initial="pageInit" animate="pageAnim" variants={{
+                  pageInit: {
+                    opacity: 0.5
+                  },
+                  pageAnim: {
+                    opacity: 1
+                  },
+                }}>
+                  <Component {...pageProps} cms={this.cms} />
+                </motion.div>
               </TinacmsGithubProvider>
             </ColorModeProvider>
           </ChakraProvider>

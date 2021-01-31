@@ -14,10 +14,10 @@ const WIP = () => {
         Oops!
       </Heading>
       <Heading m={4} fontSize="xl">
-        Looks like this page is still on stack.
+        Looks like this page is still just a proposal.
       </Heading>
       <Text fontSize="lg">
-        Check back later.
+        Check back later!
         </Text>
     </Flex>
   )

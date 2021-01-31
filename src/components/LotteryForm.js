@@ -70,7 +70,7 @@ const LotteryForm = ({ onSubmit }) => {
       >
         {props => (
           <Form>
-            <Stack spacing={6}>
+            <Stack spacing={6} align="center">
               <Stack direction={["column", "row"]} spacing={2}>
                 <Field name="firstName" validate={validateName}>
                   {({ field, form }) => (

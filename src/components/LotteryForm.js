@@ -70,7 +70,7 @@ const LotteryForm = ({ onSubmit }) => {
       >
         {props => (
           <Form>
-            <Stack spacing={6}>
+            <Stack spacing={6} mx={2}>
               <Stack direction={["column", "row"]} spacing={2}>
                 <Field name="firstName" validate={validateName}>
                   {({ field, form }) => (
@@ -128,7 +128,7 @@ const LotteryForm = ({ onSubmit }) => {
                 )}
               </Field>
               <Divider />
-              <Text fontWeight="thin">Coop Preference Ranking: </Text>
+              <Text>Coop Preference Ranking: </Text>
               <Field name="preferences[0]">
                 {({ field, form }) => (
                   <FormControl>
@@ -244,9 +244,12 @@ const LotteryForm = ({ onSubmit }) => {
                 colorScheme="teal"
                 isLoading={props.isSubmitting}
                 type="submit"
+                maxW="12rem"
               >
                 Submit
             </Button>
+            <Text flexWrap="wrap" my={4}>You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
+            <Text flexWrap="wrap" my={4}>If for some reason you are unable to submit with this page, please use the Google Form version.</Text>
             </Stack>
           </Form>
         )}

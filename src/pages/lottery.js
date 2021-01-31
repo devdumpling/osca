@@ -83,10 +83,22 @@ class EntrySubmission extends React.Component {
 function Entry({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-    <Stack mt={8} spacing={4} align="center">
+    <Stack mt={20} spacing={4} align="center">
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
+      <Stack spacing={1}>
+        <Text fontSize="lg">Your current entry: </Text>
+        <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
+        <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
+        <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
+        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>        
+        <OrderedList>
+          {entryMetadata.preferences.map(pref => (
+            <ListItem key={pref}>{pref}</ListItem>
+          ))}
+        </OrderedList>
+      </Stack>
       <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
     </Stack>
   )
@@ -157,7 +169,9 @@ const Lottery = (props) => {
             }>
 
             <Main>
-              {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
+              {!(entry && entry.email)
+                ? <EntrySubmission lottery={lottery} setEntry={setEntry} />
+                : <Stack spacing={8}><Entry entry={entry} /><EntrySubmission lottery={lottery} setEntry={setEntry} /></Stack>}
             </Main>
           </Wall>
         </Wall>

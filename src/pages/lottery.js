@@ -64,6 +64,10 @@ class EntrySubmission extends React.Component {
                 <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
                 <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
               </Stack>
+              <Stack w="100%" spacing={1} p={5} textAlign="left">
+                <Text flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
+                <Text flexWrap="wrap">If for some reason you are unable to submit with this page, please use the Google Form version.</Text>
+              </Stack>
             </Stack>
             : (
               this.state.time > end
@@ -157,7 +161,7 @@ const Lottery = (props) => {
             </Main>
           </Wall>
         </Wall>
-        <Footer />        
+        <Footer />
       </Container>
     </>
   )

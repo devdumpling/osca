@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Text } from '@chakra-ui/react'
+import { Box, Divider, Text } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
 import LotteryForm from '../components/LotteryForm'
 import Header from '../components/Header'
+import { Loader } from '../components/Loader'
 
 const currentLotteryId = 'spring2021'
 
@@ -55,15 +56,15 @@ class EntrySubmission extends React.Component {
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
-      <Box mt={5}>
+      <Box my={4}>
         {
           this.state.time >= start && end >= this.state.time
-            ? <Box>
-              <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
-              <br />
+            ? <Stack spacing={2}>
+                <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
+                <Divider />
                 <Text mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
                 <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
-              </Box>
+              </Stack>
             : (
               this.state.time > end
                 ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
@@ -143,9 +144,9 @@ const Lottery = (props) => {
       <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Main>
-          <Wall condition={!loading} caught={<div>Loading...</div>}>
-            <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
+        <Main mt={5} minH="1vh">
+          <Wall condition={!loading} caught={<Loader />}>
+            <Wall condition={session && session.user} caught={<Box><Text>The lottery is not open yet.</Text></Box>}>
               {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
             </Wall>
           </Wall>

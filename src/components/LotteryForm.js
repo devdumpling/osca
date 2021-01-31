@@ -3,7 +3,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox
+  FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup
 } from '@chakra-ui/react'
 import { useState } from 'react'
 // import LotteryPreferenceList from './LotteryPreferenceList';
@@ -115,7 +115,15 @@ const LotteryForm = ({ onSubmit }) => {
               <Text fontWeight="thin">Housing Questionnaire</Text>
               <Text fontWeight="thin" fontSize="xs">Dining-only members need not fill this out.</Text>
               <Field type="checkbox" name="comfortableWithAnyRoommate">
-                <Checkbox>I am comfortable living with any roommate regardless of assigned sex or gender.</Checkbox>
+                {({ field }) => (
+                  <Checkbox
+                    {...field}
+                    id="comfortableWithAnyRoommate"
+                    name="comfortableWithAnyRoommate"                    
+                  >
+                    <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
+                  </Checkbox>
+                )}
               </Field>
               <Divider />
               <Text fontWeight="thin">Coop Preference Ranking: </Text>

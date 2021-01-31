@@ -52,7 +52,7 @@ const LotteryForm = ({onSubmit}) => {
           tNumber: "",
           preferences: [],
         }}
-        onSubmit={onSubmit} // call our custom callback for submitting
+        onSubmit={onSubmit}
       >
         {props => (
           <Form>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Flex, Center, Text } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
@@ -16,7 +16,7 @@ const formatId = id => {
 }
 
 const enterLottery = (values, actions, callback = x => x) => {
-  hit(`/api/lottery/enter?id=${currentLotteryId}&entryMetaData=${encodeURIComponent(JSON.stringify(values))}`)
+  hit(`/api/lottery/enter?id=${currentLotteryId}&entryMetadata=${encodeURIComponent(JSON.stringify(values))}`)
     .then((data) => {
       actions.setSubmitting(false);
       callback(data);
@@ -55,22 +55,22 @@ class EntrySubmission extends React.Component {
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
-      <Flex>
+      <Box mt={5}>
         {
           this.state.time >= start && end >= this.state.time
-            ? <Center>
-              <Text>The {formatId(lotteryId)} lottery is now open for submissions!</Text>
+            ? <Box>
+              <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
               <br />
-                (<CountDown now={this.state.time} future={end} /> remaining)
-                <LotteryForm onSubmit={(data) => enterLottery(data, setEntry)} />
-              </Center>
+                <Text mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
+                <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
+              </Box>
             : (
               this.state.time > end
                 ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
                 : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
             )
         }
-      </Flex>
+      </Box>
     )
   }
 }

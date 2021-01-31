@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text, Stack, Center, Heading } from '@chakra-ui/react'
+import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { Footer } from '../components/Footer'

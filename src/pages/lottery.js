@@ -85,11 +85,11 @@ function Entry({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
     <Stack w="100%" mt={20} p={2} spacing={4} align="center">
-      <CheckIcon w={8} h={8} color="teal" />
+      <CheckIcon w={8} h={8} color="teal.500" />
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
-      <Stack border="1px" borderRadius="md" borderColor="teal" spacing={1}>
+      <Stack border="1px" borderRadius="md" borderColor="teal.500" p={4} mt={1} spacing={1}>
         <Text mb={2} fontSize="xl">Your current entry: </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>

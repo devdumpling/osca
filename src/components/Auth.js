@@ -1,6 +1,6 @@
 import React from 'react'
 import { signIn, signOut, useSession } from 'next-auth/client'
-import { Flex, Button, Avatar } from '@chakra-ui/react'
+import { Flex, Text, Button, Avatar } from '@chakra-ui/react'
 
 const LoginButton = () => {
   return (
@@ -31,7 +31,7 @@ const Account = () => {
     return (
       <Flex align="center">
         <Avatar size="sm" name={user.name} src={user.picture} mx={2} />
-        {user.email}
+        <Text fontSize="sm" mx={2}>{user.email}</Text>
         <LogoutButton />
       </Flex>
     )

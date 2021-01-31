@@ -89,7 +89,7 @@ function Entry({ entry }) {
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
-      <Stack border="1px" borderRadius="md" borderColor="teal.500" p={4} mt={1} spacing={1}>
+      <Stack border="1px" borderRadius="md" borderColor="teal.500" p={8} mt={1} spacing={1}>
         <Text mb={2} fontSize="xl">Your current entry: </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>

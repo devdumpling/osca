@@ -44,7 +44,7 @@ const LotteryForm = ({ onSubmit }) => {
     const ocmrRegEx = /^\d{4}$/i;
 
     let error;
-    if (!number) {
+    if (!ocmr) {
       error = "OCMR is required"
     } else if (!ocmrRegEx.test(ocmr)) {
       error = "Invalid OCMR! 😱" // is this 4 digits max?      
@@ -112,14 +112,16 @@ const LotteryForm = ({ onSubmit }) => {
                 </Field>
               </Stack>
               <Divider />
-              <Text fontWeight="thin">Housing Questionnaire</Text>
-              <Text fontWeight="thin" fontSize="xs">Dining-only members need not fill this out.</Text>
+              <Stack spacing={1} >
+                <Text>Housing Questionnaire</Text>
+                <Text fontWeight="thin" fontSize="sm">Dining-only members need not fill this out.</Text>
+              </Stack>
               <Field type="checkbox" name="comfortableWithAnyRoommate">
                 {({ field }) => (
                   <Checkbox
                     {...field}
                     id="comfortableWithAnyRoommate"
-                    name="comfortableWithAnyRoommate"                    
+                    name="comfortableWithAnyRoommate"
                   >
                     <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
                   </Checkbox>

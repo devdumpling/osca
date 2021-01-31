@@ -70,7 +70,7 @@ const LotteryForm = ({ onSubmit }) => {
       >
         {props => (
           <Form>
-            <Stack spacing={6} align="center">
+            <Stack spacing={6} p={2}>
               <Stack direction={["column", "row"]} spacing={2}>
                 <Field name="firstName" validate={validateName}>
                   {({ field, form }) => (
@@ -240,6 +240,7 @@ const LotteryForm = ({ onSubmit }) => {
                 )}
               </Field>
               <Button
+                alignSelf="center"
                 mt={4}
                 colorScheme="teal"
                 isLoading={props.isSubmitting}
@@ -247,7 +248,7 @@ const LotteryForm = ({ onSubmit }) => {
                 maxW="12rem"
               >
                 Submit
-            </Button>            
+            </Button>
             </Stack>
           </Form>
         )}

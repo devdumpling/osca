@@ -10,7 +10,7 @@ export const Hero = ({ title }) => (
       fontWeight="bold"
       fontSize="10vw">{title}</Heading>
     <Fade in={true}>
-      <Text py={2} fontSize="xl" textAlign="center">
+      <Text fontWeight="thin" py={2} fontSize="xl" textAlign="center">
         new website | still OSCA
       </Text>
     </Fade>

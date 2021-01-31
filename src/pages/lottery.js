@@ -93,13 +93,13 @@ function Entry({ entry }) {
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
         <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
         <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>        
-        <OrderedList>
+        <OrderedList mt={4}>
           {entryMetadata.preferences.map(pref => (
             <ListItem key={pref}>{pref}</ListItem>
           ))}
         </OrderedList>
       </Stack>
-      <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
+      {/* <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre> */}
     </Stack>
   )
 }

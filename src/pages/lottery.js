@@ -88,6 +88,7 @@ function Wall({ condition, children = [], caught = '' }) {
   }
 }
 
+
 // todo:
 // 1. nextjs should have a prefetching mechanism, so that the
 // fetch is performed when hovering over a link to this page

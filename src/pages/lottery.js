@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text } from '@chakra-ui/react'
+import { Box, Divider, Text, Center, Heading } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
@@ -60,11 +60,11 @@ class EntrySubmission extends React.Component {
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack spacing={2}>
-                <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
-                <Divider />
-                <Text mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
-                <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
-              </Stack>
+              <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
+              <Divider />
+              <Text mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
+              <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
+            </Stack>
             : (
               this.state.time > end
                 ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
@@ -144,13 +144,19 @@ const Lottery = (props) => {
       <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Main mt={5} minH="1vh">
-          <Wall condition={!loading} caught={<Loader />}>
-            <Wall condition={session && session.user} caught={<Box><Text>The lottery is not open yet.</Text></Box>}>
+        <Wall condition={!loading} caught={<Loader />}>
+          <Wall condition={session && session.user}
+            caught={
+              <Center minH="100vh">
+                <Heading>The lottery is not open yet.</Heading>
+              </Center>
+            }>
+
+            <Main mt="5rem">
               {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
-            </Wall>
+            </Main>
           </Wall>
-        </Main>
+        </Wall>
         <Footer />
         <CTA {...props} />
       </Container>

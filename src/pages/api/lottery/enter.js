@@ -14,13 +14,15 @@ function authorize (session) {
   return session
 }
 
-function qualified (userRef) {
-  if (userRef.exists) {
-    const userData = userRef.data()
-    return userRef.exists && userData.tnumber && userData.year
-  } else {
-    return false
-  }
+function qualified (userRef, lotteryRef) {
+  return true
+  // below checks user profile to see if they qualify
+  // if (userRef.exists) {
+  //   const userData = userRef.data()
+  //   return userRef.exists && userData.tnumber && userData.year
+  // } else {
+  //   return false
+  // }
 }
 
 export default async (req, res) => {
@@ -41,12 +43,7 @@ export default async (req, res) => {
     const email = user.email
 
     const userRef = await usersRef.doc(email).get()
-    if (!qualified(userRef)) {
-      return res.status(422).json({
-        error: 'User profile must include T-Number and Graduate Year'
-      })
-    }
-    const userData = userRef.data()
+    const userData = userRef.exists ? userRef.data() : {}
 
     const lotteryId = req.query.id || req.query.lotteryId
     if (!lotteryId) {
@@ -66,6 +63,12 @@ export default async (req, res) => {
     if (!lottery.active) {
       return res.status(200).json({
         error: `Lottery with ID '${lotteryId}' is not active`
+      })
+    }
+
+    if (!qualified(userRef, lotteryRef)) {
+      return res.status(422).json({
+        error: `Not qualified to enter lottery ${lotteryId}`
       })
     }
 

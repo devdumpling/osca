@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Button } from '@chakra-ui/react'
+import { Flex, Center, Text } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
@@ -15,69 +15,76 @@ const formatId = id => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : ''
 }
 
-const enterLottery = (set = x => x) => {
-  hit(`/api/lottery/enter?id=${currentLotteryId}`).then(set).catch(console.error)
+const enterLottery = (values, actions, callback = x => x) => {
+  hit(`/api/lottery/enter?id=${currentLotteryId}&entryMetaData=${encodeURIComponent(JSON.stringify(values))}`)
+    .then((data) => {
+      actions.setSubmitting(false);
+      callback(data);
+    }).catch(console.error)
+
   // todo:
   // - [ ] metadata (T#, grad year) + metadata validation
   // - [ ] error handling: missed deadline, unqualifed, etc (see endpoint for errors)
 }
 
-function CountDown ({ now, future }) {
+function CountDown({ now, future }) {
   const remaining = future - now
   return <span>{remaining / 1000} seconds</span>
 }
 
 class EntrySubmission extends React.Component {
-  constructor ({ lottery = {} }) {
+  constructor({ lottery = {} }) {
     super()
     const { latency } = lottery
     this.state = { time: Date.now() + latency }
     this.latency = latency
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.interval = setInterval(function () {
       this.setState({ time: Date.now() + this.latency })
     }.bind(this), 200)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.interval)
   }
 
-  render () {
+  render() {
     const { lottery = {}, setEntry } = this.props
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
-      <div>
+      <Flex>
         {
           this.state.time >= start && end >= this.state.time
-            ? <div>
-              <p>The {formatId(lotteryId)} lottery is now open for submissions!</p><br />
-              <Button onClick={() => enterLottery(setEntry)}>Enter Lottery</Button> (<CountDown now={this.state.time} future={end} /> remaining)
-            </div>
+            ? <Center>
+              <Text>The {formatId(lotteryId)} lottery is now open for submissions!</Text>
+              <br />
+                (<CountDown now={this.state.time} future={end} /> remaining)
+                <LotteryForm onSubmit={(data) => enterLottery(data, setEntry)} />
+              </Center>
             : (
-                this.state.time > end
-                  ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
-                  : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
-              )
+              this.state.time > end
+                ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
+                : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
+            )
         }
-      </div>
+      </Flex>
     )
   }
 }
 
-function Entry ({ entry }) {
+function Entry({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-  <div>
-    <h3>Thanks for entering, <strong>{email}</strong>!</h3> 
-    <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
-    <br />
-    <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
-  </div>
-)
+    <div>
+      <h3>Thanks for entering, <strong>{email}</strong>!</h3>
+      <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
+      <br />
+      <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
+    </div>
+  )
 }
 
 function Wall({ condition, children = [], caught = '' }) {
@@ -87,7 +94,6 @@ function Wall({ condition, children = [], caught = '' }) {
     return caught
   }
 }
-
 
 // todo:
 // 1. nextjs should have a prefetching mechanism, so that the
@@ -137,9 +143,8 @@ const Lottery = (props) => {
       <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Main>          
-          <LotteryForm />
-          <Wall condition={!loading} caught={<div>Loading...</div>}>            
+        <Main>
+          <Wall condition={!loading} caught={<div>Loading...</div>}>
             <Wall condition={session && session.user} caught={<div>Sorry, please go away</div>}>
               {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
             </Wall>

@@ -8,7 +8,7 @@ import {
 import { useState } from 'react'
 // import LotteryPreferenceList from './LotteryPreferenceList';
 
-const LotteryForm = () => {
+const LotteryForm = ({onSubmit}) => {
   const [choices, setChoices] = useState(
     [
       'Harkness Housing',
@@ -35,7 +35,7 @@ const LotteryForm = () => {
     if (!number) {
       error = "T-Number is required"
     } else if (!tNumberRegEx.test(number)) {
-      error = "Invalid T-number. Please, include a T. 😱"
+      error = "Invalid T-number. Please, include a T. 😱" // is this 8 digits max?      
     }
     return error;
   }
@@ -52,12 +52,7 @@ const LotteryForm = () => {
           tNumber: "",
           preferences: [],
         }}
-        onSubmit={(values, actions) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            actions.setSubmitting(false)
-          }, 1000)
-        }}
+        onSubmit={onSubmit} // call our custom callback for submitting
       >
         {props => (
           <Form>
@@ -156,7 +151,7 @@ const LotteryForm = () => {
                   </FormControl>
                 )}
               </Field>
-              <Button
+              <Button                            
                 mt={4}
                 colorScheme="teal"
                 isLoading={props.isSubmitting}
@@ -167,8 +162,7 @@ const LotteryForm = () => {
             </Stack>
           </Form>
         )}
-      </Formik>
-      {/* <LotteryPreferenceList choices={choices} onChange={setChoices} /> */}
+      </Formik>      
     </Flex>
   )
 }

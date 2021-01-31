@@ -1,7 +1,7 @@
 import { Spinner, Heading, Stack } from "@chakra-ui/react"
 
 export const Loader = ({ props }) => (
-  <Stack spacing={4} {...props}>
+  <Stack spacing={4} m={2} {...props}>
     <Heading>
       Waiting for quorum...
     </Heading>

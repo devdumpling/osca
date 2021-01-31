@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text, Center, Heading } from '@chakra-ui/react'
+import { Box, Divider, Text, Stack, Center, Heading } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { CTA } from '../components/CTA'
@@ -144,11 +144,11 @@ const Lottery = (props) => {
       <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Wall condition={!loading} caught={<Loader />}>
+        <Wall condition={!loading} caught={<Center minH="100vh"><Loader /></Center>}>
           <Wall condition={session && session.user}
             caught={
               <Center minH="100vh">
-                <Heading>The lottery is not open yet.</Heading>
+                <Heading>Login to sign up for the lottery.</Heading>
               </Center>
             }>
 

@@ -30,8 +30,8 @@ const Account = () => {
 
     return (
       <Flex align="center">
-        <Avatar size="sm" name={user.name} src={user.picture} mx={2} />
-        <Text mx={2}>{user.email}</Text>
+        <Avatar size="sm" name={user.name} src={user.picture} mr={2} />
+        <Text isTruncated maxW="20px" fontWeight="thin" mr={4}>{user.email}</Text>
         <LogoutButton mx={2}/>
       </Flex>
     )

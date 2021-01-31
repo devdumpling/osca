@@ -13,7 +13,7 @@ import { motion } from 'framer-motion'
 export default class Site extends App {
   constructor(props) {
     super(props)
-        
+
     const github = new GithubClient({
       proxy: '/api/proxy-github',
       authCallbackRoute: '/api/create-github-access-token',
@@ -42,7 +42,7 @@ export default class Site extends App {
   }
 
   render() {
-    const { Component, pageProps, router } = this.props
+    const { Component, pageProps, router } = this.props    
 
     return (
       /**
@@ -51,11 +51,7 @@ export default class Site extends App {
       <TinaProvider cms={this.cms}>
         <Provider session={pageProps.session}>
           <ChakraProvider resetCSS theme={theme}>
-            <ColorModeProvider
-              options={{
-                useSystemColorMode: true
-              }}
-            >
+            <ColorModeProvider options={{useSystemColorMode: true}}>
               <TinacmsGithubProvider
                 onLogin={onLogin}
                 onLogout={onLogout}
@@ -63,7 +59,7 @@ export default class Site extends App {
               >
                 <motion.div key={router.route} initial="pageInit" animate="pageAnim" variants={{
                   pageInit: {
-                    opacity: 0.5
+                    opacity: 1 // had to reset this because it was causing dark mode to freak out
                   },
                   pageAnim: {
                     opacity: 1

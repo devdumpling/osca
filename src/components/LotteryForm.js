@@ -114,7 +114,7 @@ const LotteryForm = ({ onSubmit }) => {
               <Divider />
               <Text fontWeight="thin">Housing Questionnaire</Text>
               <Text fontWeight="thin" fontSize="xs">Dining-only members need not fill this out.</Text>
-              <Field name="comfortableWithAnyRoommate">
+              <Field type="checkbox" name="comfortableWithAnyRoommate">
                 <Checkbox>I am comfortable living with any roommate regardless of assigned sex or gender.</Checkbox>
               </Field>
               <Divider />

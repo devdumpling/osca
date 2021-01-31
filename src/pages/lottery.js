@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
 import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem } from '@chakra-ui/react'
+import { CheckIcon } from '@chakra-ui/icons'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
 import { Footer } from '../components/Footer'
@@ -83,22 +84,24 @@ class EntrySubmission extends React.Component {
 function Entry({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-    <Stack mt={20} spacing={4} align="center">
+    <Stack w="100%" mt={20} p={2} spacing={4} align="center">
+      <CheckIcon w={8} h={8} color="teal" />
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
-      <Stack spacing={1}>
+      <Stack border="1px" borderRadius="md" borderColor="teal" spacing={1}>
         <Text mb={2} fontSize="xl">Your current entry: </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
         <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
         <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>   
         <Text fontWeight="thin">Preferences: </Text>
-        <OrderedList mt={4}>
+        <OrderedList my={4}>
           {entryMetadata.preferences.map(pref => (
             <ListItem fontWeight="thin" key={pref}>{pref}</ListItem>
           ))}
-        </OrderedList>
+        </OrderedList>        
+        <Text>You may also change your entry by resubmitting below.</Text>
       </Stack>
       {/* <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre> */}
     </Stack>

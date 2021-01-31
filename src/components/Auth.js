@@ -31,7 +31,7 @@ const Account = () => {
     return (
       <Flex align="center">
         <Avatar size="sm" name={user.name} src={user.picture} mr={2} />
-        <Text isTruncated maxW="20px" fontWeight="thin" mr={4}>{user.email}</Text>
+        <Text isTruncated maxW="12rem" fontWeight="thin" mr={4}>{user.email}</Text>
         <LogoutButton mx={2}/>
       </Flex>
     )

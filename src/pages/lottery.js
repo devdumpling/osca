@@ -4,7 +4,6 @@ import Meta from '../components/Meta'
 import { Box, Divider, Text, Stack, Center, Heading } from '@chakra-ui/react'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
-import { CTA } from '../components/CTA'
 import { Footer } from '../components/Footer'
 import LotteryForm from '../components/LotteryForm'
 import Header from '../components/Header'
@@ -56,7 +55,7 @@ class EntrySubmission extends React.Component {
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
-      <Box my={4}>
+      <Box mb={8}>
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack align="center" spacing={4}>
@@ -153,13 +152,12 @@ const Lottery = (props) => {
               </Center>
             }>
 
-            <Main mt="2rem">
+            <Main>
               {!(entry && entry.email) ? <EntrySubmission lottery={lottery} setEntry={setEntry} /> : <Entry entry={entry} />}
             </Main>
           </Wall>
         </Wall>
-        <Footer />
-        <CTA {...props} />
+        <Footer />        
       </Container>
     </>
   )

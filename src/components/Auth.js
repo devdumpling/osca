@@ -31,8 +31,8 @@ const Account = () => {
     return (
       <Flex align="center">
         <Avatar size="sm" name={user.name} src={user.picture} mx={2} />
-        <Text fontSize="sm" mx={2}>{user.email}</Text>
-        <LogoutButton />
+        <Text mx={2}>{user.email}</Text>
+        <LogoutButton mx={2}/>
       </Flex>
     )
   } else {

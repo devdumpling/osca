@@ -26,11 +26,11 @@ const About = ({ data={}, form={} }) => (
         </VStack>
       </Flex>
     </InlineForm>
-    <style jsx global>{`
+    {/* <style jsx global>{`
       .chakra-stack p {
         margin-bottom: 1rem !important;
       }
-    `}</style>
+    `}</style> */}
   </Container>
 )
 

@@ -41,7 +41,7 @@ const LotteryForm = ({onSubmit}) => {
   }
 
   return (
-    <Flex borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={20} alignItems="center" pb={8}>
+    <Flex w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={20} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Heading >2021 Spring Lottery</Heading>
       </Center>

@@ -8,7 +8,7 @@ import {
 import { useState } from 'react'
 // import LotteryPreferenceList from './LotteryPreferenceList';
 
-const LotteryForm = ({ onSubmit }) => {
+const LotteryForm = ({ onSubmit, currentEntryValues }) => {
   const [choices, setChoices] = useState(
     [
       'Harkness Housing',
@@ -58,7 +58,7 @@ const LotteryForm = ({ onSubmit }) => {
         <Heading >2021 Spring Lottery</Heading>
       </Center>
       <Formik
-        initialValues={{
+        initialValues={currentEntryValues ? currentEntryValues : {
           firstName: "",
           lastName: "",
           OCMR: "",

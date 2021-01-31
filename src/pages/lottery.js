@@ -88,14 +88,15 @@ function Entry({ entry }) {
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
       <Stack spacing={1}>
-        <Text fontSize="lg">Your current entry: </Text>
+        <Text mb={2} fontSize="xl">Your current entry: </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
         <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
-        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>        
+        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>   
+        <Text fontWeight="thin">Preferences: </Text>
         <OrderedList mt={4}>
           {entryMetadata.preferences.map(pref => (
-            <ListItem key={pref}>{pref}</ListItem>
+            <ListItem fontWeight="thin" key={pref}>{pref}</ListItem>
           ))}
         </OrderedList>
       </Stack>

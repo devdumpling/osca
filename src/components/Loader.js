@@ -1,10 +1,7 @@
 import { Spinner, Heading, Stack } from "@chakra-ui/react"
 
 export const Loader = ({ props }) => (
-  <Stack spacing={4} m={2} {...props}>
-    <Heading>
-      Waiting for quorum...
-    </Heading>
+  <Stack align="center" spacing={8} m={2} {...props}>
     <Spinner
       thickness="4px"
       speed="0.65s"
@@ -12,5 +9,8 @@ export const Loader = ({ props }) => (
       color="teal.500"
       size="xl"
     />
+    <Heading color="gray.500" fontWeight="thin">
+      ...waiting for quorum...
+    </Heading>    
   </Stack>
 )

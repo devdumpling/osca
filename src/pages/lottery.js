@@ -59,16 +59,15 @@ class EntrySubmission extends React.Component {
       <Box my={4}>
         {
           this.state.time >= start && end >= this.state.time
-            ? <Stack spacing={2}>
-              <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>
-              <Divider />
-              <Text mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
+            ? <Stack align="center" spacing={4}>
+              <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now open for submissions!</Text>              
+              <Text color="gray.500" fontWeight="thin" mx={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
               <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
             </Stack>
             : (
               this.state.time > end
-                ? <div>The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</div>
-                : <div>The lottery begins in <CountDown now={this.state.time} future={start} /></div>
+                ? <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</Text>
+                : <Text m={2} fontSize="lg">The lottery begins in <CountDown now={this.state.time} future={start} /></Text>
             )
         }
       </Box>
@@ -79,12 +78,12 @@ class EntrySubmission extends React.Component {
 function Entry({ entry }) {
   const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-    <div>
-      <h3>Thanks for entering, <strong>{email}</strong>!</h3>
-      <p>Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</p>
-      <br />
+    <Stack spacing={4} align="center">
+      <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
+      <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
+      <Divider />
       <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre>
-    </div>
+    </Stack>
   )
 }
 
@@ -148,7 +147,7 @@ const Lottery = (props) => {
           <Wall condition={session && session.user}
             caught={
               <Center minH="100vh">
-                <Heading>Login to sign up for the lottery.</Heading>
+                <Heading fontWeight="thin" color="gray.500">Login to enter the lottery.</Heading>
               </Center>
             }>
 

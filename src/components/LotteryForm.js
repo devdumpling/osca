@@ -34,25 +34,25 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
   }
 
   function validateTNumber(number) {
-    const tNumberRegEx = /^t\-?\d{8}$/i;
+    const tNumberRegEx = /^\d{7,8}$/i;
 
     let error;
     if (!number) {
       error = "T-Number is required"
     } else if (!tNumberRegEx.test(number)) {
-      error = "Invalid T-number. Please, include a T. 😱" // is this 8 digits max?      
+      error = "Invalid T Number. (Leave off the T) 😱" // is this 8 digits max?      
     }
     return error;
   }
 
   function validateOCMR(ocmr) {
-    const ocmrRegEx = /^\d{4}$/i;
+    const ocmrRegEx = /^\d{1,5}$/i;
 
     let error;
     if (!ocmr) {
       error = "OCMR is required"
     } else if (!ocmrRegEx.test(ocmr)) {
-      error = "Invalid OCMR! 😱" // is this 4 digits max?      
+      error = "Invalid OCMR. (1-5 digits) 😱" // is this 4 digits max?      
     }
     return error;
   }
@@ -62,8 +62,8 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Heading >2021 Spring Lottery</Heading>
       </Center>
-      <Stack textAlign="left" spacing={4} p={4} my={4}>
-        <Text fontSize="lg">
+      <Stack textAlign="left" spacing={4} p={8} my={4}>
+        <Text fontWeight="medium" fontSize="lg">
           The OSCA Lottery Process
         </Text>
         <Text>
@@ -79,7 +79,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
         </Text>
         <Text>
-          For questions, comments, or concerns, please reach out to the All-OSCA officers at mfox2@oberlin.edu.
+          For questions, comments, or concerns, email mfox2@oberlin.edu.
         </Text>
       </Stack>
       <Formik

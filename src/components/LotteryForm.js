@@ -268,7 +268,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                       id="comfortableWithAnyRoommate"
                       colorScheme="teal"
                       name="comfortableWithAnyRoommate"
-                        defaultIsChecked={initialValues[comfortableWithAnyRoommate]}                         
+                      defaultIsChecked                        
                     >
                       <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
                     </Checkbox>

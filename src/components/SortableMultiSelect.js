@@ -71,9 +71,9 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
           color: color[colorMode].toString(),
           justifyContent: 'space-between',
           padding: '1rem',
-          marginTop: '0.25rem',
-          marginBottom: '0.25rem',
-          boxShadow: '0 1px 2px 0 rgb(0 0 0 / 5%)',
+          marginTop: '0.5rem',
+          marginBottom: '0.5rem',
+          boxShadow: '0 8px 6px -2px rgb(0 0 0 / 5%)',
           width: '100%'
         }),
         // input: (style, state) => ({

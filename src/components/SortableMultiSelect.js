@@ -85,12 +85,16 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
           ...style,
           color: `${color[colorMode]}`,
         }),
+        option: (style, state) => ({
+          ...style,
+          color: `${color[colorMode]}`,
+        }),
         menu: (style, state) => ({
           ...style,
           backgroundColor: `${bgColor[colorMode]}`
         }),
         menuList: (style, state) => ({
-          ...styles,
+          ...style,
           color: `${color[colorMode]}`,
         }),
         // input: (style, state) => ({

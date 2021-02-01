@@ -2,7 +2,7 @@ import { Fade, Button, Flex, Text, Heading, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 
 export const Hero = ({ title }) => (
-  <Flex direction="column" justifyContent="center" alignItems="center" height="100vh">
+  <Flex direction="column" justifyContent="center" alignItems="center" height="calc(100vh - 5rem)">
     <Heading
       bgGradient="linear(to-l, teal.500, green.500)"
       bgClip="text"

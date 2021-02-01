@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem, Link as ChakraLink } from '@chakra-ui/react'
+import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem,, useToast, Link as ChakraLink } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
@@ -17,16 +17,28 @@ const formatId = id => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : ''
 }
 
-const enterLottery = (values, actions, callback = x => x) => {
+const enterLottery = (values, actions, toast, callback = x => x) => {
   hit(`/api/lottery/enter?id=${currentLotteryId}&entryMetadata=${encodeURIComponent(JSON.stringify(values))}`)
     .then((data) => {
-      actions.setSubmitting(false);
-      callback(data);
-    }).catch(console.error)
-
-  // todo:
-  // - [ ] metadata (T#, grad year) + metadata validation
-  // - [ ] error handling: missed deadline, unqualifed, etc (see endpoint for errors)
+      actions.setSubmitting(false)
+      toast && toast({
+        title: 'Entry Received',
+        description: 'Your lottery entry has been successfully submitted.',
+        status: 'success',
+        duration: 9000,
+        isClosable: true,
+      })
+      callback(data)
+    }).catch(error => {
+      toast && toast({
+        title: 'Uh-oh',
+        description: `We had trouble processing your entry. Please try again! If you continue to have issues, please use the Google Form at the bottom this page and email osca@oberlin.edu.`,
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+      })
+      console.error(error)
+    })
 }
 
 function CountDown({ now, future }) {
@@ -53,7 +65,7 @@ class EntrySubmission extends React.Component {
   }
 
   render() {
-    const { lottery = {}, setEntry, entry = {} } = this.props
+    const { entry = {}, lottery = {}, toast, setEntry } = this.props
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
@@ -65,7 +77,7 @@ class EntrySubmission extends React.Component {
                 <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
                 <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
               </Stack>
-              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
+              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, toast, setEntry)} />
               <Stack w="100%" align="center" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">Special Interest Co-op Applications:</Text>
                 <ChakraLink color="teal.500" isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>
@@ -91,7 +103,7 @@ class EntrySubmission extends React.Component {
 function Entry({ entry }) {
   let { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
-    <Stack w="100%" mt={20} p={2} spacing={4} align="center">
+    <Stack w="100%" mt={2} p={2} spacing={4} align="center">
       <CheckIcon w={8} h={8} color="teal.500" />
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
       <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
@@ -135,6 +147,7 @@ const Lottery = (props) => {
   let [session, loading] = useSession()
   const [entry, setEntry] = useState()
   const [lottery, setLottery] = useState()
+  const toast = useToast()
 
   if (session && session.user) {
     const { email } = session.user
@@ -171,21 +184,21 @@ const Lottery = (props) => {
       <Meta title="OSCA 2021 Spring Lottery" />
       <Header />
       <Container>
-        <Wall condition={!loading} caught={<Center minH="100vh"><Loader /></Center>}>
+        <Wall condition={!loading} caught={<Center minH="calc(100vh - 5rem)"><Loader /></Center>}>
           <Wall condition={session && session.user}
             caught={
-              <Center minH="100vh">
+              <Center minH="calc(100vh - 5rem)">
                 <Heading fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
               </Center>
             }>
 
             <Main>
               {!(entry && entry.email)
-                ? <EntrySubmission lottery={lottery} setEntry={setEntry} />
+                ? <EntrySubmission toast={toast} lottery={lottery} setEntry={setEntry} />
                 : (
                   <Stack spacing={8}>
                     <Entry entry={entry} />
-                    <EntrySubmission entry={entry} lottery={lottery} setEntry={setEntry} />
+                    <EntrySubmission toast={toast} entry={entry} lottery={lottery} setEntry={setEntry} />
                   </Stack>
                 )
               }

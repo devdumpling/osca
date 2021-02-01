@@ -16,7 +16,7 @@ const FormikOnError = ({ children }) => {
     if (!formik.isValid && formik.submitCount > 0) {
       const firstErrorKey = getFirstErrorKey(formik.errors)
       if (global.window.document.getElementsByName(firstErrorKey).length) {
-        global.window.document.getElementsByName(firstErrorKey)[0].focus()
+        global.window.document.getElementsByName(firstErrorKey)[0].scrollIntoView({ behavior: 'smooth' })
       }
     }
   }, [formik.submitCount, formik.isValid, formik.errors])

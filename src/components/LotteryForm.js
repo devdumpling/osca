@@ -9,7 +9,7 @@ import { useState } from 'react'
 import FormikOnSubmit from './FormikOnSubmit'
 // import LotteryPreferenceList from './LotteryPreferenceList'
 
-const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
+const LotteryForm = ({ onSubmit, currentEntryValues={}, lottery }) => {
   const [choices, setChoices] = useState(
     [
       'Harkness Housing & Dining',
@@ -74,7 +74,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
   }
 
   return (
-    <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={20} alignItems="center" pb={8}>
+    <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={12} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Heading >2021 Fall Lottery</Heading>
       </Center>
@@ -102,7 +102,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
         </Text>
       </Stack>
       <Formik
-        initialValues={currentEntryValues ? currentEntryValues : {
+        initialValues={{
           firstName: "",
           lastName: "",
           OCMR: "",
@@ -119,8 +119,15 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
           comfortableWithAnyRoommate: false,
           interestedInAccessCo: false,
           preferences: [],
+          ...currentEntryValues
         }}
-        onSubmit={onSubmit}
+        onSubmit={(values, actions) => {
+          global.window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          })
+          onSubmit(values, actions)
+        }}
       >
         {props => (
           <Form>

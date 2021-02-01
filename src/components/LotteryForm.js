@@ -134,7 +134,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
         }}
       >
         {props => (
-          <Form style={{maxWidth="100%"}}>
+          <Form>
             <FormikOnSubmit>
               <Stack spacing={6} p={2}>
                 <Stack direction={["column", "row"]} spacing={2}>

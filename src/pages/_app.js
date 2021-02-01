@@ -10,7 +10,26 @@ import {
 import theme from '../theme'
 import { motion } from 'framer-motion'
 
-// Sentry init
+// Clientside Firebase API
+import firebase from 'firebase/app'
+import 'firebase/analytics'
+
+if (typeof window != 'undefined') {
+  if (!firebase.apps.length) {
+    firebase.initializeApp({
+      apiKey: "AIzaSyCvSaupfnCLqdPrJ0JScChIqlYsqS2faOk",
+      authDomain: "osca-302602.firebaseapp.com",
+      projectId: "osca-302602",
+      storageBucket: "osca-302602.appspot.com",
+      messagingSenderId: "914816009770",
+      appId: "1:914816009770:web:d1d9b03267db2ba0e6e553",
+      measurementId: "G-1D6T2PVMXE"
+    })
+  }
+  firebase.analytics()
+}
+
+// Sentry API
 import * as Sentry from "@sentry/react"
 import { Integrations } from "@sentry/tracing"
 Sentry.init({
@@ -20,7 +39,6 @@ Sentry.init({
   ],
   beforeSend(event, hint) {
     // Check if it is an exception, and if so, show the report dialog
-    console.log(event)
     if (event.exception) {
       Sentry.showReportDialog({ 
         eventId: event.event_id, 

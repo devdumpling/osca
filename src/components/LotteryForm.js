@@ -120,7 +120,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
           gender: "",
           genderComfortableWith: "",
           genderNotComfortableWith: "",
-          comfortableWithAnyRoommate: false,
+          comfortableWithAnyRoommate: true,
           interestedInAccessCo: false,
           preferences: [],
           ...currentEntryValues

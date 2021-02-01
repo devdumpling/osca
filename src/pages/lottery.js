@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem,, useToast, Link as ChakraLink } from '@chakra-ui/react'
+import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem, useToast, Link as ChakraLink } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'

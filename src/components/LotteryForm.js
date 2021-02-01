@@ -60,7 +60,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
   return (
     <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={20} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
-        <Heading >2021 Spring Lottery</Heading>
+        <Heading >2021 Fall Lottery</Heading>
       </Center>
       <Stack textAlign="left" spacing={4} p={8} my={4}>
         <Text fontWeight="medium" fontSize="lg">
@@ -79,7 +79,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
         </Text>
         <Text>
-          For questions, comments, or concerns, email mfox2@oberlin.edu.
+          For questions, comments, or concerns, email osca@oberlin.edu.
         </Text>
       </Stack>
       <Formik

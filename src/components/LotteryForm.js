@@ -52,7 +52,19 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
     if (!ocmr) {
       error = "OCMR is required"
     } else if (!ocmrRegEx.test(ocmr)) {
-      error = "Invalid OCMR. (1-5 digits) 😱" // is this 4 digits max?      
+      error = "Invalid OCMR. (1-5 digits) 😱" 
+    }
+    return error;
+  }
+
+  function validatePhoneNumber(number) {
+    const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+
+    let error;
+    if (!number) {
+      error = "Phone number is required"
+    } else if (!phoneRegex.test(number)) {
+      error = "Invalid phone number 😱" 
     }
     return error;
   }
@@ -91,6 +103,12 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           lastName: "",
           OCMR: "",
           tNumber: "",
+          phoneNumber: "",
+          country: "",
+          state: "",
+          city: "",
+          addressLineOne: "",
+          addressLineTwo: "",
           comfortableWithAnyRoommate: false,
           preferences: [],
         }}
@@ -135,6 +153,59 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                       <FormLabel htmlFor="OCMR">OCMR</FormLabel>
                       <Input {...field} id="OCMR" placeholder="1234" />
                       <FormErrorMessage>{form.errors.OCMR}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+              </Stack>
+              <Stack direction={["column", "row"]} spacing={2}>
+                <Field name="phoneNumber" validate={validatePhoneNumber}>
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber}>
+                      <FormLabel htmlFor="phoneNumber">T-Number</FormLabel>
+                      <Input {...field} id="phoneNumber" placeholder="123-456-7890" />
+                      <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="country">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="country">Country</FormLabel>
+                      <Input {...field} id="country" placeholder="USA" />                      
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="city">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="city">City</FormLabel>
+                      <Input {...field} id="city" placeholder="Oberlin" />                      
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="state">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="state">State</FormLabel>
+                      <Input {...field} id="state" placeholder="OH" />                      
+                    </FormControl>
+                  )}
+                </Field>
+              </Stack>
+              <Stack direction={["column", "row"]} spacing={2}>
+                <Field name="addressLineOne">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="addressLineOne">Address Line One</FormLabel>
+                      <Input {...field} id="addressLineOne" placeholder="135 West Lorain" />                      
+                    </FormControl>
+                  )}
+                </Field>
+                <Field name="addressLineTwo">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="addressLineTwo">Address Line Two</FormLabel>
+                      <Input {...field} id="addressLineTwo" placeholder="Apartment 2" />                      
                     </FormControl>
                   )}
                 </Field>

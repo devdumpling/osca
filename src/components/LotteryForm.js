@@ -110,6 +110,8 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           addressLineOne: "",
           addressLineTwo: "",
           gender: "",
+          genderComfortableWith: "",
+          genderNotComfortableWith: "",
           comfortableWithAnyRoommate: false,
           interestedInAccessCo: false,
           preferences: [],
@@ -214,25 +216,42 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   )}
                 </Field>
               </Stack>
-              <Divider />              
+              <Divider />
               <Stack spacing={1} >
-                <Text>Housing Questionnaire</Text>
+                <Text fontWeight="normal">Housing Questionnaire</Text>
                 <Text fontWeight="thin" fontSize="sm">Dining-only members need not fill this out.</Text>
               </Stack>
               <Field name="gender">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <FormLabel htmlFor="gender">Gender</FormLabel>
-                      <Input {...field} id="gender" placeholder="?" />
-                    </FormControl>
-                  )}
-                </Field>
+                {({ field, form }) => (
+                  <FormControl>
+                    <FormLabel htmlFor="gender">Gender</FormLabel>
+                    <Input {...field} id="gender" placeholder="?" />
+                  </FormControl>
+                )}
+              </Field>
+              <Field name="genderComfortableWith">
+                {({ field, form }) => (
+                  <FormControl>
+                    <FormLabel htmlFor="genderComfortableWith">Gender(s) I'm comfortable living with</FormLabel>
+                    <Input {...field} id="genderComfortableWith" placeholder="Leave blank for all" />
+                  </FormControl>
+                )}
+              </Field>
+              <Field name="genderNotComfortableWith">
+                {({ field, form }) => (
+                  <FormControl>
+                    <FormLabel htmlFor="genderNotComfortableWith">Gender(s) I'm NOT comfortable living with</FormLabel>
+                    <Input {...field} id="genderNotComfortableWith" placeholder="Separate with semi-colons" />
+                  </FormControl>
+                )}
+              </Field>
               <Field type="checkbox" name="comfortableWithAnyRoommate">
                 {({ field }) => (
                   <Checkbox
                     {...field}
                     id="comfortableWithAnyRoommate"
                     name="comfortableWithAnyRoommate"
+                    isChecked
                   >
                     <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
                   </Checkbox>

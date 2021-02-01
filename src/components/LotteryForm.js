@@ -52,7 +52,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
     if (!ocmr) {
       error = "OCMR is required"
     } else if (!ocmrRegEx.test(ocmr)) {
-      error = "Invalid OCMR. (1-5 digits) 😱" 
+      error = "Invalid OCMR. (1-5 digits) 😱"
     }
     return error;
   }
@@ -64,7 +64,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
     if (!number) {
       error = "Phone number is required"
     } else if (!phoneRegex.test(number)) {
-      error = "Invalid phone number 😱" 
+      error = "Invalid phone number 😱"
     }
     return error;
   }
@@ -109,7 +109,9 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           city: "",
           addressLineOne: "",
           addressLineTwo: "",
+          gender: "",
           comfortableWithAnyRoommate: false,
+          interestedInAccessCo: false,
           preferences: [],
         }}
         onSubmit={onSubmit}
@@ -161,7 +163,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                 <Field name="phoneNumber" validate={validatePhoneNumber}>
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.phoneNumber && form.touched.phoneNumber}>
-                      <FormLabel htmlFor="phoneNumber">T-Number</FormLabel>
+                      <FormLabel htmlFor="phoneNumber">Phone Number</FormLabel>
                       <Input {...field} id="phoneNumber" placeholder="123-456-7890" />
                       <FormErrorMessage>{form.errors.phoneNumber}</FormErrorMessage>
                     </FormControl>
@@ -171,15 +173,17 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   {({ field, form }) => (
                     <FormControl>
                       <FormLabel htmlFor="country">Country</FormLabel>
-                      <Input {...field} id="country" placeholder="USA" />                      
+                      <Input {...field} id="country" placeholder="USA" />
                     </FormControl>
                   )}
                 </Field>
+              </Stack>
+              <Stack direction={["column", "row"]} spacing={2}>
                 <Field name="city">
                   {({ field, form }) => (
                     <FormControl>
                       <FormLabel htmlFor="city">City</FormLabel>
-                      <Input {...field} id="city" placeholder="Oberlin" />                      
+                      <Input {...field} id="city" placeholder="Oberlin" />
                     </FormControl>
                   )}
                 </Field>
@@ -187,7 +191,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   {({ field, form }) => (
                     <FormControl>
                       <FormLabel htmlFor="state">State</FormLabel>
-                      <Input {...field} id="state" placeholder="OH" />                      
+                      <Input {...field} id="state" placeholder="OH" />
                     </FormControl>
                   )}
                 </Field>
@@ -197,7 +201,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   {({ field, form }) => (
                     <FormControl>
                       <FormLabel htmlFor="addressLineOne">Address Line One</FormLabel>
-                      <Input {...field} id="addressLineOne" placeholder="135 West Lorain" />                      
+                      <Input {...field} id="addressLineOne" placeholder="135 West Lorain" />
                     </FormControl>
                   )}
                 </Field>
@@ -205,16 +209,24 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   {({ field, form }) => (
                     <FormControl>
                       <FormLabel htmlFor="addressLineTwo">Address Line Two</FormLabel>
-                      <Input {...field} id="addressLineTwo" placeholder="Apartment 2" />                      
+                      <Input {...field} id="addressLineTwo" placeholder="Apartment 2" />
                     </FormControl>
                   )}
                 </Field>
               </Stack>
-              <Divider />
+              <Divider />              
               <Stack spacing={1} >
                 <Text>Housing Questionnaire</Text>
                 <Text fontWeight="thin" fontSize="sm">Dining-only members need not fill this out.</Text>
               </Stack>
+              <Field name="gender">
+                  {({ field, form }) => (
+                    <FormControl>
+                      <FormLabel htmlFor="gender">Gender</FormLabel>
+                      <Input {...field} id="gender" placeholder="?" />
+                    </FormControl>
+                  )}
+                </Field>
               <Field type="checkbox" name="comfortableWithAnyRoommate">
                 {({ field }) => (
                   <Checkbox
@@ -223,6 +235,17 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                     name="comfortableWithAnyRoommate"
                   >
                     <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
+                  </Checkbox>
+                )}
+              </Field>
+              <Field type="checkbox" name="interestedInAccessCo">
+                {({ field }) => (
+                  <Checkbox
+                    {...field}
+                    id="interestedInAccessCo"
+                    name="interestedInAccessCo"
+                  >
+                    <Text textAlign="left">I would like to be contacted by an AccessCo about accessibility needs in OSCA.</Text>
                   </Checkbox>
                 )}
               </Field>

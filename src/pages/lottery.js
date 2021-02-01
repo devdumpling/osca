@@ -177,7 +177,7 @@ const Lottery = (props) => {
 
   return (
     <>
-      <Meta title="OSCA 2021 Spring Lottery" />
+      <Meta title="OSCA 2021 Fall Lottery" />
       <Header />
       <Container>
         <Wall condition={!loading} caught={<Center minH="calc(100vh - 5rem)"><Loader /></Center>}>

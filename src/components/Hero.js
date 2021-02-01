@@ -15,7 +15,7 @@ export const Hero = ({ title }) => (
       </Text>
     </Fade>
     <Button colorScheme="teal" mt={8} variant="outline">
-      <Link as={NextLink} href="/lottery">Spring 2021 Lottery</Link>
+      <Link as={NextLink} href="/lottery">Fall 2021 Lottery</Link>
     </Button>    
   </Flex>
 )

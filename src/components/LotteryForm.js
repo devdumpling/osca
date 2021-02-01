@@ -1,4 +1,4 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field } from 'formik'
 import {
   Flex,
   FormControl,
@@ -6,7 +6,8 @@ import {
   FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup
 } from '@chakra-ui/react'
 import { useState } from 'react'
-// import LotteryPreferenceList from './LotteryPreferenceList';
+import FormikOnSubmit from './FormikOnSubmit'
+// import LotteryPreferenceList from './LotteryPreferenceList'
 
 const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
   const [choices, setChoices] = useState(
@@ -23,53 +24,53 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
       'Old Barrows Housing (choice of OSCA dining)',
       'Brown Bag Co-op'
     ]
-  );
+  )
 
   const startDate = new Date(lottery.start).toDateString();
   const endDate = new Date(lottery.end).toDateString();
 
   function validateName(value) {
-    let error;
+    let error
     if (!value) {
       error = "Name is required"
     }
-    return error;
+    return error
   }
 
   function validateTNumber(number) {
-    const tNumberRegEx = /^\d{7,8}$/i;
+    const tNumberRegEx = /^\d{7,8}$/i
 
-    let error;
+    let error
     if (!number) {
       error = "T-Number is required"
     } else if (!tNumberRegEx.test(number)) {
       error = "Invalid T Number. (Leave off the T) 😱" // is this 8 digits max?      
     }
-    return error;
+    return error
   }
 
   function validateOCMR(ocmr) {
-    const ocmrRegEx = /^\d{1,5}$/i;
+    const ocmrRegEx = /^\d{1,5}$/i
 
-    let error;
+    let error
     if (!ocmr) {
       error = "OCMR is required"
     } else if (!ocmrRegEx.test(ocmr)) {
       error = "Invalid OCMR. (1-5 digits) 😱"
     }
-    return error;
+    return error
   }
 
   function validatePhoneNumber(number) {
-    const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/;
+    const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
 
-    let error;
+    let error
     if (!number) {
       error = "Phone number is required"
     } else if (!phoneRegex.test(number)) {
       error = "Invalid phone number 😱"
     }
-    return error;
+    return error
   }
 
   return (
@@ -123,6 +124,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
       >
         {props => (
           <Form>
+         <FormikOnSubmit>
             <Stack spacing={6} p={2}>
               <Stack direction={["column", "row"]} spacing={2}>
                 <Field name="firstName" validate={validateName}>
@@ -407,6 +409,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
                 Submit
             </Button>
             </Stack>
+<FormikOnSubmit>
           </Form>
         )}
       </Formik>
@@ -414,4 +417,4 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
   )
 }
 
-export default LotteryForm;
+export default LotteryForm

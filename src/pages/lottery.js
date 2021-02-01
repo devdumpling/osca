@@ -151,7 +151,6 @@ const Lottery = (props) => {
     if (!entry || !lottery) {
       loading = true
       hit(`/api/lottery/entries?lotteryId=${currentLotteryId}&email=${email}`).then(data => {
-        console.log(data)
         if (data.length == 1) {
           setEntry(data[0])
         } else {

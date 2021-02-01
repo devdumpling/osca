@@ -6,15 +6,7 @@ let NextAuth
 let Providers
 let auth0
 
-console.log({
-  NEXTAUTH_URL: process.env.NEXTAUTH_URL
-})
-
 export default async (req, res) => {
-  console.log({
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    req: true
-  })
   if (!NextAuth || !auth0) {
     import('next-auth').then(n => {
       NextAuth = n.default
@@ -31,11 +23,6 @@ export default async (req, res) => {
         // show login prompt if logged out.
         // by default, auth0 reauthenticates the most recent session, which is either convenient or annoying.
         auth0.authorizationUrl = auth0.authorizationUrl += '&prompt=login'
-
-        console.log({
-          NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-          dynamic: true
-        })
   
         NextAuth(req, res, { 
           providers: [ auth0 ]

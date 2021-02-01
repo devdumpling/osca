@@ -1,4 +1,5 @@
 import React from 'react'
+import { configureScope, setUser } from "@sentry/react"
 import { signIn, signOut, useSession } from 'next-auth/client'
 import { Flex, Text, Button, Avatar } from '@chakra-ui/react'
 import { Icon } from '@chakra-ui/icons'
@@ -29,6 +30,7 @@ const Account = () => {
 
   if (session) {
     const { user } = session
+    setUser({ email: user.email })
 
     return (
       <Flex align="center">
@@ -38,6 +40,7 @@ const Account = () => {
       </Flex>
     )
   } else {
+    configureScope(scope => scope.setUser(null));
     return <LoginButton />
   }
 }

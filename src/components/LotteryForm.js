@@ -8,7 +8,7 @@ import {
 import { useState } from 'react'
 // import LotteryPreferenceList from './LotteryPreferenceList';
 
-const LotteryForm = ({ onSubmit, currentEntryValues }) => {
+const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
   const [choices, setChoices] = useState(
     [
       'Harkness Housing & Dining',
@@ -24,6 +24,9 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
       'Brown Bag Co-op'
     ]
   );
+
+  const startDate = new Date(lottery.start);
+  const endDate = new Date(lottery.end);
 
   function validateName(value) {
     let error;
@@ -91,7 +94,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
         </Text>
         <Text fontWeight="medium">
-          The lottery is open from 2/1/2021 12:00AM until 2/17/2021 11:59PM.
+          The lottery is open from {startDate} until {endDate}.
         </Text>
         <Text>
           For questions, comments, or concerns, email osca@oberlin.edu.
@@ -146,7 +149,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.tNumber && form.touched.tNumber}>
                       <FormLabel htmlFor="tNumber">T-Number</FormLabel>
-                      <Input {...field} id="tNumber" placeholder="T-0000000" />
+                      <Input {...field} id="tNumber" placeholder="12345678" />
                       <FormErrorMessage>{form.errors.tNumber}</FormErrorMessage>
                     </FormControl>
                   )}

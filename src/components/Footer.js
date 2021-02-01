@@ -10,7 +10,7 @@ export const Footer = (props) => (
         boxSize="100px"
         objectFit="cover"
         src="/assets/480px-Twinpines.svg.png"
-        alt="Segun Adebayo"
+        alt="OSCA Logo"
       />
       <Stack borderRight={{base:"0px", md:"2px"}} pr={{base:0, md:8}} mb={{base: 4, md:0}} textAlign={{base:"center", md:"left"}} spacing={4} mx={4}>
         <Heading size="2xl">
@@ -30,6 +30,12 @@ export const Footer = (props) => (
             mr={2}
           >
             OSCAlums <LinkIcon />
+          </ChakraLink>
+        </ListItem>
+        <ListItem>
+          <ListIcon as={CheckCircleIcon} color="green.500" />
+          <ChakraLink isExternal href="https://www.instagram.com/oscacoops/" flexGrow={1} mr={2}>
+            Instagram <LinkIcon />
           </ChakraLink>
         </ListItem>
         <ListItem>

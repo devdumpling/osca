@@ -1,7 +1,8 @@
-import { Link as ChakraLink, Fade, Button, Flex, Text, Heading } from '@chakra-ui/react'
+import { Fade, Button, Flex, Text, Heading, Link } from '@chakra-ui/react'
+import NextLink from 'next/link'
 
 export const Hero = ({ title }) => (
-  <Flex direction="column" justifyContent="center" alignItems="center" height="100vh">
+  <Flex direction="column" justifyContent="center" alignItems="center" height="calc(100vh - 5rem)">
     <Heading
       bgGradient="linear(to-l, teal.500, green.500)"
       bgClip="text"
@@ -9,18 +10,13 @@ export const Hero = ({ title }) => (
       fontWeight="bold"
       fontSize="10vw">{title}</Heading>
     <Fade in={true}>
-      <Text py={2} fontSize="xl" textAlign="center">
+      <Text fontWeight="thin" py={2} fontSize="xl" textAlign="center">
         new website | still OSCA
       </Text>
-      <Text fontSize="md" pb={8} color="gray.500" textAlign="center">
-        ...coming soon...
-      </Text>
     </Fade>
-    <ChakraLink isExternal href="https://forms.gle/mRBYbR458RVHmSsh9">
-      <Button colorScheme="teal" mt={8} variant="outline">
-        Get email updates
-    </Button>
-    </ChakraLink>
+    <Button colorScheme="teal" mt={8} variant="outline">
+      <Link as={NextLink} href="/lottery">Spring 2021 Lottery</Link>
+    </Button>    
   </Flex>
 )
 

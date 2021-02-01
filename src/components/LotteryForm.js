@@ -78,6 +78,9 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
           Potential members of special interest coops (Old Barrows, Third World Co-op, and Third World Social Justice Co-op Housing)
           must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
         </Text>
+        <Text fontWeight="medium">
+          The lottery is open from 2/1/2021 12:00AM until 2/17/2021 11:59PM.
+        </Text>
         <Text>
           For questions, comments, or concerns, email osca@oberlin.edu.
         </Text>

@@ -25,8 +25,8 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
     ]
   );
 
-  const startDate = new Date(lottery.start);
-  const endDate = new Date(lottery.end);
+  const startDate = new Date(lottery.start).toDateString();
+  const endDate = new Date(lottery.end).toDateString();
 
   function validateName(value) {
     let error;
@@ -253,6 +253,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
                   <Checkbox
                     {...field}
                     id="comfortableWithAnyRoommate"
+                    colorScheme="teal"
                     name="comfortableWithAnyRoommate"
                     isChecked
                   >
@@ -265,6 +266,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues, lottery }) => {
                   <Checkbox
                     {...field}
                     id="interestedInAccessCo"
+                    colorScheme="teal"
                     name="interestedInAccessCo"
                   >
                     <Text textAlign="left">I would like to be contacted by an AccessCo about accessibility needs in OSCA.</Text>

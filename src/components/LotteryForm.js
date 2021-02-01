@@ -76,7 +76,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
   return (
     <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={12} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
-        <Stack spacing={1}>
+        <Stack textAlign="center" spacing={1}>
           <Heading>2021 Fall Lottery</Heading>
           <Text color="gray.500" fontWeight="thin" m={2}>{countdown} remaining</Text>
         </Stack>

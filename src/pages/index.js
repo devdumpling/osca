@@ -23,7 +23,7 @@ const Index = ({ file = {}, cms, session }) => {
     <>
       <Meta title="OSCA | Oberlin Student Cooperative Association" />
       <Header />
-      <Container>
+      <Container> {/* todo margin-top: $height-of-nav */}
         <Hero />
         <Main>
           <About form={form} data={data} />

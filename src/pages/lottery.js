@@ -9,6 +9,7 @@ import { Footer } from '../components/Footer'
 import LotteryForm from '../components/LotteryForm'
 import Header from '../components/Header'
 import { Loader } from '../components/Loader'
+import { LoginButton } from '../components/Auth'
 
 const currentLotteryId = 'spring2021'
 
@@ -30,7 +31,7 @@ const enterLottery = (values, actions, callback = x => x) => {
 
 function CountDown({ now, future }) {
   const remaining = future - now
-  return <span>{remaining / 1000} seconds</span>
+  return <span>{formatTime(remaining)}</span>
 }
 
 class EntrySubmission extends React.Component {
@@ -44,7 +45,7 @@ class EntrySubmission extends React.Component {
   componentDidMount() {
     this.interval = setInterval(function () {
       this.setState({ time: Date.now() + this.latency })
-    }.bind(this), 200)
+    }.bind(this), 1000)
   }
 
   componentWillUnmount() {
@@ -52,7 +53,7 @@ class EntrySubmission extends React.Component {
   }
 
   render() {
-    const { lottery = {}, setEntry } = this.props
+    const { lottery = {}, setEntry, entry = {} } = this.props
     const { active, start, end, now, latency, lotteryId } = lottery
     this.latency = latency
     return (
@@ -60,7 +61,7 @@ class EntrySubmission extends React.Component {
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack align="center" spacing={4}>
-              <LotteryForm onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
+              <LotteryForm currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
               <Stack w="100%" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
                 <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
@@ -82,7 +83,7 @@ class EntrySubmission extends React.Component {
 }
 
 function Entry({ entry }) {
-  const { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
+  let { email, lotteryId, entryId, userData = {}, entryMetadata = {}, timestamp } = entry
   return (
     <Stack w="100%" mt={20} p={2} spacing={4} align="center">
       <CheckIcon w={8} h={8} color="teal.500" />
@@ -97,7 +98,7 @@ function Entry({ entry }) {
         <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>   
         <Text fontWeight="thin">Preferences: </Text>
         <OrderedList my={4}>
-          {entryMetadata.preferences.map(pref => (
+          {entryMetadata.preferences && entryMetadata.preferences.map(pref => (
             <ListItem fontWeight="thin" key={pref}>{pref}</ListItem>
           ))}
         </OrderedList>        
@@ -168,14 +169,20 @@ const Lottery = (props) => {
           <Wall condition={session && session.user}
             caught={
               <Center minH="100vh">
-                <Heading fontWeight="thin" color="gray.500">Login to enter the lottery.</Heading>
+                <Heading fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
               </Center>
             }>
 
             <Main>
               {!(entry && entry.email)
                 ? <EntrySubmission lottery={lottery} setEntry={setEntry} />
-                : <Stack spacing={8}><Entry entry={entry} /><EntrySubmission lottery={lottery} setEntry={setEntry} /></Stack>}
+                : (
+                  <Stack spacing={8}>
+                    <Entry entry={entry} />
+                    <EntrySubmission entry={entry} lottery={lottery} setEntry={setEntry} />
+                  </Stack>
+                )
+              }
             </Main>
           </Wall>
         </Wall>
@@ -197,3 +204,28 @@ async function hit(...args) {
 //   const time = await fetch('/api/time')
 //   return time - now
 // }
+
+function formatTime (total) {
+  const seconds = Math.floor( (total/1000) % 60 )
+  const minutes = Math.floor( (total/1000/60) % 60 )
+  const hours = Math.floor( (total/(1000*60*60)) % 24 )
+  const days = Math.floor( total/(1000*60*60*24) % 30 )
+  const months = Math.floor( total/(1000*60*60*24*30) % 30 )
+  const years = Math.floor( total/(1000*60*60*24*30*365) % 365 )
+
+  return `
+    ${years ? `${years.toString()} ${pluralize('year', years)} ` : ``}
+    ${months ? `${months.toString()} ${pluralize('month', months)} ` : ``}
+    ${days ? `${days.toString()} ${pluralize('day', days)} ` : ``}
+    ${hours ? `${hours.toString()} ${pluralize('hour', hours)} ` : ``}
+    ${minutes ? `${minutes.toString()} ${pluralize('minute', minutes)} ` : ``}
+    ${seconds ? `${seconds.toString()} ${pluralize('second', seconds)}` : ``}
+  `
+}
+
+function pluralize (text, count) {
+  if (count != 1) {
+    return `${text}s`
+  }
+  return text
+}

@@ -131,7 +131,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues={}, lottery }) => {
       >
         {props => (
           <Form>
-          <FormikOnSubmit>
+            <FormikOnSubmit>
               <Stack spacing={6} p={2}>
                 <Stack direction={["column", "row"]} spacing={2}>
                   <Field name="firstName" validate={validateName}>
@@ -414,7 +414,7 @@ const LotteryForm = ({ onSubmit, currentEntryValues={}, lottery }) => {
                   maxW="12rem"
                 >
                   Submit
-              </Button>
+                </Button>
               </Stack>
             </FormikOnSubmit>
           </Form>

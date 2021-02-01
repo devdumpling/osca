@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 import Meta from '../components/Meta'
-import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem, useToast } from '@chakra-ui/react'
+import { Box, Divider, Text, Stack, Center, Heading, OrderedList, ListItem,, useToast, Link as ChakraLink } from '@chakra-ui/react'
 import { CheckIcon } from '@chakra-ui/icons'
 import { Container } from '../components/Container'
 import { Main } from '../components/Main'
@@ -73,10 +73,16 @@ class EntrySubmission extends React.Component {
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack align="center" spacing={4}>
-              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, toast, setEntry)} />
               <Stack w="100%" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
                 <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
+              </Stack>
+              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, toast, setEntry)} />
+              <Stack w="100%" align="center" p={5} shadow="md" borderWidth="1px" borderRadius="md">
+                <Text m={2} fontSize="lg">Special Interest Co-op Applications:</Text>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/gcgWANdqBxtcdGDr6">Third World Social Justice</ChakraLink>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/tebC1mBmiX99MhyL6">Old Barrows</ChakraLink>
               </Stack>
               <Stack w="100%" spacing={2} p={5} textAlign="left">
                 <Text noOfLines={2} flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
@@ -107,13 +113,13 @@ function Entry({ entry }) {
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
         <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
-        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>   
+        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>
         <Text fontWeight="thin">Preferences: </Text>
         <OrderedList my={4}>
           {entryMetadata.preferences && entryMetadata.preferences.map(pref => (
             <ListItem fontWeight="thin" key={pref}>{pref}</ListItem>
           ))}
-        </OrderedList>        
+        </OrderedList>
         <Text>You may also change your entry by resubmitting below.</Text>
       </Stack>
       {/* <pre>{JSON.stringify({ entryMetadata, userData, timestamp }, null, 2)}</pre> */}
@@ -218,13 +224,13 @@ async function hit(...args) {
 //   return time - now
 // }
 
-function formatTime (total) {
-  const seconds = Math.floor( (total/1000) % 60 )
-  const minutes = Math.floor( (total/1000/60) % 60 )
-  const hours = Math.floor( (total/(1000*60*60)) % 24 )
-  const days = Math.floor( total/(1000*60*60*24) % 30 )
-  const months = Math.floor( total/(1000*60*60*24*30) % 30 )
-  const years = Math.floor( total/(1000*60*60*24*30*365) % 365 )
+function formatTime(total) {
+  const seconds = Math.floor((total / 1000) % 60)
+  const minutes = Math.floor((total / 1000 / 60) % 60)
+  const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+  const days = Math.floor(total / (1000 * 60 * 60 * 24) % 30)
+  const months = Math.floor(total / (1000 * 60 * 60 * 24 * 30) % 30)
+  const years = Math.floor(total / (1000 * 60 * 60 * 24 * 30 * 365) % 365)
 
   return `
     ${years ? `${years.toString()} ${pluralize('year', years)} ` : ``}
@@ -236,7 +242,7 @@ function formatTime (total) {
   `
 }
 
-function pluralize (text, count) {
+function pluralize(text, count) {
   if (count != 1) {
     return `${text}s`
   }

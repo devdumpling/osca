@@ -6,6 +6,7 @@ import {
   FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import SortableMultiSelect from './SortableMultiSelect'
 import FormikOnSubmit from './FormikOnSubmit'
 // import LotteryPreferenceList from './LotteryPreferenceList'
 
@@ -74,7 +75,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
   }
 
   return (
-    <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" overflow="hidden" direction="column" justifyContent="flex-start" mt={12} alignItems="center" pb={8}>
+    <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" direction="column" justifyContent="flex-start" mt={12} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Stack textAlign="center" spacing={1}>
           <Heading>2021 Fall Lottery</Heading>
@@ -287,124 +288,12 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                 </Field>
                 <Divider />
                 <Text>Coop Preference Ranking: </Text>
-                <Field name="preferences[0]">
+                <Field name="preferences">
                   {({ field, form }) => (
                     <FormControl>
-                      <Select {...field} variant="outline" placeholder="1">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[1]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="2">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[2]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="3">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[3]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="4">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[4]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="5">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[5]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="6">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[6]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="7">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[7]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="8">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[8]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="9">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[9]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="10">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
-                    </FormControl>
-                  )}
-                </Field>
-                <Field name="preferences[10]">
-                  {({ field, form }) => (
-                    <FormControl>
-                      <Select {...field} variant="outline" placeholder="11">
-                        {choices.map(choice => (
-                          <option key={choice} value={choice}>{choice}</option>
-                        ))}
-                      </Select>
+                      <SortableMultiSelect {...field} options={choices} onChange={selectedOptions => {
+                        props.setFieldValue('preferences', selectedOptions)
+                      }} />
                     </FormControl>
                   )}
                 </Field>

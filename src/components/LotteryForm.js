@@ -3,7 +3,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup
+  FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup, Box
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import SortableMultiSelect from './SortableMultiSelect'

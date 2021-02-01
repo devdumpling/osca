@@ -28,8 +28,8 @@ const SortableSelect = SortableContainer(Select)
 export default function MultiSelectSort({ options = [], value = {}, onChange }) {
   // For colorMode
   const { colorMode } = useColorMode()
-  const bgColor = { light: 'gray.50', dark: 'gray.900' }
-  const color = { light: 'black', dark: 'white' }
+  const bgColor = { light: '#F7FAFC', dark: '#171923' }
+  const color = { light: '#000000', dark: '#FFFFFF' }
 
   console.log(bgColor[colorMode], color[colorMode]);
 

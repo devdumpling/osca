@@ -35,16 +35,16 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
   options = implicitLabels ? valuesAsLabels(options) : options
   value = implicitLabels ? valuesAsLabels(value) : value
 
-  const [selected, setSelected] = React.useState(value)
+  const [selected, setSelected] = React.useState(orderLabels(value))
 
   const handleChange = selectedOptions => {
-    setSelected(selectedOptions)
+    setSelected(orderLabels(selectedOptions))
     onChange(implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions)
   }
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
     const selectedOptions = arrayMove(selected, oldIndex, newIndex)
-    setSelected(selectedOptions)
+    setSelected(orderLabels(selectedOptions))
     onChange(implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions)
   }
 
@@ -95,4 +95,11 @@ function valuesAsLabels(values) {
 
 function valuesFromOptions(options) {
   return options.map(({ value }) => value)
+}
+
+function orderLabels (options) {
+  return options.map(({ value, label }, i) => ({ 
+    value, 
+    label: `${i+1}. ${label.slice(label.indexOf('. ')+label.indexOf('. ') >= 0 ? 2 : 0)}` 
+  }))
 }

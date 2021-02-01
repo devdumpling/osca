@@ -267,7 +267,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                       {...field}
                       id="comfortableWithAnyRoommate"
                       colorScheme="teal"
-                      name="comfortableWithAnyRoommate"                      
+                      name="comfortableWithAnyRoommate"
                     >
                       <Text textAlign="left">I am comfortable living with any roommate regardless of assigned sex or gender.</Text>
                     </Checkbox>
@@ -286,7 +286,11 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                   )}
                 </Field>
                 <Divider />
-                <Text>Coop Preference Ranking: </Text>
+                <Stack spacing={1}>
+                  <Text>Coop Preference Ranking: </Text>
+                  <Text fontSize="sm">(Rank 1 is your top choice)</Text>
+                  <Text fontSize="sm">(Click and drag to arrange your choices)</Text>
+                </Stack>
                 <Field name="preferences">
                   {({ field, form }) => (
                     <FormControl>

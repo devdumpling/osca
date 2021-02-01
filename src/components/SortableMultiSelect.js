@@ -80,7 +80,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         //   display: state.isFocused 'none'
         // }),
         valueContainer: (style, state) => ({
-          ...style,
+          ...style,          
           backgroundColor: `${bgColor[colorMode]}`,
           flexDirection: 'column'
         })

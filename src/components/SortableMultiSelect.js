@@ -68,7 +68,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
       styles={{
         multiValue: (style, state) => ({
           ...style,
-          color: color[colorMode].toString(),
+          color: `${color[colorMode]}`,
           justifyContent: 'space-between',
           padding: '1rem',
           marginTop: '0.5rem',
@@ -81,7 +81,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         // }),
         valueContainer: (style, state) => ({
           ...style,
-          backgroundColor: bgColor[colorMode].toString(),
+          backgroundColor: `${bgColor[colorMode]}`,
           flexDirection: 'column'
         })
       }}

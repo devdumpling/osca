@@ -73,11 +73,7 @@ class EntrySubmission extends React.Component {
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack align="center" spacing={4}>
-              <Stack w="100%" p={5} shadow="md" borderWidth="1px" borderRadius="md">
-                <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
-                <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>
-              </Stack>
-              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, toast, setEntry)} />
+              <LotteryForm countdown={<CountDown now={this.state.time} future={end} />} lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, toast, setEntry)} />
               <Stack w="100%" align="center" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">Special Interest Co-op Applications:</Text>
                 <ChakraLink color="teal.500" isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>

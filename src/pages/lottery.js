@@ -82,7 +82,7 @@ class EntrySubmission extends React.Component {
               </Stack>
               <Stack w="100%" spacing={2} p={5} textAlign="left">
                 <Text noOfLines={2} flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
-                <Text flexWrap="wrap">If for some reason you are unable to submit with this page, please use the Google Form version.</Text>
+                <Text flexWrap="wrap">If for some reason you are unable to submit with this page, please use <ChakraLink isExternal color="teal.500" href="https://forms.gle/HSiLbm2Bon6d41XQ7">the Google Form Version</ChakraLink></Text>
               </Stack>
             </Stack>
             : (

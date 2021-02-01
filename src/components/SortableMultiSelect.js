@@ -68,7 +68,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
       styles={{
         multiValue: (style, state) => ({
           ...style,
-          color: `${color[colorMode]}`,
+          color: `darkgray`,
           justifyContent: 'space-between',
           padding: '1rem',
           borderRadius: '0.5rem',
@@ -76,6 +76,22 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
           marginBottom: '0.5rem',
           boxShadow: '0 8px 6px -2px rgb(0 0 0 / 5%)',
           width: '100%'
+        }),
+        multiValueLabel: (style, state) => ({
+          ...style,
+          color: `${color[colorMode]}`,
+        }),
+        input: (style, state) => ({
+          ...style,
+          color: `${color[colorMode]}`,
+        }),
+        menu: (style, state) => ({
+          ...style,
+          backgroundColor: `${bgColor[colorMode]}`
+        }),
+        menuList: (style, state) => ({
+          ...styles,
+          color: `${color[colorMode]}`,
         }),
         // input: (style, state) => ({
         //   display: state.isFocused 'none'

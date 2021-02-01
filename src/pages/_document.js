@@ -14,7 +14,7 @@ export default class Document extends NextDocument {
           <NextScript />
           <style jsx global>{`
             * {
-              scroll-margin-top: 5rem;
+              scroll-margin-top: 5rem
             }
           `}
           </style>

@@ -55,9 +55,7 @@ export default async (req, res) => {
     const snapshot = await query.get()
     const emails = snapshot.docs.map(doc => ({
       email: doc.data().email,
-    }))
-    console.log(emails);
-    console.log(emails.length);
+    }))    
     res.status(200).json(emails)
   } else {
     res.status(401).json({

@@ -184,7 +184,7 @@ const Lottery = (props) => {
           <Wall condition={session && session.user}
             caught={
               <Center minH="calc(100vh - 5rem)">
-                <Heading fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
+                <Heading mx={2} fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
               </Center>
             }>
 

@@ -61,7 +61,7 @@ class EntrySubmission extends React.Component {
         {
           this.state.time >= start && end >= this.state.time
             ? <Stack align="center" spacing={4}>
-              <LotteryForm currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
+              <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
               <Stack w="100%" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is open for submissions!</Text>
                 <Text color="gray.500" fontWeight="thin" m={2}><CountDown now={this.state.time} future={end} /> remaining</Text>

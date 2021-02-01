@@ -11,12 +11,17 @@ import { useState } from 'react'
 const LotteryForm = ({ onSubmit, currentEntryValues }) => {
   const [choices, setChoices] = useState(
     [
-      'Harkness Housing',
-      'Harkness Dining',
-      'Keep Housing',
-      'Keep Dining',
-      'Tank Housing',
-      'Tank Dining',
+      'Harkness Housing & Dining',
+      'Harkness Dining-only',
+      'Tank Housing & Dining',
+      'Tank Dining-only',
+      'Keep Housing & Dining',
+      'Keep Dining-only',
+      'Pyle Inn Dining-only',
+      'Third World Co-op Dining-Only',
+      'Third World Co-op Dining and Third World Social Justice Housing',
+      'Old Barrows Housing (choice of OSCA dining)',
+      'Brown Bag Co-op'
     ]
   );
 
@@ -57,6 +62,14 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Heading >2021 Spring Lottery</Heading>
       </Center>
+      <Text textAlign="left" mb={4} p={4}>
+        All Oberlin College students who wish to be in OSCA during Fall 2021 and/or Spring 2022 must fill out this lottery form.
+        This lottery is not for incoming first-years or transfer students who will have an opportunity to join during Summer 2021.
+        Each student’s entry will generate a random number which determines their rank in the lottery, ensuring all students have an equal chance at membership in a co-op.
+        Under the recent lease with Oberlin College, this lottery and its resulting membership will determine the buildings OSCA is able to lease for the 2021-22 academic year.
+        Potential members of special interest coops (Old Barrows, Third World Co-op, and Third World Social Justice Co-op Housing)
+        must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
+      </Text>
       <Formik
         initialValues={currentEntryValues ? currentEntryValues : {
           firstName: "",
@@ -232,6 +245,17 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
                 {({ field, form }) => (
                   <FormControl>
                     <Select {...field} variant="outline" placeholder="10">
+                      {choices.map(choice => (
+                        <option key={choice} value={choice}>{choice}</option>
+                      ))}
+                    </Select>
+                  </FormControl>
+                )}
+              </Field>
+              <Field name="preferences[10]">
+                {({ field, form }) => (
+                  <FormControl>
+                    <Select {...field} variant="outline" placeholder="11">
                       {choices.map(choice => (
                         <option key={choice} value={choice}>{choice}</option>
                       ))}

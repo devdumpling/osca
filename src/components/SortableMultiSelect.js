@@ -89,8 +89,8 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
   )
 }
 
-function valuesAsLabels(values) {
-  return values.map((value, i) => ({ value, label: i + '. ' + value }))
+function valuesAsLabels (values) {
+  return values.map(value => ({ value, label: value }))
 }
 
 function valuesFromOptions(options) {

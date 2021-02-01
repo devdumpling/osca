@@ -68,9 +68,9 @@ class EntrySubmission extends React.Component {
               <LotteryForm lottery={lottery} currentEntryValues={entry && entry.entryMetadata} onSubmit={(data, actions) => enterLottery(data, actions, setEntry)} />
               <Stack w="100%" align="center" p={5} shadow="md" borderWidth="1px" borderRadius="md">
                 <Text m={2} fontSize="lg">Special Interest Co-op Applications:</Text>
-                <ChakraLink isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>
-                <ChakraLink isExternal href="https://forms.gle/gcgWANdqBxtcdGDr6">Third World Social Justice</ChakraLink>
-                <ChakraLink isExternal href="https://forms.gle/tebC1mBmiX99MhyL6">Old Barrows</ChakraLink>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/gcgWANdqBxtcdGDr6">Third World Social Justice</ChakraLink>
+                <ChakraLink color="teal.500" isExternal href="https://forms.gle/tebC1mBmiX99MhyL6">Old Barrows</ChakraLink>
               </Stack>
               <Stack w="100%" spacing={2} p={5} textAlign="left">
                 <Text noOfLines={2} flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>

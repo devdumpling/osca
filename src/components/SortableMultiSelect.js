@@ -73,6 +73,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
           color: `${color[colorMode]}`,
           justifyContent: 'space-between',
           padding: '1rem',
+          borderRadius: '0.5rem',
           marginTop: '0.5rem',
           marginBottom: '0.5rem',
           boxShadow: '0 8px 6px -2px rgb(0 0 0 / 5%)',
@@ -85,6 +86,10 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
           ...style,          
           backgroundColor: `${bgColor[colorMode]}`,
           flexDirection: 'column'
+        }),
+        control: (style, state) => ({
+          ...style,
+          backgroundColor: `${bgColor[colorMode]}`,
         })
       }}
     />

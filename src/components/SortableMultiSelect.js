@@ -31,6 +31,8 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
   const bgColor = { light: 'gray.50', dark: 'gray.900' }
   const color = { light: 'black', dark: 'white' }
 
+  console.log(bgColor[colorMode], color[colorMode]);
+
   const implicitLabels = Array.isArray(options)
   options = implicitLabels ? valuesAsLabels(options) : options
   value = implicitLabels ? valuesAsLabels(value) : value

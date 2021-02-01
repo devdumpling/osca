@@ -62,14 +62,26 @@ const LotteryForm = ({ onSubmit, currentEntryValues }) => {
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Heading >2021 Spring Lottery</Heading>
       </Center>
-      <Text textAlign="left" mb={4} p={4}>
-        All Oberlin College students who wish to be in OSCA during Fall 2021 and/or Spring 2022 must fill out this lottery form.
-        This lottery is not for incoming first-years or transfer students who will have an opportunity to join during Summer 2021.
-        Each student’s entry will generate a random number which determines their rank in the lottery, ensuring all students have an equal chance at membership in a co-op.
-        Under the recent lease with Oberlin College, this lottery and its resulting membership will determine the buildings OSCA is able to lease for the 2021-22 academic year.
-        Potential members of special interest coops (Old Barrows, Third World Co-op, and Third World Social Justice Co-op Housing)
-        must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
-      </Text>
+      <Stack textAlign="left" spacing={4} p={4} my={4}>
+        <Text fontSize="lg">
+          The OSCA Lottery Process
+        </Text>
+        <Text>
+          All Oberlin College students who wish to be in OSCA during Fall 2021 and/or Spring 2022 must fill out this lottery form.
+        </Text>
+        <Text>
+          This lottery is not for incoming first-years or transfer students who will have an opportunity to join during Summer 2021.
+          Each student’s entry will generate a random number which determines their rank in the lottery, ensuring all students have an equal chance at membership in a co-op.
+          Under the recent lease with Oberlin College, this lottery and its resulting membership will determine the buildings OSCA is able to lease for the 2021-22 academic year.
+        </Text>
+        <Text>
+          Potential members of special interest coops (Old Barrows, Third World Co-op, and Third World Social Justice Co-op Housing)
+          must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
+        </Text>
+        <Text>
+          For questions, comments, or concerns, please reach out to the All-OSCA officers at mfox2@oberlin.edu.
+        </Text>
+      </Stack>
       <Formik
         initialValues={currentEntryValues ? currentEntryValues : {
           firstName: "",

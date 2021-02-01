@@ -30,6 +30,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
   const { colorMode } = useColorMode()
   const bgColor = { light: '#F7FAFC', dark: '#171923' }
   const color = { light: '#000000', dark: '#FFFFFF' }
+  const multiValueBgColor = { light: '#e6e6e6', dark: '#333'}
 
   const implicitLabels = Array.isArray(options)
   options = implicitLabels ? valuesAsLabels(options) : options
@@ -68,7 +69,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
       styles={{
         multiValue: (style, state) => ({
           ...style,
-          color: `darkgray`,
+          backgroundColor: `${multiValueBgColor[colorMode]}`,
           justifyContent: 'space-between',
           padding: '1rem',
           borderRadius: '0.5rem',
@@ -96,6 +97,11 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         menuList: (style, state) => ({
           ...style,
           color: `${color[colorMode]}`,
+        }),
+        noOptionsMessage: (style, state) => ({
+          ...style,
+          color: `${color[colorMode]}`,
+          backgroundColor: `${bgColor[colorMode]}`
         }),
         // input: (style, state) => ({
         //   display: state.isFocused 'none'

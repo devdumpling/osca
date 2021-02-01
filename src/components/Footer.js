@@ -34,6 +34,12 @@ export const Footer = (props) => (
         </ListItem>
         <ListItem>
           <ListIcon as={CheckCircleIcon} color="green.500" />
+          <ChakraLink isExternal href="https://www.instagram.com/oscacoops/" flexGrow={1} mr={2}>
+            Instagram <LinkIcon />
+          </ChakraLink>
+        </ListItem>
+        <ListItem>
+          <ListIcon as={CheckCircleIcon} color="green.500" />
           <ChakraLink isExternal href="https://www.facebook.com/Oberlin-Student-Cooperative-Association-218110806562/" flexGrow={1} mr={2}>
             Facebook <LinkIcon />
           </ChakraLink>

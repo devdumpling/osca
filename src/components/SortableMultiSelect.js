@@ -2,6 +2,7 @@ import React from 'react'
 
 import Select, { components } from 'react-select'
 import { SortableContainer, SortableElement } from 'react-sortable-hoc'
+import { color, useColorMode } from '@chakra-ui/react'
 
 function arrayMove(array, from, to) {
   array = array.slice()
@@ -10,6 +11,11 @@ function arrayMove(array, from, to) {
 }
 
 const SortableMultiValue = SortableElement(props => {
+  // For colorMode
+  const { colorMode } = useColorMode()
+  const bgColor = { light: 'gray.50', dark: 'gray.900' }
+  const color = { light: 'black', dark: 'white' }
+
   // this prevents the menu from being opened/closed when the user clicks
   // on a value to begin dragging it. ideally, detecting a click (instead of
   // a drag) would still focus the control and toggle the menu, but that
@@ -24,7 +30,7 @@ const SortableMultiValue = SortableElement(props => {
 
 const SortableSelect = SortableContainer(Select)
 
-export default function MultiSelectSort({ options=[], value={}, onChange }) {
+export default function MultiSelectSort({ options = [], value = {}, onChange }) {
   const implicitLabels = Array.isArray(options)
   options = implicitLabels ? valuesAsLabels(options) : options
   value = implicitLabels ? valuesAsLabels(value) : value
@@ -62,15 +68,17 @@ export default function MultiSelectSort({ options=[], value={}, onChange }) {
       styles={{
         multiValue: (style, state) => ({
           ...style,
+          color: color,
           justifyContent: 'space-between',
           padding: '1rem',
-          width: '100%'
+          width: '100%'          
         }),
         // input: (style, state) => ({
         //   display: state.isFocused 'none'
         // }),
         valueContainer: (style, state) => ({
           ...style,
+          backgroundColor: bgColor,
           flexDirection: 'column'
         })
       }}
@@ -78,10 +86,10 @@ export default function MultiSelectSort({ options=[], value={}, onChange }) {
   )
 }
 
-function valuesAsLabels (values) {
-  return values.map((value, i) => ({ value, label:i+'. '+value }))
+function valuesAsLabels(values) {
+  return values.map((value, i) => ({ value, label: i + '. ' + value }))
 }
 
-function valuesFromOptions (options) {
+function valuesFromOptions(options) {
   return options.map(({ value }) => value)
 }

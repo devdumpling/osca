@@ -12,6 +12,12 @@ export default class Document extends NextDocument {
           <ColorModeScript />
           <Main />
           <NextScript />
+          <style jsx global>{`
+            * {
+              scroll-margin-top: 5rem;
+            }
+          `}
+          </style>
         </body>
       </Html>
     )

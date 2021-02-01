@@ -7,12 +7,13 @@ export default function NavBarContainer({ children, ...props }) {
 
   return (
     <Flex
-      position="fixed"
+      position="sticky"
       top="0"
       as="nav"
       align="center"
       wrap="wrap"
       w="100%"
+      h="5rem"
       p={4}
       boxShadow="base"
       zIndex="2"

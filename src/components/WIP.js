@@ -2,7 +2,7 @@ import { Heading, Text, Flex } from '@chakra-ui/react'
 
 const WIP = () => {
   return (
-    <Flex textAlign="left" direction="column" justifyContent="center" alignItems="center" height="100vh">
+    <Flex textAlign="left" direction="column" justifyContent="center" alignItems="center" minHeight="calc(100vh - 5rem)">
       <Heading
         bgGradient="linear(to-l, teal.500, green.500)"
         bgClip="text"

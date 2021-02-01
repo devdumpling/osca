@@ -2,6 +2,7 @@ import { Box, HStack, Stack } from "@chakra-ui/react"
 import { MenuItem } from "./MenuItem"
 import LoginButton from "./LoginButton"
 import { DarkModeSwitch } from './DarkModeSwitch'
+
 export const MenuLinks = ({ isOpen }) => (
   <Box
     display={{ base: isOpen ? "block" : "none", md: "block" }}

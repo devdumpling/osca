@@ -63,7 +63,7 @@ export default function MultiSelectSort({ options=[], value={}, onChange }) {
         multiValue: (style, state) => ({
           ...style,
           justifyContent: 'space-between',
-          padding: '0.25rem',
+          padding: '1rem',
           width: '100%'
         }),
         // input: (style, state) => ({
@@ -79,7 +79,7 @@ export default function MultiSelectSort({ options=[], value={}, onChange }) {
 }
 
 function valuesAsLabels (values) {
-  return values.map(value => ({ value, label: value }))
+  return values.map((value, i) => ({ value, label:i+'. '+value }))
 }
 
 function valuesFromOptions (options) {

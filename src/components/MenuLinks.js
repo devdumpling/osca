@@ -2,6 +2,7 @@ import { Box, HStack, Stack } from "@chakra-ui/react"
 import { MenuItem } from "./MenuItem"
 import LoginButton from "./LoginButton"
 import { DarkModeSwitch } from './DarkModeSwitch'
+
 export const MenuLinks = ({ isOpen }) => (
   <Box
     display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -14,7 +15,7 @@ export const MenuLinks = ({ isOpen }) => (
       direction={["column", "row", "row", "row"]}
       pt={[4, 4, 0, 0]}
     >
-      <MenuItem to="/lottery">Spring 2021 Lottery</MenuItem>
+      <MenuItem to="/lottery">Fall 2021 Lottery</MenuItem>
       <MenuItem to="/alumni">Alumni</MenuItem>
       <HStack>
         <LoginButton isOpen={isOpen} />

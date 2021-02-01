@@ -13,10 +13,10 @@ export default function NavBarContainer({ children, ...props }) {
       align="center"
       wrap="wrap"
       w="100%"
-      h="5rem"
+      minH="5rem"
       p={4}
       boxShadow="base"
-      zIndex="2"
+      zIndex="10"
       bg={bgColor[colorMode]}
       color={color[colorMode]}
       {...props}

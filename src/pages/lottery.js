@@ -82,12 +82,12 @@ class EntrySubmission extends React.Component {
               </Stack>
               <Stack w="100%" spacing={2} p={5} textAlign="left">
                 <Text noOfLines={2} flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
-                <Text flexWrap="wrap">If for some reason you are unable to submit with this page, please use the Google Form version.</Text>
+                <Text flexWrap="wrap">If for some reason you are unable to submit with this page, please use <ChakraLink isExternal color="teal.500" href="https://forms.gle/HSiLbm2Bon6d41XQ7">the Google Form Version</ChakraLink></Text>
               </Stack>
             </Stack>
             : (
               this.state.time > end
-                ? <Text m={2} fontSize="lg">The {formatId(lotteryId)} lottery is now over. We hope you'll enter next round!</Text>
+                ? <Text m={2} fontSize="lg">The {/* {formatId(lotteryId)} */} 2021 Fall lottery is now over. We hope you'll enter next round!</Text>
                 : <Text m={2} fontSize="lg">The lottery begins in <CountDown now={this.state.time} future={start} /></Text>
             )
         }
@@ -102,7 +102,7 @@ function Entry({ entry }) {
     <Stack w="100%" mt={2} p={2} spacing={4} align="center">
       <CheckIcon w={8} h={8} color="teal.500" />
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
-      <Text fontWeight="thin">Your entry ID for the <strong>{formatId(lotteryId)}</strong> lottery is <strong>{entryId}</strong>.</Text>
+      <Text fontWeight="thin">Your entry ID for the <strong>Fall 2021</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
       <Stack border="1px" borderRadius="md" borderColor="teal.500" p={8} mt={1} spacing={1}>
         <Text mb={2} fontSize="xl">Your current entry: </Text>
@@ -151,7 +151,6 @@ const Lottery = (props) => {
     if (!entry || !lottery) {
       loading = true
       hit(`/api/lottery/entries?lotteryId=${currentLotteryId}&email=${email}`).then(data => {
-        console.log(data)
         if (data.length == 1) {
           setEntry(data[0])
         } else {
@@ -177,14 +176,14 @@ const Lottery = (props) => {
 
   return (
     <>
-      <Meta title="OSCA 2021 Spring Lottery" />
+      <Meta title="OSCA 2021 Fall Lottery" />
       <Header />
       <Container>
         <Wall condition={!loading} caught={<Center minH="calc(100vh - 5rem)"><Loader /></Center>}>
           <Wall condition={session && session.user}
             caught={
               <Center minH="calc(100vh - 5rem)">
-                <Heading fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
+                <Heading mx={4} fontWeight="thin" color="gray.500">Please <LoginButton fontSize="1.6rem" icon={true} variant="link" text="Login or Create an Account" /> to enter the lottery.</Heading>
               </Center>
             }>
 

@@ -39,11 +39,11 @@ const Admin = (props) => {
       <Meta title={"OSCAdmin"} />
       <Header />
       <Flex direction="column">
-        <Stack direction="row" spacing={4} py={4} px={4}>
-          <Text textAlign="center">OSCAdmin</Text>          
-          <Button>Download</Button>
-        </Stack>
-        <Container align="start" direction="row" minWidth="100vw" minHeight="100vh">
+        <Container direction="row" minWidth="100vw" minHeight="100vh">
+          <Stack align="center" direction="row" spacing={4} py={4} px={4}>
+            <Text textAlign="center">OSCAdmin</Text>
+            {/* <Button>Download</Button> */}
+          </Stack>
           <Table size="sm" variant="simple">
             <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>
@@ -52,7 +52,7 @@ const Admin = (props) => {
                 <Th>Timestamp</Th>
                 <Th>EntryId</Th>
                 <Th>First</Th>
-                <Th>Last</Th>                
+                <Th>Last</Th>
                 <Th>OCMR</Th>
                 <Th>T-Number</Th>
                 <Th>Rank 1</Th>
@@ -88,7 +88,7 @@ const Admin = (props) => {
                   <Td>{entry.entryMetadata.preferences[7] || ''}</Td>
                   <Td>{entry.entryMetadata.preferences[8] || ''}</Td>
                   <Td>{entry.entryMetadata.preferences[9] || ''}</Td>
-                  <Td>{entry.entryMetadata.preferences[10] || ''}</Td>                                    
+                  <Td>{entry.entryMetadata.preferences[10] || ''}</Td>
                 </Tr>
               ))}
             </Tbody>

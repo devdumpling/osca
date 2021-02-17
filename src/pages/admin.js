@@ -44,7 +44,7 @@ const Admin = (props) => {
           <Divider />
         </Stack>
         <Container w="80vw" minHeight="100vh">
-          <pre>{entries}</pre>
+          <pre></pre>
         </Container>
       </Flex>
     </>

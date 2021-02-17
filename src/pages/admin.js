@@ -24,7 +24,7 @@ const Admin = (props) => {
       loading = true
       hit('/api/lottery/entries')
         .then(data => {
-          if (data.length) setEntries(data[0]);
+          if (data.length) setEntries(data);
         })
         .catch(err => console.log(err));
 

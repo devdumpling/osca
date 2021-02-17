@@ -39,11 +39,11 @@ const Admin = (props) => {
       <Meta title={"OSCAdmin"} />
       <Header />
       <Flex direction="column">
-        <Container align="flex-start" direction="column" minWidth="100vw" minHeight="100vh">
-          <Stack align="flex-start" direction="row" spacing={4} py={4} px={4}>
+        <Container alignItems="flex-start" direction="column" minWidth="100vw" minHeight="100vh">
+          {/* <Stack align="flex-start" direction="row" spacing={4} py={4} px={4}>
             <Text textAlign="center">OSCAdmin</Text>
             <Button>Download</Button>
-          </Stack>
+          </Stack> */}
           <Table size="sm" variant="simple">
             <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>

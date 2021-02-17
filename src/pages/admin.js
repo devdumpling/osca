@@ -45,7 +45,7 @@ const Admin = (props) => {
         </Stack> */}
         <Container direction="row" minWidth="100vw" minHeight="100vh">
           <Table size="sm" variant="simple">
-            <TableCaption placement="top">Showing {entries.length} lottery entries</TableCaption>
+            <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>
               <Tr>
                 <Th>Email</Th>

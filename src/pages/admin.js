@@ -39,10 +39,10 @@ const Admin = (props) => {
       <Meta title={"OSCAdmin"} />
       <Header />
       <Flex direction="column">
-        <Container direction="row" minWidth="100vw" minHeight="100vh">
+        <Container direction="column" minWidth="100vw" minHeight="100vh">
           <Stack align="center" direction="row" spacing={4} py={4} px={4}>
             <Text textAlign="center">OSCAdmin</Text>
-            {/* <Button>Download</Button> */}
+            <Button>Download</Button>
           </Stack>
           <Table size="sm" variant="simple">
             <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>

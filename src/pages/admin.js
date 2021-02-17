@@ -43,7 +43,7 @@ const Admin = (props) => {
           <Text textAlign="center">OSCAdmin</Text>
           <Divider />
         </Stack> */}
-        <Container minHeight="100vh">
+        <Container minWidth="100vw" minHeight="100vh">
           <Table size="sm" variant="simple">
             <TableCaption>Current lottery entries</TableCaption>
             <Thead>
@@ -53,6 +53,9 @@ const Admin = (props) => {
                 <Th>EntryId</Th>
                 <Th>First</Th>
                 <Th>Last</Th>                
+                <Th>OCMR</Th>
+                <Th>T-Number</Th>
+                <Th>Preferences</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -63,6 +66,9 @@ const Admin = (props) => {
                   <Td>{entry.entryId}</Td>
                   <Td>{entry.entryMetadata.firstName}</Td>
                   <Td>{entry.entryMetadata.lastName}</Td>
+                  <Td>{entry.entryMetadata.OCMR}</Td>
+                  <Td>{entry.entryMetadata.tNumber}</Td>
+                  <Td><pre>{JSON.stringify(entry.entryMetadata.preferences)}</pre></Td>
                 </Tr>
               ))}
             </Tbody>

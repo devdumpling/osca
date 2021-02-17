@@ -5,16 +5,6 @@ import Header from '../components/Header'
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
 
-/* const entries = hit('/api/lottery/entries').
-  then(res => {
-    if (res.status !== 200) return res.status
-
-    res.json().then(data => console.log(data))
-  })
-  .catch(err => console.log(err));
-
-console.log(entries); */
-
 const Admin = (props) => {
   let [session, loading] = useSession();
   const [entries, setEntries] = useState([]);
@@ -25,10 +15,9 @@ const Admin = (props) => {
       hit('/api/lottery/entries')
         .then(data => {
           if (data.length) setEntries(data);
+          console.log(entries);
         })
         .catch(err => console.log(err));
-
-      console.log(entries);
     } else {
       loading = false
     }

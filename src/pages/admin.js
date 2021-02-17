@@ -1,6 +1,6 @@
 import Meta from '../components/Meta'
 import { Container } from '../components/Container'
-import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
+import { Flex, Stack, Text, Divider, Button } from '@chakra-ui/react'
 import Header from '../components/Header'
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
@@ -39,11 +39,11 @@ const Admin = (props) => {
       <Meta title={"OSCAdmin"} />
       <Header />
       <Flex direction="column">
-        {/* <Stack bgColor="gray.100" w="20vw" direction="column" py={8} px={4}>
-          <Text textAlign="center">OSCAdmin</Text>
-          <Divider />
-        </Stack> */}
-        <Container align="flex-start" direction="row" minWidth="100vw" minHeight="100vh">
+        <Stack direction="row" spacing={4} py={4} px={4}>
+          <Text textAlign="center">OSCAdmin</Text>          
+          <Button>Download</Button>
+        </Stack>
+        <Container align="start" direction="row" minWidth="100vw" minHeight="100vh">
           <Table size="sm" variant="simple">
             <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>
@@ -55,7 +55,17 @@ const Admin = (props) => {
                 <Th>Last</Th>                
                 <Th>OCMR</Th>
                 <Th>T-Number</Th>
-                <Th>Preferences</Th>
+                <Th>Rank 1</Th>
+                <Th>Rank 2</Th>
+                <Th>Rank 3</Th>
+                <Th>Rank 4</Th>
+                <Th>Rank 5</Th>
+                <Th>Rank 6</Th>
+                <Th>Rank 7</Th>
+                <Th>Rank 8</Th>
+                <Th>Rank 9</Th>
+                <Th>Rank 10</Th>
+                <Th>Rank 11</Th>
               </Tr>
             </Thead>
             <Tbody>
@@ -68,7 +78,17 @@ const Admin = (props) => {
                   <Td>{entry.entryMetadata.lastName}</Td>
                   <Td>{entry.entryMetadata.OCMR}</Td>
                   <Td>{entry.entryMetadata.tNumber}</Td>
-                  <Td><pre>{JSON.stringify(entry.entryMetadata.preferences)}</pre></Td>
+                  <Td>{entry.entryMetadata.preferences[0] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[1] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[2] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[3] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[4] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[5] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[6] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[7] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[8] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[9] || ''}</Td>
+                  <Td>{entry.entryMetadata.preferences[10] || ''}</Td>                                    
                 </Tr>
               ))}
             </Tbody>

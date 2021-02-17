@@ -38,14 +38,14 @@ const Admin = (props) => {
     <>
       <Meta title={"OSCAdmin"} />
       <Header />
-      <Flex>
+      <Flex direction="column">
         {/* <Stack bgColor="gray.100" w="20vw" direction="column" py={8} px={4}>
           <Text textAlign="center">OSCAdmin</Text>
           <Divider />
         </Stack> */}
-        <Container minWidth="100vw" minHeight="100vh">
+        <Container direction="row" minWidth="100vw" minHeight="100vh">
           <Table size="sm" variant="simple">
-            <TableCaption>Current lottery entries</TableCaption>
+            <TableCaption placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>
               <Tr>
                 <Th>Email</Th>

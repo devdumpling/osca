@@ -4,6 +4,16 @@ import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
 import Header from '../components/Header'
 import { useState } from 'react'
 import { useSession } from 'next-auth/client'
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+} from "@chakra-ui/react"
 
 const Admin = (props) => {
   let [session, loading] = useSession();
@@ -34,7 +44,29 @@ const Admin = (props) => {
           <Divider />
         </Stack>
         <Container w="80vw" minHeight="100vh">
-          <pre></pre>
+          <Table variant="simple">
+            <TableCaption>Current lottery entries</TableCaption>
+            <Thead>
+              <Tr>
+                <Th>Email</Th>
+                <Th>Timestamp</Th>
+                <Th>EntryId</Th>
+                <Th>First</Th>
+                <Th>Last</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {entries.map(entry => (
+                <Tr key={entry.entryId}>
+                  <Td>{entry.email}</Td>
+                  <Td>{entry.timestamp}</Td>
+                  <Td>{entry.entryId}</Td>
+                  <Td>{entry.entryMetadata.firstName}</Td>
+                  <Td>{entry.entryMetadata.lastName}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
         </Container>
       </Flex>
     </>

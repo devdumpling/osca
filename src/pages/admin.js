@@ -3,6 +3,7 @@ import { Container } from '../components/Container'
 import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
 import Header from '../components/Header'
 import { useState } from 'react'
+import { useSession } from 'next-auth/client'
 
 /* const entries = hit('/api/lottery/entries').
   then(res => {
@@ -14,16 +15,24 @@ import { useState } from 'react'
 
 console.log(entries); */
 
-const Admin = () => {
+const Admin = (props) => {
+  let [session, loading] = useSession();
   const [entries, setEntries] = useState([]);
 
-  hit('https://osca.coop/api/lottery/entries')
-    .then(data => {
-      if (data.length) setEntries(data[0]);
-    })
-    .catch(err => console.log(err));
+  if (session && session.user) {
+    if (!entries.length) {
+      loading = true
+      hit('https://osca.coop/api/lottery/entries')
+        .then(data => {
+          if (data.length) setEntries(data[0]);
+        })
+        .catch(err => console.log(err));
 
-  console.log(entries);
+      console.log(entries);
+    } else {
+      loading = false
+    }
+  }
 
   return (
     <>
@@ -35,7 +44,7 @@ const Admin = () => {
           <Divider />
         </Stack>
         <Container w="80vw" minHeight="100vh">
-          <pre></pre>
+          <pre>{entries}</pre>
         </Container>
       </Flex>
     </>

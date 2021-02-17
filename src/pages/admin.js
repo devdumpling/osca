@@ -43,7 +43,7 @@ const Admin = (props) => {
           <Text textAlign="center">OSCAdmin</Text>
           <Divider />
         </Stack> */}
-        <Container direction="row" minWidth="100vw" minHeight="100vh">
+        <Container align="flex-start" direction="row" minWidth="100vw" minHeight="100vh">
           <Table size="sm" variant="simple">
             <TableCaption textAlign="left" placement="top">Showing {entries.length} lottery entries</TableCaption>
             <Thead>

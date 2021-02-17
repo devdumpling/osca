@@ -22,7 +22,7 @@ const Admin = (props) => {
   if (session && session.user) {
     if (!entries.length) {
       loading = true
-      hit('https://osca.coop/api/lottery/entries')
+      hit('/api/lottery/entries')
         .then(data => {
           if (data.length) setEntries(data[0]);
         })

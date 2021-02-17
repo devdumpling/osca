@@ -3,7 +3,7 @@ import { Container } from '../components/Container'
 import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
 import Header from '../components/Header'
 
-const entries = fetch('https://osca.coop/api/lottery/entries').
+const entries = hit('/api/lottery/entries').
   then(res => {
     if (res.status !== 200) return res.status
 
@@ -29,6 +29,10 @@ const Admin = () => {
       </Flex>
     </>
   )
+}
+
+async function hit(...args) {
+  return fetch(...args).then(x => x.json())
 }
 
 export default Admin

@@ -2,8 +2,9 @@ import Meta from '../components/Meta'
 import { Container } from '../components/Container'
 import { Flex, Stack, Text, Divider } from '@chakra-ui/react'
 import Header from '../components/Header'
+import { useState } from 'react'
 
-const entries = hit('/api/lottery/entries').
+/* const entries = hit('/api/lottery/entries').
   then(res => {
     if (res.status !== 200) return res.status
 
@@ -11,9 +12,19 @@ const entries = hit('/api/lottery/entries').
   })
   .catch(err => console.log(err));
 
-console.log(entries);
+console.log(entries); */
 
 const Admin = () => {
+  const [entries, setEntries] = useState([]);
+
+  hit('https://osca.coop/api/lottery/entries')
+    .then(data => {
+      if (data.length) setEntries(data[0]);
+    })
+    .catch(err => console.log(err));
+
+  console.log(entries);
+
   return (
     <>
       <Meta title={"OSCAdmin"} />

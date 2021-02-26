@@ -27,7 +27,7 @@ export const CTA = ({ cms, session }) => {
             </Button>
           </ChakraLink>
       }
-      <ChakraLink isExternal href="https://paypal.com" flexGrow={1} mx={2}>
+      <ChakraLink isExternal href="https://www.paypal.com/donate?hosted_button_id=T6K757B7N59VN" flexGrow={1} mx={2}>
         <Button width="100%" variant="outline" variantcolor="green">
           Donate
         </Button>

@@ -34,7 +34,7 @@ export default function Meta({title}) {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta
         name="description"
-        content={`OSCA | Oberlin Student Cooperative Association`}
+        content={`Oberlin Student Cooperative Association`}
       />
     </Head>
   )

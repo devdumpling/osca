@@ -1,5 +1,6 @@
 import Meta from '../components/Meta'
-import { Container, Heading, Flex } from '../components/Container'
+import { Container } from '../components/Container'
+import { Heading, Flex } from '@chakra-ui/react'
 import Header from '../components/Header'
 
 const PaymentSuccess = () => {

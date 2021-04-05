@@ -6,7 +6,7 @@ import Header from '../components/Header'
 const PaymentSuccess = () => {
   return (
     <>
-      <Meta title={"OSCA | Alumni"} />
+      <Meta title={"Payment Success"} />
       <Header />
       <Container>
         <Flex textAlign="left" direction="column" justifyContent="center" alignItems="center" minHeight="calc(100vh - 5rem)">

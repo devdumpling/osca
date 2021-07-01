@@ -11,7 +11,7 @@ import Header from '../components/Header'
 import { Loader } from '../components/Loader'
 import { LoginButton } from '../components/Auth'
 
-const currentLotteryId = 'testLottery'
+const currentLotteryId = 'summer2021'
 
 const formatId = id => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : ''

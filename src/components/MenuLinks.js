@@ -15,7 +15,7 @@ export const MenuLinks = ({ isOpen }) => (
       direction={["column", "row", "row", "row"]}
       pt={[4, 4, 0, 0]}
     >
-      <MenuItem to="/lottery">Fall 2021 Lottery</MenuItem>
+      <MenuItem to="/lottery">Lottery</MenuItem>
       <MenuItem to="/alumni">Alumni</MenuItem>
       <HStack>
         <LoginButton isOpen={isOpen} />

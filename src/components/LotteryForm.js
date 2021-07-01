@@ -15,16 +15,14 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
   const firstYear = true;
 
   // TODO make this dynamic and pull from GCP
-  const [choices, setChoices] = useState(
-    [
-      'Harkness Housing & Dining',
-      'Tank Housing & Dining',
-      'Keep Housing & Dining',
-      'Pyle Inn Dining-Only',
-      'Third World Co-op Dining-Only',
-      'Third World Co-op Dining and Third World Social Justice Housing',
-    ]
-  )
+  const choices = [
+    'Harkness Housing & Dining',
+    'Tank Housing & Dining',
+    'Keep Housing & Dining',
+    'Pyle Inn Dining-Only',
+    'Third World Co-op Dining-Only',
+    'Third World Co-op Dining and Third World Social Justice Housing',
+  ];
 
   const startDate = new Date(lottery.start).toDateString();
   const endDate = new Date(lottery.end).toDateString();

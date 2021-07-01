@@ -87,7 +87,7 @@ class EntrySubmission extends React.Component {
             </Stack>
             : (
               this.state.time > end
-                ? <Text m={2} fontSize="lg">The {/* {formatId(lotteryId)} */} 2021 Fall lottery is now over. We hope you'll enter next round!</Text>
+                ? <Text m={2} fontSize="lg">The {/* {formatId(lotteryId)} */} lottery is now over. Stay tuned for results!</Text>
                 : <Text m={2} fontSize="lg">The lottery begins in <CountDown now={this.state.time} future={start} /></Text>
             )
         }

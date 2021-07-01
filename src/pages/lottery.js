@@ -11,7 +11,7 @@ import Header from '../components/Header'
 import { Loader } from '../components/Loader'
 import { LoginButton } from '../components/Auth'
 
-const currentLotteryId = 'spring2021'
+const currentLotteryId = 'summer2021'
 
 const formatId = id => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : ''
@@ -78,7 +78,7 @@ class EntrySubmission extends React.Component {
                 <Text m={2} fontSize="lg">Special Interest Co-op Applications:</Text>
                 <ChakraLink color="teal.500" isExternal href="https://forms.gle/rLUrToLn6bnJPjpGA">Third World Co-op</ChakraLink>
                 <ChakraLink color="teal.500" isExternal href="https://forms.gle/gcgWANdqBxtcdGDr6">Third World Social Justice</ChakraLink>
-                <ChakraLink color="teal.500" isExternal href="https://forms.gle/tebC1mBmiX99MhyL6">Old Barrows</ChakraLink>
+                {/* <ChakraLink color="teal.500" isExternal href="https://forms.gle/tebC1mBmiX99MhyL6">Old Barrows</ChakraLink> */}
               </Stack>
               <Stack w="100%" spacing={2} p={5} textAlign="left">
                 <Text noOfLines={2} flexWrap="wrap">You may change your entry after submitting up until the close of the lottery. After that, submissions are final.</Text>
@@ -102,13 +102,15 @@ function Entry({ entry }) {
     <Stack w="100%" mt={2} p={2} spacing={4} align="center">
       <CheckIcon w={8} h={8} color="teal.500" />
       <Text fontSize="lg">Thanks for entering, <strong>{email}</strong>!</Text>
-      <Text fontWeight="thin">Your entry ID for the <strong>Fall 2021</strong> lottery is <strong>{entryId}</strong>.</Text>
+      <Text fontWeight="thin">Your entry ID for the <strong>2021 First Year</strong> lottery is <strong>{entryId}</strong>.</Text>
       <Divider />
       <Stack border="1px" borderRadius="md" borderColor="teal.500" p={8} mt={1} spacing={1}>
         <Text mb={2} fontSize="xl">Your current entry: </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
-        <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
+        {/* 
+        TODO add me back in and refactor this whole mess to have separate first year handling
+        <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text> */}
         <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>
         <Text fontWeight="thin">Preferences: </Text>
         <OrderedList my={4}>

@@ -3,7 +3,7 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  FormErrorMessage, Button, Input, Text, Heading, Link, Stack, Center, Select, Divider, Checkbox, CheckboxGroup, Box
+  FormErrorMessage, Button, Input, Text, Heading, Stack, Center, Divider, Checkbox, Box
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import SortableMultiSelect from './SortableMultiSelect'
@@ -11,19 +11,18 @@ import FormikOnSubmit from './FormikOnSubmit'
 // import LotteryPreferenceList from './LotteryPreferenceList'
 
 const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) => {
+  // make a separate first year version or do some prop spreading
+  const firstYear = true;
+
+  // TODO make this dynamic and pull from GCP
   const [choices, setChoices] = useState(
     [
       'Harkness Housing & Dining',
-      'Harkness Dining-only',
       'Tank Housing & Dining',
-      'Tank Dining-only',
       'Keep Housing & Dining',
-      'Keep Dining-only',
-      'Pyle Inn Dining-only',
+      'Pyle Inn Dining-Only',
       'Third World Co-op Dining-Only',
       'Third World Co-op Dining and Third World Social Justice Housing',
-      'Old Barrows Housing (choice of OSCA dining)',
-      'Brown Bag Co-op'
     ]
   )
 
@@ -78,7 +77,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
     <Flex shadow="md" w="100%" borderRadius="lg" borderWidth="1px" direction="column" justifyContent="flex-start" mt={12} alignItems="center" pb={8}>
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Stack textAlign="center" spacing={1}>
-          <Heading>2021 Fall Lottery</Heading>
+          <Heading>2021 First-Year Lottery</Heading>
           <Text color="gray.500" fontWeight="thin" m={2}>{countdown} remaining</Text>
         </Stack>
       </Center>
@@ -90,13 +89,8 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
           All Oberlin College students who wish to be in OSCA during Fall 2021 and/or Spring 2022 must fill out this lottery form.
         </Text>
         <Text>
-          This lottery is not for incoming first-years or transfer students who will have an opportunity to join during Summer 2021.
           Each student’s entry will generate a random number which determines their rank in the lottery, ensuring all students have an equal chance at membership in a co-op.
           Under the recent lease with Oberlin College, this lottery and its resulting membership will determine the buildings OSCA is able to lease for the 2021-22 academic year.
-        </Text>
-        <Text>
-          Potential members of special interest coops (Old Barrows, Third World Co-op, and Third World Social Justice Co-op Housing)
-          must fill out an additional special interest application prior to February 12th at 11:59pm separate from this lottery.
         </Text>
         <Text fontWeight="medium">
           The lottery is open from {startDate} until {endDate}.
@@ -168,15 +162,17 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                         </FormControl>
                       )}
                     </Field>
-                    <Field name="OCMR" validate={validateOCMR}>
-                      {({ field, form }) => (
-                        <FormControl isInvalid={form.errors.OCMR && form.touched.OCMR}>
-                          <FormLabel htmlFor="OCMR">OCMR</FormLabel>
-                          <Input {...field} id="OCMR" placeholder="1234" />
-                          <FormErrorMessage>{form.errors.OCMR}</FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
+                    {!firstYear &&
+                      <Field name="OCMR" validate={validateOCMR}>
+                        {({ field, form }) => (
+                          <FormControl isInvalid={form.errors.OCMR && form.touched.OCMR}>
+                            <FormLabel htmlFor="OCMR">OCMR</FormLabel>
+                            <Input {...field} id="OCMR" placeholder="1234" />
+                            <FormErrorMessage>{form.errors.OCMR}</FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                    }
                   </Stack>
                   <Stack direction={["column", "row"]} spacing={2}>
                     <Field name="phoneNumber" validate={validatePhoneNumber}>
@@ -310,7 +306,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                     maxW="12rem"
                   >
                     Submit
-                </Button>
+                  </Button>
                 </Stack>
               </FormikOnSubmit>
             </Form>

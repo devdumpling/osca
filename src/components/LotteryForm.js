@@ -257,7 +257,8 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                   <Field type="checkbox" name="comfortableWithAnyRoommate">
                     {({ field }) => (
                       <Checkbox
-                        {...field}
+                        {...field} 
+                        isChecked={comfortableWithAnyRoommate}
                         id="comfortableWithAnyRoommate"
                         colorScheme="teal"
                         name="comfortableWithAnyRoommate"
@@ -270,6 +271,7 @@ const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) 
                     {({ field }) => (
                       <Checkbox
                         {...field}
+                        isChecked={interestedInAccessCo}
                         id="interestedInAccessCo"
                         colorScheme="teal"
                         name="interestedInAccessCo"

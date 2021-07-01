@@ -5,10 +5,8 @@ import {
   FormLabel,
   FormErrorMessage, Button, Input, Text, Heading, Stack, Center, Divider, Checkbox, Box
 } from '@chakra-ui/react'
-import { useState } from 'react'
 import SortableMultiSelect from './SortableMultiSelect'
 import FormikOnSubmit from './FormikOnSubmit'
-// import LotteryPreferenceList from './LotteryPreferenceList'
 
 const LotteryForm = ({ countdown, onSubmit, currentEntryValues = {}, lottery }) => {
   // make a separate first year version or do some prop spreading

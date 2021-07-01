@@ -111,7 +111,7 @@ function Entry({ entry }) {
         {/* 
         TODO add me back in and refactor this whole mess to have separate first year handling
         <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text> */}
-        <Text fontWeight="thin">tNumber: {entryMetadata.tNumber}</Text>
+        <Text fontWeight="thin">T-Number: {entryMetadata.tNumber}</Text>
         <Text fontWeight="thin">Preferences: </Text>
         <OrderedList my={4}>
           {entryMetadata.preferences && entryMetadata.preferences.map(pref => (
@@ -178,7 +178,7 @@ const Lottery = (props) => {
 
   return (
     <>
-      <Meta title="OSCA 2021 Fall Lottery" />
+      <Meta title="OSCA 2021 First-Year Lottery" />
       <Header />
       <Container>
         <Wall condition={!loading} caught={<Center minH="calc(100vh - 5rem)"><Loader /></Center>}>

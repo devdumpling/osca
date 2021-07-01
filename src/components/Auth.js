@@ -22,7 +22,7 @@ const LogoutButton = ({ loading, icon, text, ...props }) => {
 }
 
 const Account = () => {
-  const [ session, loading ] = useSession()
+  const [session, loading] = useSession()
 
   if (loading) {
     return <Button colorScheme="teal" variant="outline" isLoading={loading}></Button>
@@ -35,8 +35,8 @@ const Account = () => {
     return (
       <Flex align="center">
         <Avatar size="sm" name={user.name} src={user.picture} mr={2} />
-        <Text isTruncated maxW="12rem" fontWeight="thin" mr={4}>{user.email}</Text>
-        <LogoutButton mx={2}/>
+        <Text display={{ sm: "none", md: "flex" }} isTruncated maxW="12rem" fontWeight="thin" mr={4}>{user.email}</Text>
+        <LogoutButton mx={2} />
       </Flex>
     )
   } else {

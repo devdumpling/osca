@@ -1,37 +1,39 @@
-import dynamic from 'next/dynamic'
-// import NextAuth from 'next-auth'
-// import Providers from 'next-auth/providers'
-
-let NextAuth
-let Providers
-let auth0
+let NextAuth;
+let auth0;
 
 export default async (req, res) => {
   if (!NextAuth || !auth0) {
-    import('next-auth').then(n => {
-      NextAuth = n.default
+    import("next-auth")
+      .then((n) => {
+        NextAuth = n.default;
 
-      import('next-auth/providers').then(p => {
-        Providers = p.default
+        import("next-auth/providers/auth0")
+          .then((p) => {
+            const { default: auth0Provider } = p;
 
-        auth0 = Providers.Auth0({
-          clientId: process.env.AUTH0_CLIENT_ID,
-          clientSecret: process.env.AUTH0_CLIENT_SECRET,
-          domain: process.env.AUTH0_DOMAIN
-        })
-        
-        // show login prompt if logged out.
-        // by default, auth0 reauthenticates the most recent session, which is either convenient or annoying.
-        auth0.authorizationUrl = auth0.authorizationUrl += '&prompt=login'
-  
-        NextAuth(req, res, { 
-          providers: [ auth0 ]
-        })
-      }).catch(err => console.error('error Providers', err))
-    }).catch(err => console.error('error NextAuth', err))
+            auth0 = auth0Provider({
+              clientId: process.env.AUTH0_CLIENT_ID,
+              clientSecret: process.env.AUTH0_CLIENT_SECRET,
+              issuer: process.env.AUTH0_DOMAIN,
+              authorization: {
+                params: {
+                  scope: "id name email",
+                  // url: `${process.env.AUTH0_DOMAIN}&prompt=login`,
+                },
+              },
+            });
+
+            NextAuth(req, res, {
+              providers: [auth0],
+            });
+          })
+          .catch((err) => console.error("error Providers", err));
+      })
+      .catch((err) => console.error("error NextAuth", err));
   } else {
-    return NextAuth(req, res, { 
-      providers: [ auth0 ]
-    })
+    return NextAuth(req, res, {
+      providers: [auth0],
+      secret: "vlmtwW+zWnkXmxiAt6c69SUFRAyRxIlwh2ZKxRUfOEg=",
+    });
   }
-}
+};

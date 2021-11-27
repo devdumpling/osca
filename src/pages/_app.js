@@ -1,5 +1,5 @@
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
-import { Provider } from "next-auth/client";
+import { SessionProvider } from "next-auth/react";
 import theme from "../theme";
 
 // Clientside Firebase API
@@ -47,16 +47,14 @@ Sentry.init({
 typeof window != "undefined" &&
   Sentry.setTags({ hostname: window.location.hostname });
 
-function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps} }) {
   return (
-    <Provider session={pageProps.session}>
+    <SessionProvider session={session}>
       <ChakraProvider resetCSS theme={theme}>
         <ColorModeProvider options={{ useSystemColorMode: true }}>
           <Component {...pageProps} />
         </ColorModeProvider>
       </ChakraProvider>
-    </Provider>
+    </SessionProvider>
   );
 }
-
-export default App;

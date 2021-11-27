@@ -11,7 +11,7 @@ const LoginButton = ({ text, icon, ...props }) => {
       leftIcon={icon && <Icon as={IoLogInOutline} w={6} h={6} />}
       colorScheme="teal"
       variant="outline"
-      onClick={() => signIn("auth0", { prompt: "login" })}
+      onClick={() => signIn("auth0", null, { prompt: "login" })}
       {...props}
     >
       {text ? text : `Log In`}

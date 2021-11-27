@@ -21,6 +21,7 @@ import LotteryForm from "../components/LotteryForm";
 import Header from "../components/Header";
 import { Loader } from "../components/Loader";
 import { LoginButton } from "../components/Auth";
+import { Component } from "react";
 
 const currentLotteryId = "summer2021";
 
@@ -64,7 +65,7 @@ function CountDown({ now, future }) {
   return <span>{formatTime(remaining)}</span>;
 }
 
-class EntrySubmission extends React.Component {
+class EntrySubmission extends Component {
   constructor({ lottery = {} }) {
     super();
     const { latency } = lottery;

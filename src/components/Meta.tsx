@@ -1,6 +1,7 @@
 import Head from "next/head";
+import { MetaProps } from "../types/components";
 
-export default function Meta({ title }) {
+export default function Meta({ title }: MetaProps) {
   return (
     <Head>
       <title>{title}</title>

@@ -1,7 +1,7 @@
-import { Fade, Button, Flex, Text, Heading, Link } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Fade, Flex, Text, Heading } from "@chakra-ui/react";
+import { HeroProps } from "../types/components";
 
-export const Hero = ({ title }) => (
+export const Hero = ({ title }: HeroProps) => (
   <Flex
     direction="column"
     justifyContent="center"
@@ -11,21 +11,16 @@ export const Hero = ({ title }) => (
     <Heading
       bgGradient="linear(to-l, teal.500, green.500)"
       bgClip="text"
-      fontSize="6xl"
+      fontSize="7xl"
       fontWeight="bold"
     >
       {title}
     </Heading>
     <Fade in={true}>
       <Text fontWeight="thin" py={2} fontSize="xl" textAlign="center">
-        new website | still OSCA
+        Oberlin Student Cooperative Association
       </Text>
     </Fade>
-    <Button colorScheme="teal" mt={8} variant="outline">
-      <Link as={NextLink} href="/lottery">
-        Fall 2021 Lottery
-      </Link>
-    </Button>
   </Flex>
 );
 

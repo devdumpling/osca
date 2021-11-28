@@ -1,53 +1,61 @@
-import React from 'react'
+import React from "react";
 
-import Select, { components } from 'react-select'
-import { SortableContainer, SortableElement } from 'react-sortable-hoc'
-import { useColorMode } from '@chakra-ui/react'
+import Select, { components } from "react-select";
+import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { useColorMode } from "@chakra-ui/react";
 
 function arrayMove(array, from, to) {
-  array = array.slice()
-  array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0])
-  return array
+  array = array.slice();
+  array.splice(to < 0 ? array.length + to : to, 0, array.splice(from, 1)[0]);
+  return array;
 }
 
-const SortableMultiValue = SortableElement(props => {
+const SortableMultiValue = SortableElement((props) => {
   // this prevents the menu from being opened/closed when the user clicks
   // on a value to begin dragging it. ideally, detecting a click (instead of
   // a drag) would still focus the control and toggle the menu, but that
   // requires some magic with refs that are out of scope for this example
-  const onMouseDown = e => {
-    e.preventDefault()
-    e.stopPropagation()
-  }
-  const innerProps = { onMouseDown }
-  return <components.MultiValue {...props} innerProps={innerProps} />
-})
+  const onMouseDown = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+  const innerProps = { onMouseDown };
+  return <components.MultiValue {...props} innerProps={innerProps} />;
+});
 
-const SortableSelect = SortableContainer(Select)
+const SortableSelect = SortableContainer(Select);
 
-export default function MultiSelectSort({ options = [], value = {}, onChange }) {
+export default function MultiSelectSort({
+  options = [],
+  value = {},
+  onChange,
+}) {
   // For colorMode
-  const { colorMode } = useColorMode()
-  const bgColor = { light: '#F7FAFC', dark: '#171923' }
-  const color = { light: '#000000', dark: '#FFFFFF' }
-  const multiValueBgColor = { light: '#e6e6e6', dark: '#333333'}
+  const { colorMode } = useColorMode();
+  const bgColor = { light: "#F7FAFC", dark: "#171923" };
+  const color = { light: "#000000", dark: "#FFFFFF" };
+  const multiValueBgColor = { light: "#e6e6e6", dark: "#333333" };
 
-  const implicitLabels = Array.isArray(options)
-  options = implicitLabels ? valuesAsLabels(options) : options
-  value = implicitLabels ? valuesAsLabels(value) : value
+  const implicitLabels = Array.isArray(options);
+  options = implicitLabels ? valuesAsLabels(options) : options;
+  value = implicitLabels ? valuesAsLabels(value) : value;
 
-  const [selected, setSelected] = React.useState(orderLabels(value))
+  const [selected, setSelected] = React.useState(orderLabels(value));
 
-  const handleChange = selectedOptions => {
-    setSelected(orderLabels(selectedOptions))
-    onChange(implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions)
-  }
+  const handleChange = (selectedOptions) => {
+    setSelected(orderLabels(selectedOptions));
+    onChange(
+      implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions
+    );
+  };
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    const selectedOptions = arrayMove(selected, oldIndex, newIndex)
-    setSelected(orderLabels(selectedOptions))
-    onChange(implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions)
-  }
+    const selectedOptions = arrayMove(selected, oldIndex, newIndex);
+    setSelected(orderLabels(selectedOptions));
+    onChange(
+      implicitLabels ? valuesFromOptions(selectedOptions) : selectedOptions
+    );
+  };
 
   return (
     <SortableSelect
@@ -70,13 +78,13 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         multiValue: (style, state) => ({
           ...style,
           backgroundColor: `${multiValueBgColor[colorMode]}`,
-          justifyContent: 'space-between',
-          padding: '1rem',
-          borderRadius: '0.5rem',
-          marginTop: '0.5rem',
-          marginBottom: '0.5rem',
-          boxShadow: '0 8px 6px -2px rgb(0 0 0 / 5%)',
-          width: '100%'
+          justifyContent: "space-between",
+          padding: "1rem",
+          borderRadius: "0.5rem",
+          marginTop: "0.5rem",
+          marginBottom: "0.5rem",
+          boxShadow: "0 8px 6px -2px rgb(0 0 0 / 5%)",
+          width: "100%",
         }),
         multiValueLabel: (style, state) => ({
           ...style,
@@ -92,7 +100,7 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         }),
         menu: (style, state) => ({
           ...style,
-          backgroundColor: `${bgColor[colorMode]}`
+          backgroundColor: `${bgColor[colorMode]}`,
         }),
         menuList: (style, state) => ({
           ...style,
@@ -101,36 +109,38 @@ export default function MultiSelectSort({ options = [], value = {}, onChange }) 
         noOptionsMessage: (style, state) => ({
           ...style,
           color: `${color[colorMode]}`,
-          backgroundColor: `${bgColor[colorMode]}`
+          backgroundColor: `${bgColor[colorMode]}`,
         }),
         // input: (style, state) => ({
         //   display: state.isFocused 'none'
         // }),
         valueContainer: (style, state) => ({
-          ...style,          
+          ...style,
           backgroundColor: `${bgColor[colorMode]}`,
-          flexDirection: 'column'
+          flexDirection: "column",
         }),
         control: (style, state) => ({
           ...style,
           backgroundColor: `${bgColor[colorMode]}`,
-        })
+        }),
       }}
     />
-  )
+  );
 }
 
-function valuesAsLabels (values) {
-  return values.map(value => ({ value, label: value }))
+function valuesAsLabels(values) {
+  return values.map((value) => ({ value, label: value }));
 }
 
 function valuesFromOptions(options) {
-  return options.map(({ value }) => value)
+  return options.map(({ value }) => value);
 }
 
-function orderLabels (options) {
-  return options.map(({ value, label }, i) => ({ 
-    value, 
-    label: `${i+1}. ${label.slice(label.indexOf('. ')+label.indexOf('. ') >= 0 ? 2 : 0)}` 
-  }))
+function orderLabels(options) {
+  return options.map(({ value, label }, i) => ({
+    value,
+    label: `${i + 1}. ${label.slice(
+      label.indexOf(". ") + label.indexOf(". ") >= 0 ? 2 : 0
+    )}`,
+  }));
 }

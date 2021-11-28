@@ -1,5 +1,5 @@
-import SpringList from 'react-spring-dnd'
-import { Flex } from '@chakra-ui/react'
+import SpringList from "react-spring-dnd";
+import { Flex } from "@chakra-ui/react";
 
 export default function DraggableList({ items }) {
   return (
@@ -10,5 +10,5 @@ export default function DraggableList({ items }) {
         ))}
       </SpringList>
     </Flex>
-  )
+  );
 }

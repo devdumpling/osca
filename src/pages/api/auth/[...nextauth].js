@@ -1,7 +1,7 @@
 let NextAuth;
 let auth0;
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   if (!NextAuth || !auth0) {
     import("next-auth")
       .then((n) => {
@@ -39,4 +39,4 @@ export default async (req, res) => {
       debug: true,
     });
   }
-};
+}

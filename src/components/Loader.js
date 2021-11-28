@@ -1,4 +1,4 @@
-import { Spinner, Heading, Stack } from "@chakra-ui/react"
+import { Spinner, Heading, Stack } from "@chakra-ui/react";
 
 export const Loader = ({ props }) => (
   <Stack align="center" spacing={8} m={2} {...props}>
@@ -11,6 +11,6 @@ export const Loader = ({ props }) => (
     />
     <Heading color="gray.500" fontWeight="thin">
       ...waiting for quorum...
-    </Heading>    
+    </Heading>
   </Stack>
-)
+);

@@ -1,7 +1,7 @@
-import Meta from '../components/Meta'
-import { Container } from '../components/Container'
-import { Heading, Flex } from '@chakra-ui/react'
-import Header from '../components/Header'
+import Meta from "../components/Meta";
+import { Container } from "../components/Container";
+import { Heading, Flex } from "@chakra-ui/react";
+import Header from "../components/Header";
 
 const PaymentSuccess = () => {
   return (
@@ -9,13 +9,18 @@ const PaymentSuccess = () => {
       <Meta title={"Payment Success"} />
       <Header />
       <Container>
-        <Flex textAlign="left" direction="column" justifyContent="center" alignItems="center" minHeight="calc(100vh - 5rem)">
+        <Flex
+          textAlign="left"
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="calc(100vh - 5rem)"
+        >
           <Heading
             bgGradient="linear(to-l, teal.500, green.500)"
             bgClip="text"
             fontSize="6xl"
             fontWeight="bold"
-            fontSize="6xl"
             mx={16}
           >
             Thank you!
@@ -26,7 +31,7 @@ const PaymentSuccess = () => {
         </Flex>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default PaymentSuccess
+export default PaymentSuccess;

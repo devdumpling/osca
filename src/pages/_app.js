@@ -47,7 +47,10 @@ Sentry.init({
 typeof window != "undefined" &&
   Sentry.setTags({ hostname: window.location.hostname });
 
-export default function App({ Component, pageProps: { session, ...pageProps} }) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <SessionProvider session={session}>
       <ChakraProvider resetCSS theme={theme}>

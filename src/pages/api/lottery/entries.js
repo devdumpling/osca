@@ -29,7 +29,7 @@ async function authorize(session, req) {
   }
 }
 
-export default async (req, res) => {
+export default async function handler(req, res) {
   let session;
   try {
     // Get user session
@@ -65,4 +65,4 @@ export default async (req, res) => {
       error: "Not authorized",
     });
   }
-};
+}

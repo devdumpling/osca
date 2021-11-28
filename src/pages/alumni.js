@@ -1,7 +1,7 @@
-import Meta from '../components/Meta'
-import WIP from '../components/WIP'
-import { Container } from '../components/Container'
-import Header from '../components/Header'
+import Meta from "../components/Meta";
+import WIP from "../components/WIP";
+import { Container } from "../components/Container";
+import Header from "../components/Header";
 
 const Alumni = () => {
   return (
@@ -12,7 +12,7 @@ const Alumni = () => {
         <WIP />
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Alumni
+export default Alumni;

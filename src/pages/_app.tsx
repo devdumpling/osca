@@ -27,7 +27,7 @@ import { Integrations } from "@sentry/tracing";
 Sentry.init({
   dsn: "https://e171613922b24f25a91ce5a0642457ea@o514246.ingest.sentry.io/5617274",
   integrations: [new Integrations.BrowserTracing()],
-  beforeSend(event, hint) {
+  beforeSend(event) {
     // Check if it is an exception, and if so, show the report dialog
     if (event.exception) {
       Sentry.showReportDialog({

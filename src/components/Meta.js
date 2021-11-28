@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-export default function Meta({title}) {
+export default function Meta({ title }) {
   return (
     <Head>
       <title>{title}</title>
@@ -37,5 +37,5 @@ export default function Meta({title}) {
         content={`Oberlin Student Cooperative Association`}
       />
     </Head>
-  )
+  );
 }

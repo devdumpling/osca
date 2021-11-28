@@ -1,9 +1,11 @@
-import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import { ColorModeScript } from '@chakra-ui/react'
-import theme from '../theme'
+/* eslint-disable @next/next/no-sync-scripts */
+// TODO - add sentry without no sync scripts
+import NextDocument, { Html, Head, Main, NextScript } from "next/document";
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "../theme";
 
 export default class Document extends NextDocument {
-  render () {
+  render() {
     return (
       <Html>
         <Head />
@@ -12,11 +14,12 @@ export default class Document extends NextDocument {
           <ColorModeScript />
           <Main />
           <NextScript />
-          <style jsx global>{`
-            * {
-              scroll-margin-top: 5rem
-            }
-          `}
+          <style jsx global>
+            {`
+              * {
+                scroll-margin-top: 5rem;
+              }
+            `}
           </style>
           <script
             src="https://browser.sentry-cdn.com/6.0.2/bundle.min.js"
@@ -25,6 +28,6 @@ export default class Document extends NextDocument {
           ></script>
         </body>
       </Html>
-    )
+    );
   }
 }

@@ -1,7 +1,7 @@
-import { Box, Stack } from "@chakra-ui/react"
-import { MenuItem } from "./MenuItem"
-import LoginButton from "./LoginButton"
-import { DarkModeSwitch } from './DarkModeSwitch'
+import { Box, Stack } from "@chakra-ui/react";
+import { MenuItem } from "./MenuItem";
+import LoginButton from "./LoginButton";
+import { DarkModeSwitch } from "./DarkModeSwitch";
 
 export const MenuLinks = ({ isOpen }) => (
   <Box
@@ -20,5 +20,5 @@ export const MenuLinks = ({ isOpen }) => (
       <LoginButton isOpen={isOpen} />
       <DarkModeSwitch />
     </Stack>
-  </Box >
-)
+  </Box>
+);

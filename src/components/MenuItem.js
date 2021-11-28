@@ -1,5 +1,5 @@
-import { Button, Link } from '@chakra-ui/react'
-import NextLink from "next/link"
+import { Button, Link } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export const MenuItem = ({ children, isLast, to = "/", ...rest }) => (
   <Link as={NextLink} href={to}>
@@ -7,4 +7,4 @@ export const MenuItem = ({ children, isLast, to = "/", ...rest }) => (
       {children}
     </Button>
   </Link>
-)
+);

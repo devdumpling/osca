@@ -4,8 +4,9 @@ import { MenuLinks } from "./MenuLinks";
 import Logo from "./Logo";
 import NavBarContainer from "./NavBarContainer";
 import { Spacer } from "@chakra-ui/react";
+import { HeaderProps } from "../types/components";
 
-const Header = (props) => {
+const Header = (props: HeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const handleToggle = () => setIsOpen(!isOpen);
 

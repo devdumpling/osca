@@ -13,12 +13,7 @@ const Index = () => {
       <Meta title="OSCA | Oberlin Student Cooperative Association" />
       <Header />
       <Container>
-        {" "}
-        {/* todo margin-top: $height-of-nav */}
         <Hero />
-        <Main>
-          <About />
-        </Main>
         <Footer />
         <CTA />
       </Container>

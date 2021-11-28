@@ -23,6 +23,7 @@ export default async (req, res) => {
               jwt: {
                 secret: process.env.NEXTAUTH_SECRET,
               },
+              debug: true,
             });
           })
           .catch((err) => console.error("error Providers", err));
@@ -35,6 +36,7 @@ export default async (req, res) => {
       jwt: {
         secret: process.env.NEXTAUTH_SECRET,
       },
+      debug: true,
     });
   }
 };

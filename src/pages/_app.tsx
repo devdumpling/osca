@@ -1,10 +1,22 @@
+import App from 'next/app'
+import Head from "next/head";
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import theme from "../theme";
+import { createContext } from "react";
+
+// Strapi
+import { getStrapiMedia } from "../lib/strapi/media";
 
 // Clientside Firebase API
+// TODO - upgrade to v9
 import firebase from "firebase/app";
 import "firebase/analytics";
+
+// Sentry
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+import { fetchAPI } from "../lib/strapi/api";
 
 if (typeof window != "undefined") {
   if (!firebase.apps.length) {
@@ -22,8 +34,7 @@ if (typeof window != "undefined") {
 }
 
 // Sentry API
-import * as Sentry from "@sentry/react";
-import { Integrations } from "@sentry/tracing";
+
 Sentry.init({
   dsn: "https://e171613922b24f25a91ce5a0642457ea@o514246.ingest.sentry.io/5617274",
   integrations: [new Integrations.BrowserTracing()],
@@ -47,17 +58,49 @@ Sentry.init({
 typeof window != "undefined" &&
   Sentry.setTags({ hostname: window.location.hostname });
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+// Strapi Global object in context
+export const GlobalContext = createContext({});
+
+const _App = ({ Component, pageProps: { session, ...pageProps } }) => {
+  const { global } = pageProps;    
+  const { metadata } = global;
+
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider resetCSS theme={theme}>
-        <ColorModeProvider options={{ useSystemColorMode: true }}>
-          <Component {...pageProps} />
-        </ColorModeProvider>
-      </ChakraProvider>
-    </SessionProvider>
+    <>
+      <Head>
+        <title>{metadata?.metaTitle}</title>
+        <link rel="shortcut icon" href={getStrapiMedia(global.favicon)} />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content={metadata?.metaDescription}
+        />
+      </Head>
+
+      <SessionProvider session={session}>
+        <ChakraProvider resetCSS theme={theme}>
+          <ColorModeProvider options={{ useSystemColorMode: true }}>
+            <GlobalContext.Provider value={global}>
+              <Component {...pageProps} />
+            </GlobalContext.Provider>
+          </ColorModeProvider>
+        </ChakraProvider>
+      </SessionProvider>
+    </>
   );
-}
+};
+
+// getInitialProps disables automatic static optimization for pages that don't
+// have getStaticProps. So article, category and home pages still get SSG.
+// Hopefully we can replace this with getStaticProps once this issue is fixed:
+// https://github.com/vercel/next.js/discussions/10949
+_App.getInitialProps = async (ctx) => {
+  // Calls page's `getInitialProps` and fills `appProps.pageProps`
+  const appProps = await App.getInitialProps(ctx);
+  // Fetch global site settings from Strapi
+  const global = await fetchAPI("/global");
+  // Pass the data to our page via props
+  return { ...appProps, pageProps: { global } };
+};
+
+export default _App;

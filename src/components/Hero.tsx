@@ -1,7 +1,7 @@
 import { Fade, Flex, Text, Heading } from "@chakra-ui/react";
 import { HeroProps } from "../types/components";
 
-export const Hero = ({ title }: HeroProps) => (
+export const Hero = ({ title, subtitle }: HeroProps) => (
   <Flex
     direction="column"
     justifyContent="center"
@@ -18,7 +18,7 @@ export const Hero = ({ title }: HeroProps) => (
     </Heading>
     <Fade in={true}>
       <Text fontWeight="thin" py={2} fontSize="xl" textAlign="center">
-        Oberlin Student Cooperative Association
+        {subtitle}
       </Text>
     </Fade>
   </Flex>
@@ -26,4 +26,5 @@ export const Hero = ({ title }: HeroProps) => (
 
 Hero.defaultProps = {
   title: "OSCA",
+  subtitle: "Oberlin Student Cooperative Association",
 };

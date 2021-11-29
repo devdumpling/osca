@@ -1,5 +1,6 @@
 export interface HeroProps {
     title?: string;
+    subtitle?: string;
 }
 
 export interface MetaProps {

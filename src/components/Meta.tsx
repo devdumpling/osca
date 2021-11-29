@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { MetaProps } from "../types/components";
 
-export default function Meta({ title }: MetaProps) {
+export default function Meta({ title, description }: MetaProps) {
   return (
     <Head>
       <title>{title}</title>
@@ -35,7 +35,7 @@ export default function Meta({ title }: MetaProps) {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta
         name="description"
-        content={`Oberlin Student Cooperative Association`}
+        content={description || 'Oberlin Student Cooperative Association'}
       />
     </Head>
   );

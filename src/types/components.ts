@@ -5,6 +5,7 @@ export interface HeroProps {
 
 export interface MetaProps {
     title?: string;
+    description?: string;
 }
 
 export interface HeaderProps {

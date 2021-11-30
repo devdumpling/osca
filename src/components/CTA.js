@@ -6,9 +6,8 @@ import { Container } from "./Container";
 export const CTA = () => {
   return (
     <Container
+      alignSelf="center"
       flexDirection="row"
-      position="fixed"
-      bottom="0"
       width="100%"
       maxWidth="48rem"
       py={2}

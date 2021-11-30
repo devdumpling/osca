@@ -6,18 +6,19 @@ export const Hero = ({ title, subtitle }: HeroProps) => (
     direction="column"
     justifyContent="center"
     alignItems="center"
-    height="calc(100vh - 5rem)"
+    minHeight="16rem"    
   >
     <Heading
+      as="h1"
       bgGradient="linear(to-l, teal.500, green.500)"
       bgClip="text"
-      fontSize="7xl"
+      fontSize="8rem"
       fontWeight="bold"
     >
       {title}
     </Heading>
     <Fade in={true}>
-      <Text fontWeight="thin" py={2} fontSize="xl" textAlign="center">
+      <Text fontWeight="thin" py={2} fontSize="2xl" textAlign="center">
         {subtitle}
       </Text>
     </Fade>

@@ -23,7 +23,7 @@ import { Loader } from "../components/Loader";
 import { LoginButton } from "../components/Auth";
 import { Component } from "react";
 
-const currentLotteryId = "summer2021";
+const currentLotteryId = "spring2022";
 
 const formatId = (id) => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : "";
@@ -179,7 +179,7 @@ function Entry({ entry }) {
         Thanks for entering, <strong>{email}</strong>!
       </Text>
       <Text fontWeight="thin">
-        Your entry ID for the <strong>2021 First Year</strong> lottery is{" "}
+        Your entry ID for the {currentLotteryId} lottery is{" "}
         <strong>{entryId}</strong>.
       </Text>
       <Divider />
@@ -196,9 +196,7 @@ function Entry({ entry }) {
         </Text>
         <Text fontWeight="thin">First Name: {entryMetadata.firstName}</Text>
         <Text fontWeight="thin">Last Name: {entryMetadata.lastName}</Text>
-        {/* 
-        TODO add me back in and refactor this whole mess to have separate first year handling
-        <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text> */}
+        <Text fontWeight="thin">OCMR: {entryMetadata.OCMR}</Text>
         <Text fontWeight="thin">T-Number: {entryMetadata.tNumber}</Text>
         <Text fontWeight="thin">Preferences: </Text>
         <OrderedList my={4}>
@@ -274,7 +272,7 @@ const Lottery = (props) => {
 
   return (
     <>
-      <Meta title="OSCA 2021 First-Year Lottery" />
+      <Meta title={`OSCA ${currentLotteryId} Lottery`} />
       <Header />
       <Container>
         <Wall

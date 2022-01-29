@@ -4,7 +4,6 @@ import { Container } from "../components/Container";
 import { Heading, Flex, Text, Box } from "@chakra-ui/react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { fetchAPI } from "../lib/strapi/api";
 import ReactMarkdown from "react-markdown";
 
 const markdownComponents = {
@@ -17,43 +16,21 @@ const markdownComponents = {
   p: (props) => <Text as="p" {...props} />,
 };
 
-const About = (props) => {
-  const { about } = props;
-  const { metadata } = about;
-
+const About = () => {
   return (
     <>
-      <Meta
-        title={metadata?.metaTitle || "About"}
-        description={metadata?.metaDescription}
-      />
+      <Meta title={"About"} />
       <Header />
       <Container>
         <Flex flexDirection="column" minHeight="95vh" my={4} p={4}>
           <Heading alignSelf="center" as="h1" size="2xl" my={4}>
-            {about?.title}
-          </Heading>
-          <Box m={2} p={2}>
-            <ReactMarkdown components={markdownComponents}>
-              {about?.copy}
-            </ReactMarkdown>
-          </Box>
+            OSCA
+          </Heading>          
         </Flex>
         <Footer />
       </Container>
     </>
   );
 };
-
-export async function getStaticProps() {
-  const about = await fetchAPI("/about");
-
-  return {
-    props: {
-      about,
-    },
-    revalidate: 1,
-  };
-}
 
 export default About;

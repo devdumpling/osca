@@ -5,21 +5,17 @@ import { Container } from "../components/Container";
 import { CTA } from "../components/CTA";
 import { Footer } from "../components/Footer";
 import Header from "../components/Header";
-import { fetchAPI } from "../lib/strapi/api";
 
 import { Heading, Text, Button, Box, Flex } from "@chakra-ui/react";
 
-const Index = (props) => {
-  const { home } = props;
-  const { aboutHeading, aboutBody } = home;
-
+const Index = () => {
   return (
     <>
       <Meta title="OSCA | Oberlin Student Cooperative Association" />
       <Header />
       <Container>
         <Main mb={16}>
-          <Hero title={home?.heroTitle} subtitle={home?.heroSubtitle} />
+          <Hero />
           <Flex
             flexDirection="column"
             alignSelf="center"
@@ -28,8 +24,8 @@ const Index = (props) => {
             borderRadius="1rem"
           >
             <Box>
-              <Heading mb={4}>{aboutHeading}</Heading>
-              <Text>{aboutBody}</Text>
+              <Heading mb={4}>Heading</Heading>
+              <Text>Text</Text>
               <Button size="lg" colorScheme="green" mt={4}>
                 Learn More
               </Button>
@@ -42,21 +38,5 @@ const Index = (props) => {
     </>
   );
 };
-
-export async function getStaticProps() {
-  // Run API calls in parallel
-  const [pages, home] = await Promise.all([
-    fetchAPI("/pages"),
-    fetchAPI("/home"),
-  ]);
-
-  return {
-    props: {
-      pages,
-      home,
-    },
-    revalidate: 1,
-  };
-}
 
 export default Index;

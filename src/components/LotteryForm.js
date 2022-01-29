@@ -17,6 +17,8 @@ import {
 import SortableMultiSelect from "./SortableMultiSelect";
 import FormikOnSubmit from "./FormikOnSubmit";
 
+import { LOTTERY_CHOICES } from "../lib/constants";
+
 const LotteryForm = ({
   countdown,
   onSubmit,
@@ -24,17 +26,7 @@ const LotteryForm = ({
   lottery,
 }) => {
   // TODO - make a separate first year version or do some prop spreading
-  const firstYear = false;
-
-  // TODO make this dynamic and pull from GCP
-  const choices = [
-    "Harkness Housing & Dining",
-    "Tank Housing & Dining",
-    "Keep Housing & Dining",
-    "Pyle Inn Dining-Only",
-    "Third World Co-op Dining-Only",
-    "Third World Co-op Dining and Third World Social Justice Housing",
-  ];
+  const firstYear = false;  
 
   const startDate = new Date(lottery.start).toDateString();
   const endDate = new Date(lottery.end).toDateString();
@@ -401,7 +393,7 @@ const LotteryForm = ({
                       <FormControl>
                         <SortableMultiSelect
                           {...field}
-                          options={choices}
+                          options={LOTTERY_CHOICES}
                           onChange={(selectedOptions) => {
                             props.setFieldValue("preferences", selectedOptions);
                           }}

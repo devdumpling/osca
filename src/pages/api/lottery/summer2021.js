@@ -1,6 +1,7 @@
 import { getSession } from "next-auth/react";
 import { Firestore } from "@google-cloud/firestore";
 import { credentials } from "../../../utils";
+import { CURRENT_LOTTERY_ID } from "../../../lib/constants";
 
 const firestore = new Firestore({
   projectId: credentials.project_id,
@@ -41,7 +42,7 @@ export default async function handler(req, res) {
   }
 
   if (await authorize(session, req)) {
-    const query = entriesRef.where("lotteryId", "==", "spring2022");
+    const query = entriesRef.where("lotteryId", "==", CURRENT_LOTTERY_ID);
 
     const id = req.query.id || req.query.entryId;
     if (id) {

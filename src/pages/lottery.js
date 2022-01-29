@@ -22,8 +22,7 @@ import Header from "../components/Header";
 import { Loader } from "../components/Loader";
 import { LoginButton } from "../components/Auth";
 import { Component } from "react";
-
-const currentLotteryId = "spring2022";
+import { CURRENT_LOTTERY_ID, CURRENT_LOTTERY_NAME } from "../lib/constants";
 
 const formatId = (id) => {
   return id ? `${id[0].toUpperCase()}${id.slice(1, -4)} ${id.slice(-4)}` : "";
@@ -31,7 +30,7 @@ const formatId = (id) => {
 
 const enterLottery = (values, actions, toast, callback = (x) => x) => {
   hit(
-    `/api/lottery/enter?id=${currentLotteryId}&entryMetadata=${encodeURIComponent(
+    `/api/lottery/enter?id=${CURRENT_LOTTERY_ID}&entryMetadata=${encodeURIComponent(
       JSON.stringify(values)
     )}`
   )
@@ -149,8 +148,8 @@ class EntrySubmission extends Component {
           </Stack>
         ) : this.state.time > end ? (
           <Text m={2} fontSize="lg">
-            The {/* {formatId(lotteryId)} */} lottery is now over. Stay tuned
-            for results!
+            The {CURRENT_LOTTERY_NAME} lottery is now over. Stay tuned for
+            results!
           </Text>
         ) : (
           <Text m={2} fontSize="lg">
@@ -179,7 +178,7 @@ function Entry({ entry }) {
         Thanks for entering, <strong>{email}</strong>!
       </Text>
       <Text fontWeight="thin">
-        Your entry ID for the {currentLotteryId} lottery is{" "}
+        Your entry ID for the {CURRENT_LOTTERY_ID} lottery is{" "}
         <strong>{entryId}</strong>.
       </Text>
       <Divider />
@@ -242,7 +241,7 @@ const Lottery = (props) => {
 
     if (!entry || !lottery) {
       loading = true;
-      hit(`/api/lottery/entries?lotteryId=${currentLotteryId}&email=${email}`)
+      hit(`/api/lottery/entries?lotteryId=${CURRENT_LOTTERY_ID}&email=${email}`)
         .then((data) => {
           if (data.length == 1) {
             setEntry(data[0]);
@@ -253,7 +252,7 @@ const Lottery = (props) => {
         .catch((err) => console.log(err));
 
       let now = Date.now();
-      hit(`/api/lottery/lotteries?lotteryId=${currentLotteryId}`)
+      hit(`/api/lottery/lotteries?lotteryId=${CURRENT_LOTTERY_ID}`)
         .then((data) => {
           if (data.length == 1) {
             const lottery = data[0];
@@ -272,7 +271,7 @@ const Lottery = (props) => {
 
   return (
     <>
-      <Meta title={`OSCA ${currentLotteryId} Lottery`} />
+      <Meta title={`OSCA ${CURRENT_LOTTERY_ID} Lottery`} />
       <Header />
       <Container>
         <Wall

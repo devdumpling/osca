@@ -15,8 +15,7 @@ export const MenuLinks = ({ isOpen }) => (
       direction={["column", "row", "row", "row"]}
       pt={[4, 4, 0, 0]}
     >
-      <MenuItem to="/lottery">Lottery</MenuItem>
-      <MenuItem to="/alumni">Alumni</MenuItem>
+      <MenuItem to="/lottery">Lottery</MenuItem>      
       <LoginButton isOpen={isOpen} />
       <DarkModeSwitch />
     </Stack>

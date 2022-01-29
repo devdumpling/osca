@@ -16,7 +16,7 @@ const Index = () => {
       <Meta title="OSCA | Oberlin Student Cooperative Association" />
       <Header />
       <Container>
-        <Main mb={16}>
+        <Main justifyContent="center">
           <Hero />
           <Flex
             flexDirection="column"

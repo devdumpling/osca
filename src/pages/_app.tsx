@@ -1,10 +1,16 @@
+import Head from "next/head";
 import { ChakraProvider, ColorModeProvider } from "@chakra-ui/react";
 import { SessionProvider } from "next-auth/react";
 import theme from "../theme";
 
 // Clientside Firebase API
+// TODO - upgrade to v9
 import firebase from "firebase/app";
 import "firebase/analytics";
+
+// Sentry
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 
 if (typeof window != "undefined") {
   if (!firebase.apps.length) {
@@ -22,8 +28,7 @@ if (typeof window != "undefined") {
 }
 
 // Sentry API
-import * as Sentry from "@sentry/react";
-import { Integrations } from "@sentry/tracing";
+
 Sentry.init({
   dsn: "https://e171613922b24f25a91ce5a0642457ea@o514246.ingest.sentry.io/5617274",
   integrations: [new Integrations.BrowserTracing()],
@@ -47,17 +52,24 @@ Sentry.init({
 typeof window != "undefined" &&
   Sentry.setTags({ hostname: window.location.hostname });
 
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
+const _App = ({ Component, pageProps: { session, ...pageProps } }) => {  
   return (
-    <SessionProvider session={session}>
-      <ChakraProvider resetCSS theme={theme}>
-        <ColorModeProvider options={{ useSystemColorMode: true }}>
-          <Component {...pageProps} />
-        </ColorModeProvider>
-      </ChakraProvider>
-    </SessionProvider>
+    <>
+      <Head>
+        <title>OSCA</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" />
+      </Head>
+
+      <SessionProvider session={session}>
+        <ChakraProvider resetCSS theme={theme}>
+          <ColorModeProvider options={{ useSystemColorMode: true }}>
+            <Component {...pageProps} />
+          </ColorModeProvider>
+        </ChakraProvider>
+      </SessionProvider>
+    </>
   );
-}
+};
+
+export default _App;

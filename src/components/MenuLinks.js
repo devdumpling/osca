@@ -16,6 +16,7 @@ export const MenuLinks = ({ isOpen }) => (
       pt={[4, 4, 0, 0]}
     >
       <MenuItem to="/lottery">Lottery</MenuItem>      
+      <MenuItem to="/faq">FAQ</MenuItem>      
       <LoginButton isOpen={isOpen} />
       <DarkModeSwitch />
     </Stack>

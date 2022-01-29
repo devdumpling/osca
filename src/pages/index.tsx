@@ -6,6 +6,8 @@ import { CTA } from "../components/CTA";
 import { Footer } from "../components/Footer";
 import Header from "../components/Header";
 
+// next link
+import Link from "next/link";
 import { Heading, Text, Button, Box, Flex } from "@chakra-ui/react";
 
 const Index = () => {
@@ -24,14 +26,14 @@ const Index = () => {
             borderRadius="1rem"
           >
             <Box>
-              <Heading mb={4}>2022-2023 Lottery</Heading>
-              <Text>Open Jan 31</Text>
+              <Heading>2022-2023 Lottery</Heading>
+              <Text size="sm">Open Jan 28</Text>
               <Flex>
                 <Button size="lg" colorScheme="green" mt={4} mr={4}>
-                  Sign Up
+                  <Link href="/lottery">Sign Up</Link>
                 </Button>
                 <Button size="lg" colorScheme="green" mt={4} variant="ghost">
-                  Learn More
+                  <Link href="/faq">Learn More</Link>
                 </Button>
               </Flex>
             </Box>

@@ -23,8 +23,8 @@ const LotteryForm = ({
   currentEntryValues = {},
   lottery,
 }) => {
-  // make a separate first year version or do some prop spreading
-  const firstYear = true;
+  // TODO - make a separate first year version or do some prop spreading
+  const firstYear = false;
 
   // TODO make this dynamic and pull from GCP
   const choices = [
@@ -97,7 +97,7 @@ const LotteryForm = ({
     >
       <Center mb={4} p={4} w="100%" shadow="sm">
         <Stack textAlign="center" spacing={1}>
-          <Heading>2021 First-Year Lottery</Heading>
+          <Heading>2022 OSCA Lottery</Heading>
           <Text color="gray.500" fontWeight="thin" m={2}>
             {countdown} remaining
           </Text>
@@ -108,15 +108,15 @@ const LotteryForm = ({
           The OSCA Lottery Process
         </Text>
         <Text>
-          All Oberlin College students who wish to be in OSCA during Fall 2021
-          and/or Spring 2022 must fill out this lottery form.
+          All Oberlin College students who wish to be in OSCA during Fall 2022
+          and/or Spring 2023 must fill out this lottery form.
         </Text>
         <Text>
           Each student’s entry will generate a random number which determines
           their rank in the lottery, ensuring all students have an equal chance
           at membership in a co-op. Under the recent lease with Oberlin College,
           this lottery and its resulting membership will determine the buildings
-          OSCA is able to lease for the 2021-22 academic year.
+          OSCA is able to lease for the 2022-23 academic year.
         </Text>
         <Text fontWeight="medium">
           The lottery is open from {startDate} until {endDate}.

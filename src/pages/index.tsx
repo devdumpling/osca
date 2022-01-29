@@ -24,11 +24,16 @@ const Index = () => {
             borderRadius="1rem"
           >
             <Box>
-              <Heading mb={4}>Heading</Heading>
-              <Text>Text</Text>
-              <Button size="lg" colorScheme="green" mt={4}>
-                Learn More
-              </Button>
+              <Heading mb={4}>2022-2023 Lottery</Heading>
+              <Text>Open Jan 31</Text>
+              <Flex>
+                <Button size="lg" colorScheme="green" mt={4} mr={4}>
+                  Sign Up
+                </Button>
+                <Button size="lg" colorScheme="green" mt={4} variant="ghost">
+                  Learn More
+                </Button>
+              </Flex>
             </Box>
           </Flex>
         </Main>
